@@ -1,3 +1,8 @@
+2003-07-03  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.xs: Fix error in slaOap fortran interface. This was breaking
+	the comet test. Does not affect the C version.
+
 2003-07-02  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* t/comet.t: Add a test for perturbation of orbital elements since

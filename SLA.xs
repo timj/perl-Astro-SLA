@@ -3,12 +3,12 @@
   perl-SLA glue - 99% complete
                                         t.jenness@jach.hawaii.edu
 
-  Copyright (C) 1998-2001 Tim Jenness.  All rights reserved.
+  Copyright (C) 1998-2003 Tim Jenness.  All rights reserved.
   This program is free software; you can redistribute it and/or
   modify it under the same terms as Perl itself.
 
-  Has been tested with the May 1998 release of SLALIB
-
+  Has been tested with the Jan 2003 release of SLALIB
+  (C and Fortran)
  */
  
  
@@ -2057,8 +2057,8 @@ slaOap(type, ob1, ob2, date, dut, elongm, phim, hm, xp, yp, tdk, pmb, rh, wl, tl
  PROTOTYPE: $$$$$$$$$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-   TRAIL(sla_oap)(&type, &ob1, &ob2, &date, &dut, &elongm, &phim, &hm, &xp,
-		  &yp, &tdk, &pmb, &rh, &wl, &tlr, &rap, &dap);
+   TRAIL(sla_oap)(type, &ob1, &ob2, &date, &dut, &elongm, &phim, &hm, &xp,
+		  &yp, &tdk, &pmb, &rh, &wl, &tlr, &rap, &dap, strlen(type));
 #else
    slaOap(type, ob1, ob2, date, dut, elongm, phim, hm, xp, yp, tdk, pmb, rh, wl, tlr, &rap, &dap);
 #endif
