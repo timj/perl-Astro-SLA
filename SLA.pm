@@ -307,7 +307,7 @@ Aborts if telescope name is unknown.
 
 sub lstnow_tel {
 
-  croak 'Usage: lstnow($tel)' unless scalar(@_) == 1;
+  croak 'Usage: lstnow_tel($tel)' unless scalar(@_) == 1;
 
   my $tel = shift;
  
@@ -412,6 +412,41 @@ sub ut2lst {
   $lst += D2PI if $lst < 0.0;
 
   return ($lst, $mjd);
+
+}
+
+=item B<ut2lst_tel>
+
+Given the UT time, calculate the Modified Julian date and the 
+local sidereal time (radians) for the specified telescope.
+
+ ($lst, $mjd) = ut2lst_tel(yy, mn, dd, hh, mm, ss, tel)
+
+=cut
+
+sub ut2lst_tel ($$$$$$$) {
+  croak 'Usage: ut2lst_tel($tel)' unless scalar(@_) == 7;
+
+  my $tel = pop(@_);
+ 
+  # Upper case the telescope
+  $tel = uc($tel);
+
+  my ($w, $p, $h, $name);
+
+  # Find the longitude of this telescope
+  slaObs(-1, $tel, $name, $w, $p, $h);
+
+  # Check telescope name
+  if ($name eq '?') {
+    croak "Telescope name $tel unrecognised by slaObs()";
+  }
+
+  # Convert longitude to west negative
+  $w *= -1.0;
+
+  # Run ut2lst
+  return ut2lst(@_, $w);
 
 }
 
