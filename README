@@ -1,19 +1,63 @@
 Astro::SLA -- interface to C SLALIB library
 ==========
 
+This module provides an interface layer to the C version of the SLALIB
+library.  From the abstract of the SLALIB manual (written by Par
+Wallace):
+
+   "SLALIB is a library used by writers of positional-astronomy
+   applications. Most of the 171 routines are concerned with
+   astronomical position and time, but a number have wider
+   trigonometrical, numerical or general applications."
+
+Documentation:
+
+ Instructions on the p
+
 Requirements:
+-------------
 
  - This module requires the C version of the SLALIB library
    written by Pat Wallace. It will not work with the Starlink
-   (FORTRAN) version of SLALIB.
+   (FORTRAN) version of SLALIB. Please contact Pat Wallace
+   (ptw@star.rl.ac.uk) if you would like a copy of the library.
 
    It has been tested with the May 1998 release of SLALIB.
 
+   A C compiler is required - this is an XS module.
+
+Platforms:
+----------
+
+   This module has been tested on the following platforms:
+
+   - SPARC Solaris 2.6, Sun CC, perl5.004_04
+   - SPARC Solaris 2.6, Sun CC, perl5.005_03
+   - RedHat Linux 6.0, egcs, perl5.005_03
 
 Installation:
+-------------
 
  - Edit the Makefile.PL so that the location of the SLA
-   library and include files are correct
+   library and include files are correct.
+ 
+   In general you will have a libsla.a or a libcsla.a.
+   The default is to search for libcsla.a. You will have 
+   to change the LIBS entry if you use libsla.a for the C version.
+   It is assumed the library is available from /usr/local/lib by default.
+
+   The includes files, slamac.h and slalib.h, should be available
+   in the default path. If they are somewhere else the Makefile.PL 
+   should be edited to reflect this location. For example,
+   change the line
+ 
+     INC => '',
+
+   to
+
+     INC => '-I/home/me/include',
+
+   to pick them up from /home/me/include
 
 Then:
 
@@ -22,7 +66,20 @@ Then:
   % make test
   % make install
 
+The compilation will generate some prototype errors relating to
+pointers to arrays. These can be ignored - I will fix them
+eventually.
+
 Currently there is only one test (converting B1950 to J2000).
+
+Documentation:
+--------------
+
+The module provides documentation on how to use the perl interface
+to SLALIB. It does not contain information on how to use
+SLALIB itself. For more information on SLALIB see:
+
+  http://star-www.rl.ac.uk/star/docs/sun67.htx/sun67.html
 
 
 Copyright

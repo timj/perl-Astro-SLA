@@ -2,12 +2,12 @@ package Astro::SLA;
 
 =head1 NAME
 
-Astro::SLA - perl interface to SLAlib astrometry library
+Astro::SLA - perl interface to SLAlib positional astronomy library
 
 =head1 SYNOPSIS
 
   use SLA;
-  use SLA qw(constants sla);
+  use SLA qw(:constants :sla);
 
   slaFk45z($ra, $dec, 1950.0, $ra2000, $dec2000);
   slaCldj($yy, $mn, $dd, $mjd, $status);
@@ -26,11 +26,10 @@ implemented since perl can work in double precision.
 The SLALIB constants (as provided in slamac.h) are available.
 
 In addition small utility subroutines are provided that
-do useful task (from the author's point of view) - specifically
+do useful tasks (from the author's point of view) - specifically
 routines for calculating the Local Sidereal Time. It may be
 that this part of the module should be moved into an 
 accompanying module -- Astro::SLA::Extras.
-
 
 =cut
 
@@ -43,7 +42,7 @@ use strict;
 use Carp;
 use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
-$VERSION = '0.11';
+$VERSION = '0.90';
 
 @ISA = qw(Exporter DynaLoader); 
 
@@ -116,7 +115,7 @@ Each group will be discussed in turn.
 
 All the double precision SLA routines are implemented except for
 slaPxy, slaDmat, slaSvd, slaSvdcov, slaSvdsol (I may do these some
-other time -- although they should be done in perlDL).
+other time -- although they should be done in C<PDL>).
 
 The implemented routines are:
 

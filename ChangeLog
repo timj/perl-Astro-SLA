@@ -1,3 +1,7 @@
+1999-05-17  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.pm: Version now 0.90 in preparation for CPAN release.
+
 1999-03-12  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* SLA.pm: Up version number to 0.11
