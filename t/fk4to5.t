@@ -76,7 +76,7 @@ sub btoj {
   # Check for sign. Dont use numeric comparison since this
   # will not trap -00 01
   $dsign = ($d =~ /^\s*-/ ? -1 : 1);
-  $d = abs($d);
+  $d *= $dsign;  # since abs(-0) == -0
 
   slaDaf2r($d,$dm,$ds ,$dec_rad,$status);
 

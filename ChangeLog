@@ -1,6 +1,7 @@
 2000-04-11  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* t/fk4to5.t: Improve the test (and fix btoj for -00 decs)
+	(btoj): dont use abs($d), multiply by dsign instead.
 
 2000-03-28  Tim Jenness  <timj@jach.hawaii.edu>
 
