@@ -40,6 +40,7 @@
 			 double *b2);
   double TRAIL(sla_dt)(double * epoch);
   double TRAIL(sla_dtt)(double * dju);
+  double TRAIL(sla_dvdv)(double * va, double *vb);
   double TRAIL(sla_epb)(double * date);
   double TRAIL(sla_epb2d)(double * epb);
   double TRAIL(sla_epco)(char *k0, char *k, double *e, int len1, int len2);
@@ -255,7 +256,8 @@ slaAop(rap,dap,date,dut,elongm,phim,hm,xp,yp,tdk,pmb,rh,wl,tlr,aob,zob,hob,dob,r
  PROTOTYPE: $$$$$$$$$$$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaAop");
+  TRAIL(sla_aop)(&rap,&dap,&date,&dut,&elongm,&phim,&hm,&xp,&yp,&tdk,&pmb,
+		 &rh,&wl,&tlr,&aob,&zob,&hob,&dob,&rob);
 #else
   slaAop(rap,dap,date,dut,elongm,phim,hm,xp,yp,tdk,pmb,rh,wl,tlr,&aob,&zob,&hob,&dob,&rob);
 #endif
@@ -285,7 +287,8 @@ slaAoppa(date,dut,elongm,phim,hm,xp,yp,tdk,pmb,rh,wl,tlr,aoprms)
  CODE:
   aoprms = get_mortalspace(14,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaAoppa");
+  TRAIL(sla_aoppa)(&date,&dut,&elongm,&phim,&hm,&xp,&yp,&tdk,&pmb,&rh,
+		   &wl,&tlr,aoprms);
 #else
   slaAoppa(date,dut,elongm,phim,hm,xp,yp,tdk,pmb,rh,wl,tlr,aoprms);
 #endif
@@ -306,7 +309,7 @@ slaAoppat(date, aoprms)
   /* Should probably allocate [14] doubles here and copy the array
      myself */
 #ifdef USE_FORTRAN
-  not_impl("slaAoppat");
+  TRAIL(sla_aoppat)(&date,aoprms);
 #else
   slaAoppat(date, aoprms);
 #endif
@@ -327,7 +330,7 @@ slaAopqk(rap, dap, aoprms, aob, zob, hob, dob, rob)
  PROTOTYPE: $$\@$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaAopqk");
+  TRAIL(sla_aopqk)(&rap, &dap, aoprms, &aob,&zob,&hob,&dob,&rob);
 #else
   slaAopqk(rap, dap, aoprms, &aob,&zob,&hob,&dob,&rob);
 #endif
@@ -352,7 +355,7 @@ slaAtmdsp(tdk, pmb, rh, wl1, a1, b1, wl2, a2, b2)
  PROTOTYPE:
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaAtmdsp");
+  TRAIL(sla_atmdsp)(&tdk, &pmb, &rh, &wl1, &a1, &b1, &wl2, &a2, &b2);
 #else
   slaAtmdsp(tdk, pmb, rh, wl1, a1, b1, wl2, &a2, &b2);
 #endif
@@ -371,7 +374,7 @@ slaAv2m(axvec, rmat)
  CODE:
   rmat = get_mortalspace(9,'f');
 #ifdef USE_FORTRAN
-  not_impl("slaAv2m");
+  TRAIL(sla_av2m)(axvec, rmat);
 #else
   slaAv2m(axvec, (void*)rmat);
 #endif
@@ -395,7 +398,7 @@ slaCaldj(iy, im, id, djm, j)
  PROTOTYPE: $$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaCaldj");
+  TRAIL(sla_caldj)(&iy, &im, &id, &djm, &j);
 #else
   slaCaldj(iy, im, id, &djm, &j);
 #endif
@@ -414,7 +417,7 @@ slaCalyd(iy, im, id, ny, nd, j)
  PROTOTYPE: $$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaCalyd");
+  TRAIL(sla_calyd)(&iy, &im, &id, &ny, &nd, &j);
 #else
   slaCalyd(iy, im, id, &ny, &nd, &j);
 #endif
@@ -460,7 +463,7 @@ slaClyd(iy, im, id, ny, nd, j)
  PROTOTYPE: $$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaClyd");
+  TRAIL(sla_clyd)(&iy, &im, &id, &ny, &nd, &j);
 #else
   slaClyd(iy, im, id, &ny, &nd, &j);
 #endif
@@ -549,7 +552,7 @@ slaDav2m(axvec, rmat)
  CODE:
   rmat = get_mortalspace(9,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDav2m");
+  TRAIL(sla_dav2m)(axvec,rmat);
 #else
   slaDav2m(axvec, (void*)rmat);
 #endif
@@ -586,7 +589,7 @@ slaDbjin(string, nstrt, dreslt, j1, j2)
  PROTOTYPE: $$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDbjin");
+  TRAIL(sla_dbjin)(string, &nstrt, &dreslt, &j1, &j2,strlen(string));
 #else
   slaDbjin(string, &nstrt, &dreslt, &j1, &j2);
 #endif
@@ -610,7 +613,7 @@ slaDc62s(v, a, b, r, ad, bd, rd)
  PROTOTYPE: \@$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDc62s");
+  TRAIL(sla_dc62s)(v, &a, &b, &r, &ad, &bd, &rd);
 #else
   slaDc62s(v, &a, &b, &r, &ad, &bd, &rd);
 #endif
@@ -654,7 +657,7 @@ slaDcmpf(coeffs, xy, yz, xs, ys, perp, orient)
  PROTOTYPE: \@$$$$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaDcmpf");
+  TRAIL(sla_dcmpf)(coeffs, &xy, &yz, &xs, &ys, &perp, &orient);
 #else
   slaDcmpf(coeffs, &xy, &yz, &xs, &ys, &perp, &orient);
 #endif
@@ -743,7 +746,7 @@ slaDeuler(order, phi, theta, psi, rmat)
  CODE:
   rmat = get_mortalspace(9,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDeuler");
+  TRAIL(sla_deuler)(order, &phi, &theta, &psi, rmat,strlen(order));
 #else
   slaDeuler(order, phi, theta, psi, (void*)rmat);
 #endif
@@ -803,7 +806,7 @@ slaDimxv(dm, va, vb)
  CODE:
   vb = get_mortalspace(3,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDimxv");
+  TRAIL(sla_dimxv)(dm,va,vb);
 #else
   slaDimxv((void*)dm, va, vb);
 #endif
@@ -822,7 +825,7 @@ slaDjcal(ndp, djm, iymdf, j)
  CODE:
    iymdf =  get_mortalspace(4,'i');
 #ifdef USE_FORTRAN
-  not_impl("slaDjcal");
+   TRAIL(sla_djcal)(&ndp, &djm, iymdf, &j);
 #else
    slaDjcal(ndp, djm, iymdf, &j);
 #endif
@@ -865,7 +868,7 @@ slaDm2av(rmat, axvec)
  CODE:
   axvec = get_mortalspace(3,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDm2av");
+  TRAIL(sla_dm2av)(rmat,axvec);
 #else
   slaDm2av((void*)rmat, axvec);
 #endif
@@ -884,7 +887,7 @@ slaDmoon(date, pv)
  CODE:
    pv = get_mortalspace(6,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDmoon");
+   TRAIL(sla_dmoon)(&date,pv);
 #else
    slaDmoon(date, pv);
 #endif
@@ -906,7 +909,7 @@ slaDmxm(a, b, c)
  CODE:
   c = get_mortalspace(9, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaDmxm");
+  TRAIL(sla_dmxm)(a,b,c);
 #else
   slaDmxm((void*)a,(void*)b,(void*)c);
 #endif
@@ -1119,7 +1122,7 @@ slaDtf2d(ihour, imin, sec, days, j)
  PROTOTYPE: $$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDtf2d");
+  TRAIL(sla_dtf2d)(&ihour,&imin,&sec,&days,&j);
 #else
   slaDtf2d(ihour, imin, sec, &days, &j);
 #endif
@@ -1141,7 +1144,6 @@ slaDtf2r(ihour, imin, sec, rad, j)
  CODE:
 #ifdef USE_FORTRAN
   TRAIL(sla_dtf2r)(&ihour, &imin, &sec, &rad, &j);
-  /* not_impl("slaDtf2r"); */
 #else
   slaDtf2r(ihour, imin, sec, &rad, &j);
 #endif
@@ -1163,7 +1165,7 @@ slaDtp2s(xi, eta, raz, decz, ra, dec)
   slaTp2s = 1
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDtp2s");
+  TRAIL(sla_dtp2s)(&xi, &eta, &raz, &decz, &ra, &dec);
 #else
   slaDtp2s(xi, eta, raz, decz, &ra, &dec);
 #endif
@@ -1184,7 +1186,7 @@ slaDtp2v(xi, eta, v0, v)
  CODE:
   v = get_mortalspace(3, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaDtp2v");
+  TRAIL(sla_dtp2v)(&xi,&eta,v0,v);
 #else
   slaDtp2v(xi, eta, v0, v);
 #endif
@@ -1208,7 +1210,7 @@ slaDtps2c(xi, eta, ra, dec, raz1, decz1, raz2, decz2, n)
   slaTps2c = 1
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDtps2c");
+  TRAIL(sla_dtps2c)(&xi, &eta, &ra, &dec, &raz1, &decz1, &raz2, &decz2, &n);
 #else
   slaDtps2c(xi, eta, ra, dec, &raz1, &decz1, &raz2, &decz2, &n);
 #endif
@@ -1234,7 +1236,7 @@ slaDtpv2c(xi, eta, v, v01, v02, n)
   v01 = get_mortalspace(3,'d');
   v02 = get_mortalspace(3,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDtpv2c");
+  TRAIL(sla_dtpv2c)(&xi,&eta,v,v01,v02,&n);
 #else
   slaDtpv2c(xi, eta, v, v01, v02, &n);
 #endif
@@ -1271,7 +1273,7 @@ slaDv2tp(v, v0, xi, eta, j)
   slaV2tp = 1
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDv2tp");
+  TRAIL(sla_dv2tp)(v,v0,&xi,&eta,&j);
 #else
   slaDv2tp(v, v0, &xi, &eta, &j);
 #endif
@@ -1289,7 +1291,7 @@ slaDvdv(va, vb)
   slaVdv = 1
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDvdv");
+   RETVAL = TRAIL(sla_dvdv)(va, vb);
 #else
    RETVAL = slaDvdv(va, vb);
 #endif
@@ -1307,7 +1309,7 @@ slaDvn(v, uv, vm)
  CODE:
   uv = get_mortalspace(3,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDvn");
+  TRAIL(sla_dvn)(v, uv, &vm);
 #else
   slaDvn(v, uv, &vm);
 #endif
@@ -1327,7 +1329,7 @@ slaDvxv(va, vb, vc)
  CODE:
   vc = get_mortalspace(3,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDvxv");
+  TRAIL(sla_dvxv)(va,vb,vc);
 #else
   slaDvxv(va,vb,vc);
 #endif
@@ -1348,7 +1350,7 @@ slaEarth(iy, id, fd, pv)
  CODE:
    pv = get_mortalspace(6,'f');
 #ifdef USE_FORTRAN
-  not_impl("slaEarth");
+  TRAIL(sla_earth)(&iy,&id,&fd,pv);
 #else
    slaEarth(iy, id, fd, pv);
 #endif
@@ -1366,7 +1368,7 @@ slaEcleq(dl, db, date, dr, dd)
  PROTOTYPE: $$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaEcleq");
+  TRAIL(sla_ecleq)(&dl, &db, &date, &dr, &dd);
 #else
   slaEcleq(dl, db, date, &dr, &dd);
 #endif
@@ -1382,7 +1384,7 @@ slaEcmat(date, rmat)
  CODE:
   rmat = get_mortalspace(9,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaEcmat");
+  TRAIL(sla_ecmat)(&date,rmat);
 #else
   slaEcmat(date, (void*)rmat);
 #endif
@@ -1402,7 +1404,7 @@ slaEcor(rm, dm, iy, id, fd, rv, tl)
  PROTOTYPE: $$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaEcor");
+  TRAIL(sla_ecor)(&rm, &dm, &iy, &id, &fd, &rv, &tl);
 #else
   slaEcor(rm, dm, iy, id, fd, &rv, &tl);
 #endif
@@ -1419,7 +1421,7 @@ slaEg50(dr, dd, dl, db)
  PROTOTYPE: $$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaEg50");
+   TRAIL(sla_eg50)(&dr,&dd,&dl,&db);
 #else
    slaEg50(dr, dd, &dl, &db);
 #endif
@@ -1506,7 +1508,7 @@ slaEqecl(dr, dd, date, dl, db)
  PROTOTYPE: $$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaEqecl");
+  TRAIL(sla_eqecl)(&dr,&dd,&date,&dl,&db);
 #else
    slaEqecl(dr, dd, date, &dl, &db);
 #endif
@@ -1538,7 +1540,7 @@ slaEqgal(dr, dd, dl, db)
  PROTOTYPE: $$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaEqgal");
+   TRAIL(sla_eqgal)(&dr,&dd,&dl,&db);
 #else
    slaEqgal(dr, dd, &dl, &db);
 #endif
@@ -1555,7 +1557,7 @@ slaEtrms(ep, ev)
  CODE:
   ev = get_mortalspace(3, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaEtrms");
+  TRAIL(sla_etrms)(&ep,ev);
 #else
   slaEtrms(ep, ev);
 #endif
@@ -1582,7 +1584,7 @@ slaEvp(date, deqx, dvb, dpb, dvh, dph)
    dvh = get_mortalspace(3,'d');
    dph = get_mortalspace(3,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaEvp");
+   TRAIL(sla_evp)(&date,&deqx,dvb,dpb,dvh,dph);
 #else
    slaEvp(date, deqx, dvb, dpb, dvh, dph);
 #endif
@@ -1615,7 +1617,8 @@ slaFk425(r1950,d1950,dr1950,dd1950,p1950,v1950,r2000,d2000,dr2000,dd2000,p2000,v
  PROTOTYPE: $$$$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaFk425");
+  TRAIL(sla_fk425)(&r1950,&d1950,&dr1950,&dd1950,&p1950,&v1950,
+		   &r2000,&d2000,&dr2000,&dd2000,&p2000,&v2000);
 #else
   slaFk425(r1950,d1950,dr1950,dd1950,p1950,v1950,&r2000,&d2000,&dr2000,&dd2000,&p2000,&v2000);
 #endif
@@ -1668,9 +1671,11 @@ slaFk524(r2000,d2000,dr2000,dd2000,p2000,v2000,r1950,d1950,dr1950,dd1950,p1950,v
  PROTOTYPE: $$$$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaFk524");
+  TRAIL(sla_fk524)(&r2000,&d2000,&dr2000,&dd2000,&p2000,&v2000,
+		   &r1950,&d1950,&dr1950,&dd1950,&p1950,&v1950);
 #else
-  slaFk524(r2000,d2000,dr2000,dd2000,p2000,v2000,&r1950,&d1950,&dr1950,&dd1950,&p1950,&v1950);
+  slaFk524(r2000,d2000,dr2000,dd2000,p2000,v2000,
+	   &r1950,&d1950,&dr1950,&dd1950,&p1950,&v1950);
 #endif
  OUTPUT:
   r1950
@@ -1692,7 +1697,7 @@ slaFk54z(r2000, d2000, bepoch, r1950, d1950, dr1950, dd1950)
  PROTOTYPE: $$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaFk54z");
+  TRAIL(sla_fk54z)(&r2000, &d2000, &bepoch, &r1950, &d1950, &dr1950, &dd1950);
 #else
   slaFk54z(r2000, d2000, bepoch, &r1950, &d1950, &dr1950, &dd1950);
 #endif
@@ -1732,7 +1737,7 @@ slaGalsup(dl, db, dsl, dsb)
  PROTOTYPE: $$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaGalsup");
+  TRAIL(sla_galsup)(&dl,&db,&dsl,&dsb);
 #else
    slaGalsup(dl, db, &dsl, &dsb);
 #endif
@@ -1749,7 +1754,7 @@ slaGe50(dl, db, dr, dd)
  PROTOTYPE: $$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaGe50");
+   TRAIL(sla_ge50)(&dl,&db,&dr,&dd);
 #else
    slaGe50(dl, db, &dr, &dd);
 #endif
@@ -1767,7 +1772,7 @@ slaGeoc(p, h, r, z)
  PROTOTYPE: $$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaGeoc");
+  TRAIL(sla_geoc)(&p,&h,&r,&z);
 #else
    slaGeoc(p, h, &r, &z);
 #endif
@@ -1835,7 +1840,7 @@ slaImxv(rm, va, vb)
  CODE:
   vb = get_mortalspace(3,'f');
 #ifdef USE_FORTRAN
-  not_impl("slaImxv");
+  TRAIL(sla_imxv)((void*)rm, va, vb);
 #else
   slaImxv((void*)rm, va, vb);
 #endif
@@ -1855,7 +1860,7 @@ slaInvf(fwds, bkwds, j)
  CODE:
   bkwds = get_mortalspace(6,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaInvf");
+  TRAIL(sla_invf)(fwds, bkwds, &j);
 #else
   slaInvf(fwds, bkwds, &j);
 #endif
@@ -1877,7 +1882,8 @@ slaKbj(jb, e, k, j)
  CODE:
   k = string;
 #ifdef USE_FORTRAN
-  not_impl("slaKbj");
+  TRAIL(sla_kbj)(&jb,&e,k,&j,256);
+  stringf77toC(k,256);
 #else
   slaKbj(jb, e, k, &j);
 #endif
@@ -1921,7 +1927,7 @@ slaMappa(eq, date, amprms)
  CODE:
   amprms = get_mortalspace(21, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaMappa");
+  TRAIL(sla_mappa)(&eq,&date,amprms);
 #else
   slaMappa(eq, date, amprms);
 #endif
@@ -1943,7 +1949,7 @@ slaMapqk(rm, dm, pr, pd, px, rv, amprms, ra, da)
  PROTOTYPE: $$$$$$\@$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaMapqk");
+  TRAIL(sla_mapqk)(&rm, &dm, &pr, &pd, &px, &rv, amprms, &ra, &da);
 #else
   slaMapqk(rm, dm, pr, pd, px, rv, amprms, &ra, &da);
 #endif
@@ -1961,7 +1967,7 @@ slaMapqkz(rm, dm, amprms, ra, da)
  PROTOTYPE: $$\@$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaMapqkz");
+   TRAIL(sla_mapqkz)(&rm, &dm, amprms, &ra, &da);
 #else
    slaMapqkz(rm, dm, amprms, &ra, &da);
 #endif
@@ -1980,7 +1986,7 @@ slaMoon(iy, id, fd, pv)
  CODE:
    pv = get_mortalspace(6,'f');
 #ifdef USE_FORTRAN
-  not_impl("slaMoon");
+   TRAIL(sla_moon)(&iy,&id,&fd,pv);
 #else
    slaMoon(iy, id, fd, pv);
 #endif
@@ -2002,7 +2008,7 @@ slaNut(date, rmatn)
  CODE:
   rmatn = get_mortalspace(9, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaNut");
+  TRAIL(sla_nut)(&date,rmatn);
 #else
   slaNut(date, (void*)rmatn);
 #endif
@@ -2020,7 +2026,7 @@ slaNutc(date, dpsi, deps, eps0)
  PROTOTYPE: $$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaNutc");
+  TRAIL(sla_nutc)(&date, &dpsi, &deps, &eps0);
 #else
   slaNutc(date, &dpsi, &deps, &eps0);
 #endif
@@ -2071,7 +2077,7 @@ slaOapqk(type, ob1, ob2, aoprms, rap, dap)
  PROTOTYPE: $$$\@$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaOapqk");
+  TRAIL(sla_oapqk)(type, &ob1, &ob2, aoprms, &rap, &dap,strlen(type));
 #else
   slaOapqk(type, ob1, ob2, aoprms, &rap, &dap);
 #endif
@@ -2142,7 +2148,7 @@ slaPcd(disco, x, y)
  PROTOTYPE: $$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaPcd");
+  TRAIL(sla_pcd)(&disco, &x, &y);
 #else
   slaPcd(disco, &x, &y);
 #endif
@@ -2163,7 +2169,7 @@ slaPda2h(p, d, a, h1, j1, h2, j2)
  PROTOTYPE: $$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaPda2h");
+  TRAIL(sla_pda2h)(&p, &d, &a, &h1, &j1, &h2, &j2);
 #else
   slaPda2h(p, d, a, &h1, &j1, &h2, &j2);
 #endif
@@ -2274,7 +2280,8 @@ slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, jstat
  CODE:
   pv = get_mortalspace(6, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaPlanel");
+  TRAIL(sla_planel)(&date, &jform, &epoch, &orbinc, &anode, &perih, &aorq, &e,
+		    &aorl, &dm, pv, &jstat);
 #else
   slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, &jstat);
 #endif
@@ -2293,7 +2300,7 @@ slaPlanet(date, np, pv, jstat)
  CODE:
    pv = get_mortalspace(6, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaPlanet");
+   TRAIL(sla_planet)(&date, &np, pv, &jstat);
 #else
    slaPlanet(date, np, pv, &jstat);
 #endif
@@ -2350,7 +2357,7 @@ slaPm(r0,d0,pr,pd,px,rv,ep0,ep1,r1,d1)
  PROTOTYPE: $$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaPm");
+  TRAIL(sla_pm)(&r0,&d0,&pr,&pd,&px,&rv,&ep0,&ep1,&r1,&d1);
 #else
   slaPm(r0,d0,pr,pd,px,rv,ep0,ep1,&r1,&d1);
 #endif
@@ -2371,7 +2378,7 @@ slaPolmo(elongm, phim, xp, yp, elong, phi, daz)
  PROTOTYPE: $$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaPolmo");
+  TRAIL(sla_polmo)(&elongm, &phim, &xp, &yp, &elong, &phi, &daz);
 #else
   slaPolmo(elongm, phim, xp, yp, &elong, &phi, &daz);
 #endif
@@ -2410,7 +2417,7 @@ slaPrec(ep0, ep1, rmatp)
  CODE:
   rmatp = get_mortalspace(9,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaPrec");
+  TRAIL(sla_prec)(&ep0, &ep1, rmatp);
 #else
   slaPrec(ep0, ep1, (void*)rmatp);
 #endif
@@ -2449,7 +2456,7 @@ slaPrecl(ep0, ep1, rmatp)
  CODE:
   rmatp = get_mortalspace(9,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaPrecl");
+  TRAIL(sla_precl)(&ep0, &ep1, rmatp);
 #else
   slaPrecl(ep0, ep1, (void*)rmatp);
 #endif
@@ -2466,7 +2473,7 @@ slaPrenut(epoch, date, rmatpn)
  CODE:
   rmatpn = get_mortalspace(9,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaPrenut");
+  TRAIL(sla_prenut)(&epoch, &date, rmatpn);
 #else
   slaPrenut(epoch, date, (void*)rmatpn);
 #endif
@@ -2572,7 +2579,7 @@ slaRefco(hm, tdk, pmb, rh, wl, phi, tlr, eps, refa, refb)
  PROTOTYPE: $$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaRefco");
+  TRAIL(sla_refco)(&hm, &tdk, &pmb, &rh, &wl, &phi, &tlr, &eps, &refa, &refb);
 #else
   slaRefco(hm, tdk, pmb, rh, wl, phi, tlr, eps, &refa, &refb);
 #endif
@@ -2591,7 +2598,7 @@ slaRefcoq(tdk, pmb, rh, wl, refa, refb)
  PROTOTYPE: $$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaRefcoq");
+  TRAIL(sla_refcoq)(&tdk, &pmb, &rh, &wl, &refa, &refb);
 #else
   slaRefcoq(tdk, pmb, rh, wl, &refa, &refb);
 #endif
@@ -2616,7 +2623,7 @@ slaRefro(zobs, hm, tdk, pmb, rh, wl, phi, tlr, eps, ref)
  PROTOTYPE: $$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaRefro");
+  TRAIL(sla_refro)(&zobs, &hm, &tdk, &pmb, &rh, &wl, &phi, &tlr, &eps, &ref);
 #else
   slaRefro(zobs, hm, tdk, pmb, rh, wl, phi, tlr, eps, &ref);
 #endif
@@ -2633,7 +2640,7 @@ slaRefv(vu, refa, refb, vr)
  CODE:
   vr = get_mortalspace(3, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaRefv");
+  TRAIL(sla_refv)(vu, &refa, &refb, vr);
 #else
   slaRefv(vu, refa, refb, vr);
 #endif
@@ -2650,7 +2657,7 @@ slaRefz(zu, refa, refb, zr)
  PROTOTYPE: $$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaRefz");
+   TRAIL(sla_refz)(&zu, &refa, &refb, &zr);
 #else
    slaRefz(zu, refa, refb, &zr);
 #endif
@@ -2744,7 +2751,7 @@ slaS2tp(ra, dec, raz, decz, xi, eta, j)
  PROTOTYPE: $$$$$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaS2tp");
+  TRAIL(sla_s2tp)(&ra, &dec, &raz, &decz, &xi, &eta, &j);
 #else
   slaS2tp(ra, dec, raz, decz, &xi, &eta, &j);
 #endif
@@ -2767,7 +2774,7 @@ slaSubet(rc, dc, eq, rm, dm)
  PROTOTYPE: $$$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaSubet");
+  TRAIL(sla_subet)(&rc, &dc, &eq, &rm, &dm);
 #else
   slaSubet(rc, dc, eq, &rm, &dm);
 #endif
@@ -2812,7 +2819,7 @@ slaUnpcd(disco, x, y)
  PROTOTYPE: $$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaUnpcd");
+  TRAIL(sla_unpcd)(&disco, &x, &y);
 #else
   slaUnpcd(disco, &x, &y);
 #endif
@@ -2840,7 +2847,7 @@ slaXy2xy(x1, y1, coeffs, x2, y2)
  PROTOTYPE: $$\@$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaXy2xy");
+  TRAIL(sla_xy2xy)(&x1, &y1, coeffs, &x2, &y2);
 #else
   slaXy2xy(x1, y1, coeffs, &x2, &y2);
 #endif
