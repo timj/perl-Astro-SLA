@@ -1902,7 +1902,7 @@ slaRdplan(date, np, elong, phi, ra, dec, diam)
   double ra = NO_INIT
   double dec = NO_INIT
   double diam = NO_INIT
- PROTOTYPE: $$$$$$
+ PROTOTYPE: $$$$$$$
  CODE:
   slaRdplan(date, np, elong, phi, &ra, &dec, &diam);
  OUTPUT:
