@@ -77,7 +77,7 @@ void not_impl( char * s ) {
 /* Internally convert an f77 string to C - must be at least 1 byte long */
 /* Could use cnf here */
  
-stringf77toC (char*c, int len) {
+void stringf77toC (char*c, int len) {
    int i;
 
    if (len==0) {return;} /* Do nothing */
@@ -102,6 +102,23 @@ stringf77toC (char*c, int len) {
    *(c+i) = '\0';   
 }
 
+/* Copy a C string into a buffer and pad that buffer with spaces
+   to the requested size suitable for use with Fortran.
+   This code is stolen from Starlink CNF routine cnfExprt
+   [see SUN/209 - CNF]
+*/
+void myCnfExprt ( const char * source_c,
+		    char * dest_f, int dest_len) {
+   int i;                        /* Loop counter                            */
+
+/* Copy the characters of the input C string to the output FORTRAN string,  */
+/* taking care not to go beyond the end of the FORTRAN string.              */
+   for( i = 0 ; (i < dest_len ) && ( source_c[i] != '\0' ) ; i++ )
+      dest_f[i] = source_c[i];
+/* Fill the rest of the output FORTRAN string with blanks.                  */
+   for(  ; i < dest_len ; i++ )
+      dest_f[i] = ' ';
+}
 
 
 MODULE = Astro::SLA   PACKAGE = Astro::SLA
@@ -1849,7 +1866,25 @@ slaImxv(rm, va, vb)
   vb
 
 
-##### SKIP: slaIntin for now -- does perl need it?
+##### does perl need slaIntin?
+
+void
+slaIntin(string, nstrt, ireslt, jflag)
+  char * string
+  int nstrt
+  long ireslt
+  int jflag = NO_INIT
+ PROTOTYPE: $$$$
+ CODE:
+#ifdef USE_FORTRAN
+  TRAIL(sla_intin)(string, &nstrt, &ireslt, &jflag, strlen(string));
+#else
+  slaIntin(string, &nstrt, &ireslt, &jflag);
+#endif
+ OUTPUT:
+  nstrt
+  ireslt
+  jflag
 
 void
 slaInvf(fwds, bkwds, j)
@@ -2095,27 +2130,63 @@ slaOapqk(type, ob1, ob2, aoprms, rap, dap)
 # guaranteed to contain a valid pointer to char.
 #  slaObs is now defined in the .pm file
 
+# Since "c" can be both input and output depending on the value
+# of n the XS routine is explicit and will write the output to
+# outc regardless of inc. We do this to allow slaObs to be called
+# with constants that can not handle always being modified in the
+# simple XS {could use PPCODE but the multivar approach is easier
+# since there are many return values that would need to be specified.)
+
 void
-_slaObs(n, c, name, w, p, h)
+_slaObs(n, inc, outc, name, w, p, h)
   int n
-  char * c
+  char * inc
+  char * outc = NO_INIT
   char * name = NO_INIT
   double w = NO_INIT
   double p = NO_INIT
   double h = NO_INIT
- PROTOTYPE: $$$$$$
+  char * rwc = NO_INIT
+ PROTOTYPE: $$$$$$$
  PREINIT:
-  char string[40];
+  int  name_len = 40;
+  int  code_len = 11;
+  char string[name_len];
+  char * c;
+  char code[code_len];
+  char tempc[code_len];
  CODE:
   name = string;
+  outc = code;
+  outc[0] = '\0';
+
+  /* If n is greater than 1 we need to write the output
+     to outc. If n is less than 1 we can be readonly and just
+     use inc.
+  */
+  if (n < 1) {
+    /* read from inc. Length must be calculated for Fortran */
+    c = inc;
+    code_len = strlen(c);
+  } else {
+    /* write into outc directly. We know the length */
+    c = outc;
+  }
 #ifdef USE_FORTRAN
-  TRAIL(sla_obs)(&n,c,name,&w,&p,&h,strlen(c),40);
-  stringf77toC(name,40);
+  /* copy the input code [if any] to temp variable */ 
+  myCnfExprt(c,tempc,code_len);
+  TRAIL(sla_obs)(&n,tempc,name,&w,&p,&h,code_len,name_len);
+  stringf77toC(name,name_len);
+  if (n>0) {
+    /* Need to C-ify the string if we were expecting a reply */
+    outc = tempc;
+    stringf77toC(outc,code_len);
+  }
 #else
   slaObs(n, c, name, &w, &p, &h);
 #endif
  OUTPUT:
-  c
+  outc
   name
   w
   p
