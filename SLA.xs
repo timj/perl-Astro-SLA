@@ -659,9 +659,9 @@ slaDmoon(date, pv)
   double * pv = NO_INIT
  PROTOTYPE: $\@
  CODE:
-   pv = get_mortalspace(6,'f');
+   pv = get_mortalspace(6,'d');
    slaDmoon(date, pv);
-   unpack1D( (SV*)ST(1), (void *)pv, 'f', 6);
+   unpack1D( (SV*)ST(1), (void *)pv, 'd', 6);
  OUTPUT:
   pv
 
