@@ -6,7 +6,7 @@ use Astro::SLA;
 ###########################################################################
 
 # Only one test
-print "1..2\n";
+print "1..3\n";
 
 # Test a simple example
 my $ra = "6 10 23.9";
