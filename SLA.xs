@@ -68,7 +68,7 @@
 /* This function is used to raise an error if we have not
    implemented the Fortran interface */
 void not_impl( char * s ) {
-  Perl_croak("%s Fortran interface not yet implemented. Please inform the module author.\n",
+  Perl_croak("%s Fortran interface not yet implemented. Please inform the module author.",
 	s);
 }
 
@@ -118,7 +118,7 @@ slaAddet(rm, dm, eq, rc, dc)
  PROTOTYPE: $$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaAddet");
+  TRAIL(sla_addet)(&rm,&dm,&eq,&rc,&dc);
 #else
   slaAddet(rm, dm, eq, &rc, &dc);
 #endif
@@ -135,7 +135,7 @@ slaAfin(string, nstrt, reslt, jf)
  PROTOTYPE: $$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaAfin");
+  TRAIL(sla_afin)(string,&nstrt,&reslt,&jf,strlen(string));
 #else
   slaAfin(string, &nstrt, &reslt, &jf);
 #endif
@@ -176,7 +176,8 @@ slaAltaz(ha, dec, phi, az, azd, azdd, el, eld, eldd, pa, pad, padd)
  PROTOTYPE: $$$$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaAltaz");
+  TRAIL(sla_altaz)(&ha, &dec, &phi, &az, &azd, &azdd, &el, &eld, 
+		   &eldd, &pa, &pad, &padd);
 #else
   slaAltaz(ha, dec, phi, &az, &azd, &azdd, &el, &eld, &eldd, &pa, &pad, &padd);
 #endif
@@ -202,7 +203,7 @@ slaAmp(ra, da, date, eq, rm, dm)
  PROTOTYPE: $$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaAmp");
+  TRAIL(sla_amp)(&ra, &da, &date, eq, &rm, &dm);
 #else
   slaAmp(ra, da, date, eq, &rm, &dm);
 #endif
@@ -222,7 +223,7 @@ slaAmpqk(ra, da, amprms, rm, dm)
  PROTOTYPE: $$\@$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaAmpqk");
+  TRAIL(sla_ampqk)(&ra,&da,amprms,&rm,&dm);
 #else
   slaAmpqk(ra, da, amprms, &rm, &dm);
 #endif
@@ -510,7 +511,7 @@ slaDafin(string, nstrt, dreslt, jf)
  PROTOTYPE: $$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDafin");
+   TRAIL(sla_dafin)(string,&nstrt,&dreslt,&jf,strlen(string));
 #else
   slaDafin(string, &nstrt, &dreslt, &jf);
 #endif
@@ -720,7 +721,7 @@ slaDe2h(ha, dec, phi, az, el)
   slaE2h = 1
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDe2h");
+  TRAIL(sla_de2h)(&ha, &dec, &phi, &az, &el);
 #else
   slaDe2h(ha, dec, phi, &az, &el);
 #endif
@@ -762,7 +763,7 @@ slaDfltin(string, nstrt, dreslt, jflag)
   slaFloatin = 1
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDfltin");
+  TRAIL(sla_dfltin)(string, &nstrt, &dreslt, &jflag,strlen(string));
 #else
   slaDfltin(string, &nstrt, &dreslt, &jflag);
 #endif
@@ -785,7 +786,7 @@ slaDh2e(az, el, phi, ha, dec)
   slaH2e = 1
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDh2e");
+  TRAIL(sla_dh2e)(&az, &el, &phi, &ha, &dec);
 #else
   slaDh2e(az, el, phi, &ha, &dec);
 #endif
@@ -1045,7 +1046,7 @@ slaDs2c6(a, b, r, ad, bd, rd, v)
  CODE:
   v = get_mortalspace(6,'d');
 #ifdef USE_FORTRAN
-  not_impl("slaDs2c6");
+  TRAIL(sla_ds2c6)(&a, &b, &r, &ad, &bd, &rd, v);
 #else
   slaDs2c6(a, b, r, ad, bd, rd, v);
 #endif
@@ -1065,7 +1066,7 @@ slaDs2tp(ra, dec, raz, decz, xi, eta, j)
  PROTOTYPE: $$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaDs2tp");
+  TRAIL(sla_ds2tp)(&ra, &dec, &raz, &decz, &xi, &eta, &j);
 #else
   slaDs2tp(ra, dec, raz, decz, &xi, &eta, &j);
 #endif
@@ -1713,7 +1714,7 @@ slaGaleq(dl, db, dr, dd)
  PROTOTYPE: $$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaGaleq");
+   TRAIL(sla_galeq)(&dl,&db,&dr,&dd);
 #else
    slaGaleq(dl, db, &dr, &dd);
 #endif
@@ -1902,7 +1903,7 @@ slaMap(rm, dm, pr, pd, px, rv, eq, date, ra, da)
  PROTOTYPE: $$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaMap");
+  TRAIL(sla_map)(&rm, &dm, &pr, &pd, &px, &rv, &eq, &date, &ra, &da);
 #else
   slaMap(rm, dm, pr, pd, px, rv, eq, date, &ra, &da);
 #endif
@@ -2050,7 +2051,8 @@ slaOap(type, ob1, ob2, date, dut, elongm, phim, hm, xp, yp, tdk, pmb, rh, wl, tl
  PROTOTYPE: $$$$$$$$$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaOap");
+   TRAIL(sla_oap)(&type, &ob1, &ob2, &date, &dut, &elongm, &phim, &hm, &xp,
+		  &yp, &tdk, &pmb, &rh, &wl, &tlr, &rap, &dap);
 #else
    slaOap(type, ob1, ob2, date, dut, elongm, phim, hm, xp, yp, tdk, pmb, rh, wl, tlr, &rap, &dap);
 #endif
@@ -2184,7 +2186,7 @@ slaPdq2h(p, d, q, h1, j1, h2, j2)
  PROTOTYPE: $$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaPdq2h");
+  TRAIL(sla_pdq2h)(&p, &d, &q, &h1, &j1, &h2, &j2);
 #else
   slaPdq2h(p, d, q, &h1, &j1, &h2, &j2);
 #endif
@@ -2218,9 +2220,12 @@ slaPertel(jform,date0,date1,epoch0,orbi0,anode0,perih0,aorq0,e0,am0,epoch1,orbi1
  CODE:
   jstat = 0;
 #ifdef USE_FORTRAN
-  not_impl("slaPertel");
+  TRAIL(sla_pertel)(&jform,&date0,&date1,&epoch0,&orbi0,&anode0,&perih0,
+		    &aorq0,&e0,&am0,&epoch1,&orbi1,&anode1,&perih1,
+		    &aorq1,&e1,&am1,&jstat);
 #else
-  slaPertel(jform,date0,date1,epoch0,orbi0,anode0,perih0,aorq0,e0,am0,&epoch1,&orbi1,&anode1,&perih1,&aorq1,&e1,&am1,&jstat);
+  slaPertel(jform,date0,date1,epoch0,orbi0,anode0,perih0,aorq0,e0,am0,
+	    &epoch1,&orbi1,&anode1,&perih1,&aorq1,&e1,&am1,&jstat);
 #endif
  OUTPUT:
   epoch1
@@ -2241,7 +2246,7 @@ slaPertue(date,u,jstat)
  CODE:
   jstat = 0;
 #ifdef USE_FORTRAN
-  not_impl("slaPertue");
+  TRAIL(sla_pertue)(&date,u,&jstat);
 #else
   slaPertue(date,u,&jstat);
 #endif
@@ -2318,7 +2323,8 @@ slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm
  PROTOTYPE: $$$$$$$$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaPlante");
+  TRAIL(sla_plante)(&date, &elong, &phi, &jform, &epoch, &orbinc, &anode,
+		    &perih, &aorq,&e, &aorl, &dm, &ra, &dec, &r, &jstat);
 #else
   slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, &ra, &dec, &r, &jstat);
 #endif
@@ -2479,7 +2485,7 @@ slaPvobs(p, h, stl, pv)
  CODE:
    pv = get_mortalspace(6, 'd');
 #ifdef USE_FORTRAN
-  not_impl("slaPvobs");
+  TRAIL(sla_pvobs)(&p,&h,&stl,pv);
 #else
    slaPvobs(p, h, stl, pv);
 #endif
@@ -2541,7 +2547,7 @@ slaRdplan(date, np, elong, phi, ra, dec, diam)
  PROTOTYPE: $$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  not_impl("slaRdplan");
+  TRAIL(sla_rdplan)(&date, &np, &elong, &phi, &ra, &dec, &diam);
 #else
   slaRdplan(date, np, elong, phi, &ra, &dec, &diam);
 #endif
@@ -2778,7 +2784,7 @@ slaSupgal(dsl, dsb, dl, db)
  PROTOTYPE: $$$$
  CODE: 
 #ifdef USE_FORTRAN
-  not_impl("slaSupgal");
+   TRAIL(sla_supgal)(&dsl,&dsb,&dl,&db);
 #else
    slaSupgal(dsl, dsb, &dl, &db);
 #endif
