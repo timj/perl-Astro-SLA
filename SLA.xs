@@ -656,7 +656,7 @@ slaDm2av(rmat, axvec)
 void
 slaDmoon(date, pv)
   double date
-  float * pv = NO_INIT
+  double * pv = NO_INIT
  PROTOTYPE: $\@
  CODE:
    pv = get_mortalspace(6,'f');
@@ -666,7 +666,7 @@ slaDmoon(date, pv)
   pv
 
 
-#### FLAG : Matric manipulation should be using PDLs
+#### FLAG : Matrix manipulation should be using PDLs
 
 void
 slaDmxm(a, b, c)
@@ -1719,16 +1719,14 @@ slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm
   double dm
   double ra = NO_INIT
   double dec = NO_INIT
-  double diam = NO_INIT
   double r = NO_INIT
   int jstat = NO_INIT
- PROTOTYPE: $$$$$$$$$$$$$$$$$
+ PROTOTYPE: $$$$$$$$$$$$$$$$
  CODE:
-  slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, &ra, &dec, &diam, &r, &jstat);
+  slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, &ra, &dec, &r, &jstat);
  OUTPUT:
   ra
   dec
-  diam
   r
   jstat
 
@@ -1764,7 +1762,7 @@ slaPolmo(elongm, phim, xp, yp, elong, phi, daz)
   double daz = NO_INIT
  PROTOTYPE: $$$$$$$
  CODE:
-  slaPolmo(elongm, phim, xp, yp, elong, phi, daz);
+  slaPolmo(elongm, phim, xp, yp, &elong, &phi, &daz);
  OUTPUT:
   elong
   phi
