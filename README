@@ -10,19 +10,19 @@ Wallace):
    astronomical position and time, but a number have wider
    trigonometrical, numerical or general applications."
 
-This is the README for version 0.91 of Astro::SLA.
+This is the README for version 0.92 of Astro::SLA.
 
 Requirements:
 -------------
 
- - This module requires the C version of the SLALIB library
-   written by Pat Wallace. It will not work with the Starlink
-   (FORTRAN) version of SLALIB. Please contact Pat Wallace
-   (ptw@star.rl.ac.uk) if you would like a copy of the library.
+This module requires the C version of the SLALIB library written by
+Pat Wallace. It will not work with the Starlink (FORTRAN) version of
+SLALIB. Please contact Pat Wallace (ptw@tpsoft.demon.co.uk) for
+details of how to obtain the (proprietary) C SLALIB library.
 
-   It has been tested with the May 1998 release of SLALIB.
+It has been tested with the May 1998 release of SLALIB.
 
-   A C compiler is required - this is an XS module.
+A C compiler is required - this is an XS module.
 
 Platforms:
 ----------
@@ -64,10 +64,6 @@ Then:
   % make test
   % make install
 
-The compilation will generate some prototype errors relating to
-pointers to arrays. These can be ignored - I will fix them
-eventually.
-
 Currently there is only one test (converting B1950 to J2000).
 
 Documentation:
@@ -87,9 +83,8 @@ This module is copyright (C) 1998, 1999 Tim Jenness and PPARC.  All rights
 reserved.  This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. 
 
-The SLALIB library (C version) is copyrighted by Patrick Wallace
-(ptw@star.rl.ac.uk). Please contact him if you would like a 
-copy of the library.
+The SLALIB library (C version) is proprietary.  Please contact Patrick
+Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 
 The array handling code was written by Karl Glazebrook.
 
@@ -99,7 +94,16 @@ Changes
 
 See the ChangeLog file for a full list of changes.
 
-Changes in this release (0.91):
+Changes in this release (0.92):
+
+  - Export all single precision aliases
+
+  - Export slaDvxv
+
+  - Fix compiler warnings (thanks to Chris Phillips <phillips@jive.nfra.nl>
+    for a patch).
+
+Changes for release 0.91:
 
   - Add DR2S, DR2H and slaEcleq to the export list. 
 
