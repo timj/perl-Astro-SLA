@@ -10,7 +10,7 @@ Wallace):
    astronomical position and time, but a number have wider
    trigonometrical, numerical or general applications."
 
-This is the README for version 0.92 of Astro::SLA.
+This is the README for version 0.93 of Astro::SLA.
 
 Requirements:
 -------------
@@ -20,7 +20,7 @@ Pat Wallace. It will not work with the Starlink (FORTRAN) version of
 SLALIB. Please contact Pat Wallace (ptw@tpsoft.demon.co.uk) for
 details of how to obtain the (proprietary) C SLALIB library.
 
-It has been tested with the May 1998 release of SLALIB.
+It has been tested with the May 1998 and January 2000 releases of SLALIB.
 
 A C compiler is required - this is an XS module.
 
@@ -29,9 +29,9 @@ Platforms:
 
    This module has been tested on the following platforms:
 
-   - SPARC Solaris 2.6, Sun CC, perl5.004_04
    - SPARC Solaris 2.6, Sun CC, perl5.005_03
-   - RedHat Linux 6.0, egcs, perl5.005_03
+   - RedHat Linux 6.1, egcs, perl5.005_03
+   - RedHat Linux 6.1, egcs, perl5.6.0
 
 Installation:
 -------------
@@ -79,7 +79,8 @@ SLALIB itself. For more information on SLALIB see:
 Copyright
 ---------
 
-This module is copyright (C) 1998, 1999 Tim Jenness and PPARC.  All rights
+This module is copyright (C) 1998-2000 Tim Jenness and 
+the UK Particle Physics and Astronomy Research Council.  All rights
 reserved.  This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. 
 
@@ -94,7 +95,23 @@ Changes
 
 See the ChangeLog file for a full list of changes.
 
-Changes in this release (0.92):
+Changes in this release (0.93):
+
+  - New utility 'stime' for printing the current time, MJD and LST
+
+  - Add ut2lst_tel command (this was in the docs but not present)
+
+  - Fix bug in slaEg50 (thanks to Chris Phillips)
+
+  - Fix segmentation violation in certain uses of the slaObs
+    command on linux.
+
+  - Should now compile cleanly on perl 5.6.0 (now uses PL_na symbols
+    in XS layer)
+
+  - slightly improved test suite.
+
+Changes for release 0.92:
 
   - Export all single precision aliases
 
