@@ -44,13 +44,13 @@ use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
 $VERSION = '0.93';
 
-@ISA = qw(Exporter DynaLoader); 
+@ISA = qw(Exporter DynaLoader);
 
 
 
 %EXPORT_TAGS = (
 		'sla'=>[qw/
-			sla524 slaAddet slaAfin slaAirmas slaAmp slaAmpqk
+			slaAddet slaAfin slaAirmas slaAmp slaAmpqk
 			slaAop slaAoppa slaAoppat slaAopqk slaAtmdsp
 			slaAv2m slaBear slaCaf2r slaCaldj slaCalyd
 			slaCc2s slaCc62s slaCd2tf slaCldj slaClyd
@@ -83,7 +83,7 @@ $VERSION = '0.93';
 			/],
 
 		'constants'=>[qw/
-			      DPI D2PI D1B2PI D4PI D1B4PI DPISQ DSQRPI DPIBY2 
+			      DPI D2PI D1B2PI D4PI D1B4PI DPISQ DSQRPI DPIBY2
 			      DD2R DR2D DAS2R DR2AS DH2R DR2H DS2R DR2S D15B2P
 			      /],
 
@@ -123,7 +123,7 @@ other time -- although they should be done in C<PDL>).
 
 The implemented routines are:
 
- sla524 slaAddet slaAfin slaAirmas slaAmp slaAmpqk slaAop
+ slaAddet slaAfin slaAirmas slaAmp slaAmpqk slaAop
  slaAoppa slaAoppat slaAopqk slaAtmdsp slaAv2m slaBear
  slaCaf2r slaCaldj slaCalyd slaCc2s slaCc62s slaCd2tf
  slaCldj slaClyd slaCr2af slaCr2tf slaCs2c6 slaDaf2r
@@ -226,7 +226,7 @@ L<constant> pragma):
 
 =item DR2S - 12*3600/pi: radians to seconds of time
 
-=item D15B2PI - 15/(2*pi): hours to degrees * radians to turns
+=item D15B2P - 15/(2*pi): hours to degrees * radians to turns
 
 =back
 
