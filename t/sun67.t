@@ -102,7 +102,7 @@ print "# Section 4.11 - Mean Place transformations\n";
 
 {
   # Test star: ra=16:09:55.13 dec=-75:59:27.2
-  #            equinox=1900 epoch=1953.087 pm1=-0.0312 s/yr pm2=0.103 as/yr
+  #            equinox=1900 epoch=1963.087 pm1=-0.0312 s/yr pm2=0.103 as/yr
   #            parallax=0.062 radial velocity=-34.22
   #            epoch of observation = 1994.35
 
@@ -148,7 +148,7 @@ print "# Section 4.11 - Mean Place transformations\n";
   is(r2rasex($r4), "16 16 28.138", "RA with new E-terms");
   is(r2decsex($d4), "-76 06 54.37", "Dec with new E-terms");
 
-  # Transform to J200, no proper motion
+  # Transform to J2000, no proper motion
   Astro::SLA::slaFk45z($r4, $d4, $ep1b, my $r5, my $d5);
 
   is(r2rasex($r5), "16 23 07.901", "RA J2000, current epoch");
