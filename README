@@ -2,7 +2,7 @@ Astro::SLA -- interface to C SLALIB library
 ==========
 
 This module provides an interface layer to the C version of the SLALIB
-library.  From the abstract of the SLALIB manual (written by Par
+library.  From the abstract of the SLALIB manual (written by Pat
 Wallace):
 
    "SLALIB is a library used by writers of positional-astronomy
@@ -10,9 +10,7 @@ Wallace):
    astronomical position and time, but a number have wider
    trigonometrical, numerical or general applications."
 
-Documentation:
-
- Instructions on the p
+This is the README for version 0.91 of Astro::SLA.
 
 Requirements:
 -------------
@@ -85,7 +83,7 @@ SLALIB itself. For more information on SLALIB see:
 Copyright
 ---------
 
-This module is copyright (C) 1998 Tim Jenness and PPARC.  All rights
+This module is copyright (C) 1998, 1999 Tim Jenness and PPARC.  All rights
 reserved.  This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. 
 
@@ -94,3 +92,19 @@ The SLALIB library (C version) is copyrighted by Patrick Wallace
 copy of the library.
 
 The array handling code was written by Karl Glazebrook.
+
+
+Changes
+-------
+
+See the ChangeLog file for a full list of changes.
+
+Changes in this release (0.91):
+
+  - Add DR2S, DR2H and slaEcleq to the export list. 
+
+  - Fix argument order of slaEqgal and slaSupgal
+        [patch supplied by Tim Kimball (kimball@stsci.edu)]
+ 
+  - Allow use of single precision names as aliases to double precision 
+    commands.
