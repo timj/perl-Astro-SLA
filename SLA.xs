@@ -3,7 +3,7 @@
   perl-SLA glue - 99% complete
                                         t.jenness@jach.hawaii.edu
 
-  Copyright (C) 1998 Tim Jenness.  All rights reserved.
+  Copyright (C) 1998, 1999 Tim Jenness.  All rights reserved.
   This program is free software; you can redistribute it and/or
   modify it under the same terms as Perl itself.
 
@@ -21,17 +21,7 @@
 #include "arrays.c"
 
 
-/* Memory for strings */
-static char string[256];
-
-
 MODULE = Astro::SLA   PACKAGE = Astro::SLA
-
-
-
-
-
-
 
 
 # Add a few routines
@@ -536,6 +526,8 @@ slaDe2h(ha, dec, phi, az, el)
   double az = NO_INIT
   double el = NO_INIT
  PROTOTYPE: $$$$$
+ ALIAS:
+  slaE2h = 1
  CODE:
   slaDe2h(ha, dec, phi, &az, &el);
  OUTPUT:
@@ -551,6 +543,8 @@ slaDeuler(order, phi, theta, psi, rmat)
   double psi
   double * rmat = NO_INIT
  PROTOTYPE: $$$$\@
+ ALIAS:
+  slaEuler = 1
  CODE:
   rmat = get_mortalspace(9,'d');
   slaDeuler(order, phi, theta, psi, rmat);
@@ -566,6 +560,8 @@ slaDfltin(string, nstrt, dreslt, jflag)
   double dreslt
   int jflag = NO_INIT
  PROTOTYPE: $$$$
+ ALIAS:
+  slaFloatin = 1
  CODE:
   slaDfltin(string, &nstrt, &dreslt, &jflag);
  OUTPUT:
@@ -583,6 +579,8 @@ slaDh2e(az, el, phi, ha, dec)
   double ha = NO_INIT
   double dec = NO_INIT
  PROTOTYPE: $$$$$
+ ALIAS:
+  slaH2e = 1
  CODE:
   slaDh2e(az, el, phi, &ha, &dec);
 OUTPUT:
@@ -643,6 +641,8 @@ slaDm2av(rmat, axvec)
   double * rmat
   double * axvec = NO_INIT
  PROTOTYPE: \@\@
+ ALIAS:
+  slaM2av = 1
  CODE:
   axvec = get_mortalspace(3,'d');
   slaDm2av(rmat, axvec);
@@ -674,6 +674,8 @@ slaDmxm(a, b, c)
   double * b
   double * c = NO_INIT
  PROTOTYPE: \@\@\@
+ ALIAS:
+  slaMxm = 1
  CODE:
   c = get_mortalspace(9, 'd');
   slaDmxm(a,b,c);
@@ -687,6 +689,8 @@ slaDmxv(dm, va, vb)
   double * va
   double * vb = NO_INIT
  PROTOTYPE: \@\@\@
+ ALIAS:
+  slaMxv = 1
  CODE:
   vb = get_mortalspace(3, 'd');
   slaDmxv(dm, va, vb);
@@ -700,6 +704,8 @@ slaDpav(v1, v2)
   double * v1
   double * v2
  PROTOTYPE: \@\@
+ ALIAS:
+  slaPav = 1
  CODE:
   RETVAL = slaDpav(v1, v2);
  OUTPUT:
@@ -728,6 +734,8 @@ double
 slaDrange(angle)
   double angle
  PROTOTYPE: $
+ ALIAS:
+  slaRange = 1
  CODE:
   RETVAL = slaDrange(angle);
  OUTPUT:
@@ -737,6 +745,8 @@ double
 slaDranrm(angle)
   double angle
  PROTOTYPE: $
+ ALIAS:
+  slaRanorm = 1
  CODE:
   RETVAL = slaDranrm(angle);
  OUTPUT:
@@ -809,6 +819,8 @@ slaDsep(a1, b1, a2, b2)
   double a2
   double b2
  PROTOTYPE: $$$$
+ ALIAS:
+  slaSep = 1
  CODE:
   RETVAL = slaDsep(a1, b1, a2, b2);
  OUTPUT:
@@ -867,6 +879,8 @@ slaDtp2s(xi, eta, raz, decz, ra, dec)
   double ra = NO_INIT
   double dec = NO_INIT
  PROTOTYPE: $$$$$$
+ ALIAS:
+  slaTp2s = 1
  CODE:
   slaDtp2s(xi, eta, raz, decz, &ra, &dec);
  OUTPUT:
@@ -881,6 +895,8 @@ slaDtp2v(xi, eta, v0, v)
   double * v0
   double * v = NO_INIT
  PROTOTYPE: $$\@\@
+ ALIAS:
+  slaTp2v = 1
  CODE:
   v = get_mortalspace(3, 'd');
   slaDtp2v(xi, eta, v0, v);
@@ -900,6 +916,8 @@ slaDtps2c(xi, eta, ra, dec, raz1, decz1, raz2, decz2, n)
   double decz2 = NO_INIT
   int n = NO_INIT
  PROTOTYPE: $$$$$$$$$
+ ALIAS:
+  slaTps2c = 1
  CODE:
   slaDtps2c(xi, eta, ra, dec, &raz1, &decz1, &raz2, &decz2, &n);
  OUTPUT:
@@ -918,6 +936,8 @@ slaDtpv2c(xi, eta, v, v01, v02, n)
   double * v02 = NO_INIT
   int n = NO_INIT
  PROTOTYPE: $$\@\@\@
+ ALIAS:
+  slaTpv2c = 1
  CODE:
   v01 = get_mortalspace(3,'d');
   v02 = get_mortalspace(3,'d');
@@ -947,6 +967,8 @@ slaDv2tp(v, v0, xi, eta, j)
   double eta = NO_INIT
   int j = NO_INIT
  PROTOTYPE: \@\@$$$
+ ALIAS:
+  slaV2tp = 1
  CODE:
   slaDv2tp(v, v0, &xi, &eta, &j);
  OUTPUT:
@@ -959,6 +981,8 @@ slaDvdv(va, vb)
   double * va
   double * vb
  PROTOTYPE: \@\@
+ ALIAS:
+  slaVdv = 1
  CODE:
    RETVAL = slaDvdv(va, vb);
  OUTPUT:
@@ -970,6 +994,8 @@ slaDvn(v, uv, vm)
   double * uv = NO_INIT
   double vm
  PROTOTYPE: \@\@$
+ ALIAS:
+  slaVn = 1
  CODE:
   uv = get_mortalspace(3,'d');
   slaDvn(v, uv, &vm);
@@ -984,6 +1010,8 @@ slaDvxv(va, vb, vc)
   double * vb
   double * vc = NO_INIT
  PROTOTYPE: \@\@\@
+ ALIAS:
+  slaVxv = 1
  CODE:
   vc = get_mortalspace(3,'d');
   slaDvxv(va,vb,vc);
@@ -1145,7 +1173,7 @@ slaEqgal(dr, dd, dl, db)
   double db = NO_INIT
  PROTOTYPE: $$$$
  CODE: 
-   slaEqgal(dd, dr, &dl, &db);
+   slaEqgal(dr, dd, &dl, &db);
  OUTPUT:
   dl
   db
@@ -1416,6 +1444,8 @@ slaKbj(jb, e, k, j)
   char * k = NO_INIT
   int j = NO_INIT
  PROTOTYPE: $$$$
+ PREINIT:
+  char string[256];
  CODE:
   k = string;
   slaKbj(jb, e, k, &j);
@@ -1589,6 +1619,8 @@ slaObs(n, c, name, w, p, h)
   double p = NO_INIT
   double h = NO_INIT
  PROTOTYPE: $$$$$$
+ PREINIT:
+  char string[256];
  CODE:
   name = string;
   slaObs(n, c, name, &w, &p, &h);
@@ -1612,7 +1644,7 @@ slaPa(ha, dec, phi)
   RETVAL
 
 
-#### SKIP: slaPav use slaDpav instead.
+#### SKIP: slaPav use slaDpav instead (is alias).
 
 void
 slaPcd(disco, x, y)
@@ -2080,7 +2112,7 @@ slaSubet(rc, dc, eq, rm, dm)
   dm
 
 void
-slaSupgal(dl, db, dsl, dsb)
+slaSupgal(dsl, dsb, dl, db)
   double dsl
   double dsb
   double dl = NO_INIT
