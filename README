@@ -1,0 +1,37 @@
+Astro::SLA -- interface to C SLALIB library
+==========
+
+Requirements:
+
+ - This module requires the C version of the SLALIB library
+   written by Pat Wallace. It will not work with the Starlink
+   (FORTRAN) version of SLALIB.
+
+
+Installation:
+
+ - Edit the Makefile.PL so that the location of the SLA
+   library and include files are correct
+
+Then:
+
+  % perl Makefile.PL
+  % make
+  % make test
+  % make install
+
+Currently there is only one test (converting B1950 to J2000).
+
+
+Copyright
+---------
+
+This module is copyright (C) 1998 Tim Jenness and PPARC.  All rights
+reserved.  This program is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself. 
+
+The SLALIB library (C version) is copyrighted by Patrick Wallace
+(ptw@star.rl.ac.uk). Please contact him if you would like a 
+copy of the library.
+
+The array handling code was written by Karl Glazebrook.
