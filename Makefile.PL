@@ -7,5 +7,6 @@ WriteMakefile(
 '],
     'DEFINE'    => '',
     'INC'       => ' ',
+    'dist'      => { COMPRESS => "gzip -9f"}
     );
 
