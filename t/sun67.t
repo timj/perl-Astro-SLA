@@ -400,9 +400,9 @@ EOF
   my $i = 1;
 
   # Parse the year
-  Astro::SLA::slaIntin($date,$i,my $iy, my $j);
-  Astro::SLA::slaIntin($date,$i,my $im, $j);
-  Astro::SLA::slaIntin($date,$i,my $id, $j);
+  Astro::SLA::slaIntin($date,$i,my $iy=0, my $j);
+  Astro::SLA::slaIntin($date,$i,my $im=0, $j);
+  Astro::SLA::slaIntin($date,$i,my $id=0, $j);
 
   # Parse the time
   $i = 1;
