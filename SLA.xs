@@ -243,7 +243,7 @@ slaAv2m(axvec, rmat)
  PROTOTYPE: \@\@
  CODE:
   rmat = get_mortalspace(9,'f');
-  slaAv2m(axvec, rmat);
+  slaAv2m(axvec, (void*)rmat);
   unpack1D( (SV*)ST(1), (void *)rmat, 'f', 9);
  OUTPUT:
   rmat
@@ -389,7 +389,7 @@ slaDav2m(axvec, rmat)
  PROTOTYPE: \@\@
  CODE:
   rmat = get_mortalspace(9,'d');
-  slaDav2m(axvec, rmat);
+  slaDav2m(axvec, (void*)rmat);
   unpack1D( (SV*)ST(1), (void *)rmat, 'd', 9);
  OUTPUT:
   rmat
@@ -547,7 +547,7 @@ slaDeuler(order, phi, theta, psi, rmat)
   slaEuler = 1
  CODE:
   rmat = get_mortalspace(9,'d');
-  slaDeuler(order, phi, theta, psi, rmat);
+  slaDeuler(order, phi, theta, psi, (void*)rmat);
   unpack1D( (SV*)ST(4), (void *)rmat, 'd', 9);
  OUTPUT:
   rmat
@@ -595,7 +595,7 @@ slaDimxv(dm, va, vb)
  PROTOTYPE: \@\@\@
  CODE:
   vb = get_mortalspace(3,'d');
-  slaDimxv(dm, va, vb);
+  slaDimxv((void*)dm, va, vb);
   unpack1D( (SV*)ST(2), (void *)vb, 'd', 3);
  OUTPUT: 
   vb
@@ -645,7 +645,7 @@ slaDm2av(rmat, axvec)
   slaM2av = 1
  CODE:
   axvec = get_mortalspace(3,'d');
-  slaDm2av(rmat, axvec);
+  slaDm2av((void*)rmat, axvec);
   unpack1D( (SV*)ST(1), (void *)axvec, 'd', 3);
  OUTPUT:
   axvec
@@ -678,7 +678,7 @@ slaDmxm(a, b, c)
   slaMxm = 1
  CODE:
   c = get_mortalspace(9, 'd');
-  slaDmxm(a,b,c);
+  slaDmxm((void*)a,(void*)b,(void*)c);
   unpack1D( (SV*)ST(2), (void *)c, 'd', 9);
  OUTPUT:
   c
@@ -693,7 +693,7 @@ slaDmxv(dm, va, vb)
   slaMxv = 1
  CODE:
   vb = get_mortalspace(3, 'd');
-  slaDmxv(dm, va, vb);
+  slaDmxv((void*)dm, va, vb);
   unpack1D( (SV*)ST(2), (void *)vb, 'd', 3);
  OUTPUT:
   vb
@@ -1057,7 +1057,7 @@ slaEcmat(date, rmat)
  PROTOTYPE: $\@
  CODE:
   rmat = get_mortalspace(9,'d');
-  slaEcmat(date, rmat);
+  slaEcmat(date, (void*)rmat);
   unpack1D( (SV*)ST(1), (void *)rmat, 'd', 9);
  OUTPUT:
   rmat
@@ -1414,7 +1414,7 @@ slaImxv(rm, va, vb)
  PROTOTYPE: \@\@\@
  CODE:
   vb = get_mortalspace(3,'f');
-  slaImxv(rm, va, vb);
+  slaImxv((void*)rm, va, vb);
   unpack1D( (SV*)ST(2), (void *)vb, 'f', 3);
  OUTPUT: 
   vb
@@ -1549,7 +1549,7 @@ slaNut(date, rmatn)
  PROTOTYPE: $\@
  CODE:
   rmatn = get_mortalspace(9, 'd');
-  slaNut(date, rmatn);
+  slaNut(date, (void*)rmatn);
   unpack1D( (SV*)ST(1), (void *)rmatn, 'd', 9);
  OUTPUT:
   rmatn
@@ -1811,7 +1811,7 @@ slaPrebn(bep0, bep1, rmatp)
  PROTOTYPE: $$\@
  CODE:
   rmatp = get_mortalspace(9,'d');
-  slaPrebn(bep0, bep1, rmatp);
+  slaPrebn(bep0, bep1, (void*)rmatp);
   unpack1D( (SV*)ST(2), (void *)rmatp, 'd', 9);
  OUTPUT:
   rmatp
@@ -1825,7 +1825,7 @@ slaPrec(ep0, ep1, rmatp)
  PROTOTYPE: $$\@
  CODE:
   rmatp = get_mortalspace(9,'d');
-  slaPrec(ep0, ep1, rmatp);
+  slaPrec(ep0, ep1, (void*)rmatp);
   unpack1D( (SV*)ST(2), (void *)rmatp, 'd', 9);
  OUTPUT:
   rmatp
@@ -1856,7 +1856,7 @@ slaPrecl(ep0, ep1, rmatp)
  PROTOTYPE: $$\@
  CODE:
   rmatp = get_mortalspace(9,'d');
-  slaPrecl(ep0, ep1, rmatp);
+  slaPrecl(ep0, ep1, (void*)rmatp);
   unpack1D( (SV*)ST(2), (void *)rmatp, 'd', 9);
  OUTPUT:
   rmatp
@@ -1869,7 +1869,7 @@ slaPrenut(epoch, date, rmatpn)
  PROTOTYPE: $$\@
  CODE:
   rmatpn = get_mortalspace(9,'d');
-  slaPrenut(epoch, date, rmatpn);
+  slaPrenut(epoch, date, (void*)rmatpn);
   unpack1D( (SV*)ST(2), (void *)rmatpn, 'd', 9);
  OUTPUT:
   rmatpn
