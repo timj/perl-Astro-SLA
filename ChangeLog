@@ -1,3 +1,14 @@
+1999-10-11  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.pm: Version number now 0.92
+	
+	* SLA.pm: Export single precisions commands. Export slaDvxv.
+	Update documentation to reflect the exportable commands rather
+	than the initial list.
+	
+	* SLA.xs: Fix compiler warnings by using void* (patch supplied by
+	Chris Phillips <phillips@jive.nfra.nl>)
+
 1999-08-03  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* SLA.pm: Version now 0.91
