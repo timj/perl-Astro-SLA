@@ -12,4 +12,5 @@ t/slaObs.t
 t/mjd.t
 t/preces.t
 t/comet.t
+t/sun67.t
 stime
