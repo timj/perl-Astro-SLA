@@ -1,11 +1,47 @@
 package Astro::SLA;
- 
+
+=head1 NAME
+
+Astro::SLA - perl interface to SLAlib astrometry library
+
+=head1 SYNOPSIS
+
+  use SLA;
+  use SLA qw(constants sla);
+
+  slaFk45z($ra, $dec, 1950.0, $ra2000, $dec2000);
+  slaCldj($yy, $mn, $dd, $mjd, $status);
+
+  ($lst, $mjd) = lstnow($long);
+  ($lst, $mjd) = ut2lst_tel($yy,$mn,$dd,$hh,$mm,$ss,'JCMT');
+
+=head1 DESCRIPTION
+
+This modules provides a perl interface to the C version of the
+SLALIB astrometry library written by Pat Wallace.
+
+In general the single precision routines have not been 
+implemented since perl can work in double precision.
+
+The SLALIB constants (as provided in slamac.h) are available.
+
+In addition small utility subroutines are provided that
+do useful task (from the author's point of view) - specifically
+routines for calculating the Local Sidereal Time. It may be
+that this part of the module should be moved into an 
+accompanying module -- Astro::SLA::Extras.
+
+
+=cut
+
+# '  -- close quote for my 'authors' apostrophe above.
+
 require Exporter;
 require DynaLoader;
 
 use strict;
 use Carp;
-use vars qw(@ISA @EXPORT_OK $VERSION);
+use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
 $VERSION = '0.10';
 
@@ -13,42 +49,168 @@ $VERSION = '0.10';
 
 
 
-@EXPORT_OK = qw( slaFk45z slaDtf2r slaDaf2r slaDr2af slaDr2tf slaPreces
-	      slaEqeqx slaCldj slaDe2h slaDh2e slaDat slaGmst slaDjcl
-	      slaDd2tf
-	      slaAddet slaAfin slaAirmas slaAmp slaAmpqk slaAop
-	      slaAoppa slaAoppat slaAopqk slaAtmdsp slaAv2m slaCaldj
-	      slaCalyd slaClyd slaDafin slaDav2m slaDbear slaDbjin
-	      slaDc62s slaDcc2s slaDcmpf slaDcs2c slaDeuler slaDfltin
-	      slaDimxv slaDjcal slaDm2av slaDmoon slaDmxm slaDmxv
-	      slaDpav slaDrange slaDranrm slaDs2c6 slaDs2tp
-	      slaDsep slaDtf2d slaDtp2s slaDtp2v slaDtps2c
-	      slaDtpv2c slaDtt slaDv2tp slaDvdv slaDvn slaDvn slaEarth
-	      slaEcmat slaEcor slaEg50 slaEpb slaEpb2d slaEpco
-	      slaEpj slaEpj2d slaEqecl slaEqgal slaEtrms slaEvp
-	      slaFk425 sla524 slaFk54z  slaGaleq slaGalsup slaGe50
-	      slaGeoc slaGmsta slaGresid slaImxv slaInvf
-	      slaKbj slaMap slaMappa slaMapqk slaMapqkz slaMoon
-	      slaNut slaNutc slaOap slaOapqk slaObs slaPa
-	      slaPcd slaPda2h slaPdq2h slaPlanel slaPlanet slaPlante
-	      slaPm slaPolmo slaPrebn slaPrec slaPrecl slaPrenut
-	      slaPvobs slaRcc slaRdplan slaRefco slaRefcoq
-	      slaRefv slaRefz slaRverot slaRvgalc slaRvlg slaRvlsrd
-	      slaRvlsrk slaS2tp slaSubet slaSupgal slaUnpcd slaWait
-	      slaXy2xy slaZd
+%EXPORT_TAGS = (
+		'sla'=>[qw/
+			slaFk45z slaDtf2r slaDaf2r slaDr2af slaDr2tf
+			slaPreces slaEqeqx slaCldj slaDe2h slaDh2e
+			slaDat slaGmst slaDjcl slaDd2tf slaAddet
+			slaAfin slaAirmas slaAmp slaAmpqk slaAop
+			slaAoppa slaAoppat slaAopqk slaAtmdsp slaAv2m
+			slaCaldj slaCalyd slaClyd slaDafin slaDav2m
+			slaDbear slaDbjin slaDc62s slaDcc2s slaDcmpf
+			slaDcs2c slaDeuler slaDfltin slaDimxv slaDjcal
+			slaDm2av slaDmoon slaDmxm slaDmxv
+			slaDrange slaDranrm slaDs2c6 slaDs2tp slaDsep
+			slaDtf2d slaDtp2s slaDtp2v slaDtps2c slaDtpv2c
+			slaDtt slaDv2tp slaDvdv slaDvn slaDvn slaEarth
+			slaEcmat slaEcor slaEg50 slaEpb slaEpb2d
+			slaEpco slaEpj slaEpj2d slaEqecl slaEqgal
+			slaEtrms slaEvp slaFk425 sla524 slaFk54z
+			slaGaleq slaGalsup slaGe50 slaGeoc slaGmsta
+			slaImxv slaInvf slaKbj slaMap
+			slaMappa slaMapqk slaMapqkz slaMoon slaNut
+			slaNutc slaOap slaOapqk slaObs slaPa slaPcd
+			slaPda2h slaPdq2h slaPlanet
+			slaPm slaPolmo slaPrebn slaPrec
+			slaPrecl slaPrenut slaPvobs slaRcc slaRdplan
+			slaRefco slaRefcoq slaRefv slaRefz slaRverot
+			slaRvgalc slaRvlg slaRvlsrd slaRvlsrk slaS2tp
+			slaSubet slaSupgal slaUnpcd slaWait slaXy2xy
+			slaZd
+			/],
 
-		 DPI D2PI D1B2PI D4PI D1B4PI DPISQ DSQRPI DPIBY2 
-		 DD2R DR2D DAS2R DR2AS DH2R DS2R D15B2P
+		'constants'=>[qw/
+			      DPI D2PI D1B2PI D4PI D1B4PI DPISQ DSQRPI DPIBY2 
+			      DD2R DR2D DAS2R DR2AS DH2R DS2R D15B2P
+			      /],
 
-		 lst_from_ut
-	    ); 
+		'funcs'=>[qw/
+			  lstnow lstnow_tel ut2lst ut2lst_tel
+			  /]
+	       ); 
  
  
+Exporter::export_tags('sla','constants','funcs');
+
 bootstrap Astro::SLA;
- 
-=item Constants
 
-Constants supplied by this module.
+
+=head1 Routines
+
+There are 3 distinct groups of routines that can be imported into
+the namespace via tags:
+
+=over 4
+
+=item sla - import just the SLALIB routines
+
+=item constants - import the SLALIB constants
+
+=item funcs - import the extra routines
+
+=back
+
+Each group will be discussed in turn.
+
+=head2 sla
+
+All the double precision SLA routines are implemented except for
+slaPxy, slaDmat, slaSvd, slaSvdcov, slaSvdsol (I may do these some
+other time -- although they should be done in perlDL).
+
+The implemented routines are:
+
+	slaFk45z slaDtf2r slaDaf2r slaDr2af slaDr2tf
+	slaPreces slaEqeqx slaCldj slaDe2h slaDh2e
+	slaDat slaGmst slaDjcl slaDd2tf slaAddet
+	slaAfin slaAirmas slaAmp slaAmpqk slaAop
+	slaAoppa slaAoppat slaAopqk slaAtmdsp slaAv2m
+	slaCaldj slaCalyd slaClyd slaDafin slaDav2m
+	slaDbear slaDbjin slaDc62s slaDcc2s slaDcmpf
+	slaDcs2c slaDeuler slaDfltin slaDimxv slaDjcal
+	slaDm2av slaDmoon slaDmxm slaDmxv
+	slaDrange slaDranrm slaDs2c6 slaDs2tp slaDsep
+	slaDtf2d slaDtp2s slaDtp2v slaDtps2c slaDtpv2c
+	slaDtt slaDv2tp slaDvdv slaDvn slaDvn slaEarth
+	slaEcmat slaEcor slaEg50 slaEpb slaEpb2d
+	slaEpco slaEpj slaEpj2d slaEqecl slaEqgal
+	slaEtrms slaEvp slaFk425 sla524 slaFk54z
+	slaGaleq slaGalsup slaGe50 slaGeoc slaGmsta
+	slaImxv slaInvf slaKbj slaMap
+	slaMappa slaMapqk slaMapqkz slaMoon slaNut
+	slaNutc slaOap slaOapqk slaObs slaPa slaPcd
+	slaPda2h slaPdq2h slaPlanet
+	slaPm slaPolmo slaPrebn slaPrec
+	slaPrecl slaPrenut slaPvobs slaRcc slaRdplan
+	slaRefco slaRefv slaRefz slaRverot
+	slaRvgalc slaRvlg slaRvlsrd slaRvlsrk slaS2tp
+	slaSubet slaSupgal slaUnpcd slaWait slaXy2xy
+	slaZd
+
+Also, slaDpav, slaGresid, slaPlanel, slaPlante, slaRefcoq and
+slaRandom are not in the C library (although they are in the Fortran
+version).  slaWait is implemented using the perl 'select(ready file
+descriptors)' command.
+
+
+For more information on the SLALIB routines consult the Starlink
+documentation (Starlink User Note 67 (SUN/67)). This document
+is available from the Starlink web site (http://star-www.rl.ac.uk/)
+[SUN67 avialable from: 
+http://star-www.rl.ac.uk/cgi-bin/htxserver/sun67.htx/sun67.html]]
+
+
+=cut
+
+sub slaWait ($) {
+  my $delay = shift;
+  select (undef, undef, undef, $delay);
+
+}
+
+
+=head2 Constants
+
+Constants supplied by this module (note that they are implemented via the
+L<constant> pragma):
+
+=over 4
+
+=item DPI - Pi
+
+=item D2PI - 2 * Pi
+
+=item D1B2PI - 1 / (2 * Pi)
+
+=item D4PI - 4 * Pi
+
+=item D1B4PI - 1 / (4 * Pi)
+
+=item DPISQ - Pi ** 2 (Pi squared)
+
+=item DSQRPI - sqrt(Pi)
+
+=item DPIBY2 - Pi / 2: 90 degrees in radians
+
+=item DD2R - Pi / 180: degrees to radians
+
+=item DR2D - 180/Pi:  radians to degrees
+
+=item DAS2R - pi/(180*3600): arcseconds to radians
+
+=item DR2AS - 180*3600/pi: radians to arcseconds
+
+=item DH2R - pi/12: hours to radians
+
+=item DR2H - 12/pi: radians to hours
+
+=item DS2R - pi / (12*3600): seconds of time to radians
+
+=item DR2S - 12*3600/pi: radians to seconds of time
+
+=item 15/(2*pi) - hours to degrees * radians to turns
+
+=back
 
 =cut
 
@@ -104,9 +266,43 @@ use constant DR2S => 1.3750987083139757010431557155385240879777313391975e4;
 use constant D15B2P => 2.3873241463784300365332564505877154305168946861068;
 
 
+=head2 Extra functions (using the 'funcs' tag)
+
+
+=over 4
+
+=item ($lst, $mjd) = lstnow_tel($tel);
+
+Return current LST (in radians) and MJD for a given telescope.
+The telescope identifiers should match those present in slaObs.
+
+=cut
+
+sub lstnow_tel {
+
+  croak 'Usage: lstnow($tel)' unless scalar(@_) == 1;
+
+  my $tel = shift;
+
+  my ($w, $p, $h, $name);
+
+  # Find the longitude of this telescope
+  slaObs(-1, $tel, $name, $w, $p, $h);
+
+  # Convert longitude to west negative
+  $w *= -1.0;
+
+  # Run lstnow
+  my ($lst, $mjd) = lstnow($w);
+
+}
+
+
 =item ($lst, $mjd) = lstnow($long);
- 
-Return current LST and MJD
+
+Return current LST (in radians) and MJD (days)
+Longitude should be negative if degrees west
+and in radians.
 
 =cut
 
@@ -124,28 +320,28 @@ sub lstnow {
    # Calculate LST
    $year += 1900;
    $mon++;
-   my ($lst, $mjd) = lst_from_ut($year, $mon, $mday, $hour, $min, $sec, $long);
+   my ($lst, $mjd) = ut2lst($year, $mon, $mday, $hour, $min, $sec, $long);
 
-   slaDr2tf(1, $lst, $sign, \@ihmsf);
-   print "LST: $sign$ihmsf[0] $ihmsf[1] $ihmsf[2]\n";
+#   slaDr2tf(1, $lst, $sign, \@ihmsf);
+#   print "LST: $sign$ihmsf[0] $ihmsf[1] $ihmsf[2]\n";
      
    return ($lst, $mjd);
 
 }
 
 
-=item ($lst, $mjd) = lst_from_ut(yy, mn, dd, hh, mm, ss, long)
+=item ($lst, $mjd) = ut2lst(yy, mn, dd, hh, mm, ss, long)
 
 Given the UT time, calculate the Modified Julian date and the 
-local sidereal time for the specified longitude.
+local sidereal time (radians) for the specified longitude.
 
-Longitude should be negative if degrees west.
+Longitude should be negative if degrees west and in radians.
 
 =cut
 
-sub lst_from_ut {
+sub ut2lst {
 
-  croak 'Usage: lst_from_ut(yy,mn,dd,hh,mm,ss,long)' 
+  croak 'Usage: ut2lst(yy,mn,dd,hh,mm,ss,long)' 
     unless scalar(@_) == 7;
 
   my ($yy, $mn, $dd, $hh, $mm, $ss, $long) = @_;
@@ -175,7 +371,7 @@ sub lst_from_ut {
 
   # Local sidereal time = GMST + EQEQX + Longitude in radians
 
-  $lst = $gmst + $eqeqx + ($long * DD2R);
+  $lst = $gmst + $eqeqx + $long;
   
   $lst += D2PI if $lst < 0.0;
 
@@ -183,6 +379,24 @@ sub lst_from_ut {
 
 }
 
+=back
 
+
+=head1 AUTHOR
+
+Tim Jenness (t.jenness@jach.hawaii.edu)
+
+
+=head1 COPYRIGHT
+
+This module is copyright (C) 1998 Tim Jenness and PPARC.  All rights
+reserved.  This program is free software; you can redistribute it
+and/or modify it under the same terms as Perl itself.
+
+The SLALIB library (C version) is copyrighted by Patrick Wallace
+(ptw@star.rl.ac.uk). Please contact him if you would like a 
+copy of the library.
+
+=cut
 
 1;
