@@ -33,6 +33,7 @@ my %halebopp = (
 		AORQ => 0.9226383480674554,
 		E => 0.9949722217794675,
 		AORL => 0.0,
+		DM => 0,
 	      );
 
 # Time UT: 1997-10-24T17:00:00
@@ -69,8 +70,6 @@ my $name = 'JCMT';
 Astro::SLA::slaObs(-1, $name, my $fullname, my $long, my $lat, my $h);
 $long *= -1; # Need east positive
 print "# $fullname, $long, $lat, $h \n";
-
-
 
 # Now use the elements
 Astro::SLA::slaPlante($MJD, $long, $lat, $jform,
