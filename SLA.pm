@@ -80,7 +80,7 @@ $VERSION = '0.98';
 			slaRvlsrd slaRvlsrk slaS2tp slaSep slaSubet
 			slaSupgal slaTp2s slaTp2v slaTps2c slaTpv2c
 			slaUnpcd slaV2tp slaVdv slaVxv slaWait slaXy2xy
-			slaZd
+			slaZd slaIntin
 			/],
 
 		'constants'=>[qw/
@@ -148,7 +148,7 @@ The implemented routines are:
  slaRefv slaRefz slaRverot slaRvgalc slaRvlg slaRvlsrd
  slaRvlsrk slaS2tp slaSep slaSubet slaSupgal slaTp2s slaTp2v
  slaTps2c slaTpv2c slaUnpcd slaV2tp slaVdv slaVxv slaWait
- slaXy2xy slaZd
+ slaXy2xy slaZd slaIntin
 
 Also, slaGresid and slaRandom are not in the C library (although they
 are in the Fortran version).  slaWait is implemented using the perl
@@ -180,11 +180,21 @@ sub slaWait ($) {
 #   occuring when 'c' is set to undef but is to be a return value
 #   have a perl layer that replaces undef with '' in order to fix the
 #   issue
+# We also do this so that a constant can be supplied as the argument.
+# undef first argument is converted to -1
 
 sub slaObs ($$$$$$) {
   my $c = (defined $_[1] ? $_[1] : '');
-  _slaObs($_[0], $c, $_[2], $_[3], $_[4], $_[5]);
-  $_[1] = $c; # use aliasing
+  my $outc;
+  my $n = (defined $_[0] ? $_[0] : -1);
+  _slaObs($n, $c, $outc, $_[2], $_[3], $_[4], $_[5]);
+
+  # Copy outc to the caller namespace only if a positive
+  # number was specified to slaObs
+  if ($n > 0) {
+    $_[1] = $outc;
+  }
+
   return;
 }
 
@@ -456,7 +466,7 @@ sub ut2lst_tel ($$$$$$$) {
 
 =head1 AUTHOR
 
-Tim Jenness E<gt>t.jenness@jach.hawaii.eduE<lt>
+Tim Jenness E<gt>tjenness@cpan.orgE<lt>
 
 =head1 REQUIREMENTS
 
@@ -469,21 +479,18 @@ in 2002.
 You must have either the C version of the library or the Starlink
 Fortran version of the library in order to build this module.
 
-The Fortran version of SLALIB is currently available from Starlink under the
-Starlink Software Licence (effectively meaning free for non-commercial
-use). You can download it from Starlink (http://www.starlink.rl.ac.uk)
+The Fortran version of SLALIB is available from Starlink under the
+Gnu GPL. You can download it from Starlink (http://www.starlink.rl.ac.uk)
 using the Starlink Software Store
 (http://www.starlink.rl.ac.uk/Software/software_store.htm).
 Specifically: http://www.starlink.rl.ac.uk/cgi-store/storeform1?SLA
-Starlink have approved the release of this library using a GPL licence
-but the package has not yet been made available.
 
 The SLALIB library (C version) is proprietary.  Please contact Patrick
 Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 
 =head1 COPYRIGHT
 
-This module is copyright (C) 1998-2003 Tim Jenness and PPARC.  All rights
+This module is copyright (C) 1998-2004 Tim Jenness and PPARC.  All rights
 reserved.  This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 
