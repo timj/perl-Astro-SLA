@@ -42,7 +42,7 @@ use strict;
 use Carp;
 use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
-$VERSION = '0.98';
+$VERSION = '0.99';
 
 @ISA = qw(Exporter DynaLoader);
 
@@ -377,7 +377,7 @@ sub lstnow {
 
 =item B<ut2lst>
 
-Given the UT time, calculate the Modified Julian date and the 
+Given the UT time, calculate the Modified Julian date (UTC) and the 
 local sidereal time (radians) for the specified longitude.
 
  ($lst, $mjd) = ut2lst(yy, mn, dd, hh, mm, ss, long)
@@ -388,42 +388,39 @@ Longitude should be negative if degrees west and in radians.
 
 sub ut2lst {
 
-  croak 'Usage: ut2lst(yy,mn,dd,hh,mm,ss,long)' 
+  croak 'Usage: ut2lst(yy,mn,dd,hh,mm,ss,long)'
     unless scalar(@_) == 7;
 
   my ($yy, $mn, $dd, $hh, $mm, $ss, $long) = @_;
 
-  my ($rad, $j, $fd, $mjd, $slastatus, $gmst, $eqeqx, $lst);
-
   # Calculate fraction of day
-  slaDtf2r($hh, $mm, $ss, $rad, $j);
-
-  $fd = $rad / D2PI;
+  slaDtf2d($hh, $mm, $ss, my $fd, my $j);
+  if ($j != 0) {
+    croak "Error calculating fractional day with H=$hh M=$mm S=$ss\n";
+  }
 
   # Calculate modified julian date of UT day
-  slaCldj($yy, $mn, $dd, $mjd, $slastatus);
+  slaCldj($yy, $mn, $dd, my $mjd, my $slastatus);
 
   if ($slastatus != 0) {
     croak "Error calculating modified Julian date with args: $yy $mn $dd\n";
   }
 
   # Calculate sidereal time of greenwich
-  $gmst = slaGmsta($mjd, $fd);
+  my $gmst = slaGmsta($mjd, $fd);
 
   # Find MJD of current time (not just day)
   $mjd += $fd;
 
-  # Equation of the equinoxes
-  $eqeqx = slaEqeqx($mjd);
+  # Equation of the equinoxes (requires TT although makes very
+  # little differnece)
+  my $tt = $mjd + ( slaDtt($mjd) / 86_400.0);
+  my $eqeqx = slaEqeqx($tt);
 
   # Local sidereal time = GMST + EQEQX + Longitude in radians
-
-  $lst = $gmst + $eqeqx + $long;
-
-  $lst += D2PI if $lst < 0.0;
+  my $lst = slaDranrm($gmst + $eqeqx + $long);
 
   return ($lst, $mjd);
-
 }
 
 =item B<ut2lst_tel>
@@ -493,6 +490,19 @@ Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 This module is copyright (C) 1998-2004 Tim Jenness and PPARC.  All rights
 reserved.  This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful,but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+Place,Suite 330, Boston, MA  02111-1307, USA
 
 =cut
 
