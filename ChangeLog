@@ -1,3 +1,7 @@
+2003-10-22  Tim Jenness  <timj@jach.hawaii.edu>
+
+	--- VERSION 0.98 on CPAN ---
+
 2003-09-04  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* SLA.xs: Missed two Perl_croaks that only occur when linking

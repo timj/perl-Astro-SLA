@@ -125,6 +125,10 @@ Changes
 
 See the ChangeLog file for a full list of changes.
 
+Changes for release 0.98:
+
+  - Missed two "Perl_croak + threading errors"
+
 Changes for release 0.97:
 
   - Addition of a test for cometary ephemerides
