@@ -20,9 +20,10 @@ This module requires either the C or Fortran version of the SLALIB
 library written by Pat Wallace. 
 
 This module has been tested with the Starlink Fortran library v2.4-8
-(released September 2001) and the April 2002 release of the C
-library. If you are working with orbital elements you need a version
-of the library released sometime in 2002.
+(released September 2001) and v2.4-11 (spring 2003), and the April
+2002 and 2003 releases of the C library. If you are working with
+orbital elements you need a version of the library released sometime
+in 2002.
 
 You must have either the C version of the library or the Starlink
 Fortran version of the library in order to build this module.
@@ -33,6 +34,8 @@ use). You can download it from Starlink (http://www.starlink.rl.ac.uk)
 using the Starlink Software Store
 (http://www.starlink.rl.ac.uk/Software/software_store.htm).
 Specifically: http://www.starlink.rl.ac.uk/cgi-store/storeform1?SLA
+Starlink have approved the release of this library using a GPL licence
+but the package has not yet been made available.
 
 Please contact Pat Wallace (ptw@tpsoft.demon.co.uk) for details of how
 to obtain the (proprietary) C SLALIB library.
@@ -50,7 +53,7 @@ Platforms:
    - Sparc Solaris 8, Sun Compiler 6, perl 5.6.1
    - RedHat Linux 7.3, gcc2.96, perl5.8.0
    - RedHat Linux 7.3, gcc2.96, perl5.6.1
-
+   - RedHat Linux 9, gcc 3, perl 5.8.1
 
 Installation:
 -------------
@@ -86,8 +89,9 @@ Then:
 
 The tests only test part of the build. Some functions remain untested.
 In particular orbital element support will not be very good unless you
-have a modern installation of SLALIB (sometime from 2002). Astro::Coords
-will require a new module.
+have a modern installation of SLALIB (sometime from 2002).
+
+See Astro::Coords for a general object-oriented wrapper around Astro::SLA.
 
 Documentation:
 --------------
@@ -102,7 +106,7 @@ SLALIB itself. For more information on SLALIB see:
 Copyright
 ---------
 
-This module is copyright (C) 1998-2002 Tim Jenness and 
+This module is copyright (C) 1998-2003 Tim Jenness and 
 the UK Particle Physics and Astronomy Research Council.  All rights
 reserved.  This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. 
@@ -110,8 +114,8 @@ modify it under the same terms as Perl itself.
 The SLALIB library (C version) is proprietary.  Please contact Patrick
 Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 
-The Starlink SLALIB library (Fortran) is available from Starlink
-under the Starlink Software licence for non-commercial use.
+The Starlink SLALIB library (Fortran) is available from Starlink,
+currently under the Starlink Software licence for non-commercial use.
 
 The array handling code was written by Karl Glazebrook.
 
@@ -120,6 +124,15 @@ Changes
 -------
 
 See the ChangeLog file for a full list of changes.
+
+Changes for release 0.97:
+
+  - Addition of a test for cometary ephemerides
+
+  - A fix to the slaOap function when using the Fortran bindings
+
+  - Fix for building with a thread-enabled perl, although slalib
+    is not proven to be thread safe.
 
 Changes for release 0.96:
 
