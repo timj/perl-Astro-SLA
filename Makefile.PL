@@ -3,6 +3,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
 	      'NAME'      => 'Astro::SLA',
 	      'VERSION_FROM'   => 'SLA.pm',
+              'EXE_FILES' => [ 'stime' ],
 	      'LIBS'      => [
 			      '-L/usr/local/lib -lcsla -lm',
 			     ],
