@@ -1,3 +1,9 @@
+1999-03-12  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.pm: Up version number to 0.11
+
+	* SLA.xs: slaDmoon fixed - double not float
+
 1998-06-02  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* SLA.pm: Complete 99% + add lst routines
