@@ -59,7 +59,7 @@ $VERSION = '0.10';
 			slaCaldj slaCalyd slaClyd slaDafin slaDav2m
 			slaDbear slaDbjin slaDc62s slaDcc2s slaDcmpf
 			slaDcs2c slaDeuler slaDfltin slaDimxv slaDjcal
-			slaDm2av slaDmoon slaDmxm slaDmxv
+			slaDm2av slaDmoon slaDmxm slaDmxv slaDpav
 			slaDrange slaDranrm slaDs2c6 slaDs2tp slaDsep
 			slaDtf2d slaDtp2s slaDtp2v slaDtps2c slaDtpv2c
 			slaDtt slaDv2tp slaDvdv slaDvn slaDvn slaEarth
@@ -67,11 +67,11 @@ $VERSION = '0.10';
 			slaEpco slaEpj slaEpj2d slaEqecl slaEqgal
 			slaEtrms slaEvp slaFk425 sla524 slaFk54z
 			slaGaleq slaGalsup slaGe50 slaGeoc slaGmsta
-			slaImxv slaInvf slaKbj slaMap
+			slaImxv slaInvf slaKbj slaMap slaGresid
 			slaMappa slaMapqk slaMapqkz slaMoon slaNut
 			slaNutc slaOap slaOapqk slaObs slaPa slaPcd
-			slaPda2h slaPdq2h slaPlanet
-			slaPm slaPolmo slaPrebn slaPrec
+			slaPda2h slaPdq2h slaPlanel slaPlanet slaPlante
+			slaPm slaPolmo slaPrebn slaPrec slaRandom
 			slaPrecl slaPrenut slaPvobs slaRcc slaRdplan
 			slaRefco slaRefcoq slaRefv slaRefz slaRverot
 			slaRvgalc slaRvlg slaRvlsrd slaRvlsrk slaS2tp
@@ -128,7 +128,7 @@ The implemented routines are:
 	slaCaldj slaCalyd slaClyd slaDafin slaDav2m
 	slaDbear slaDbjin slaDc62s slaDcc2s slaDcmpf
 	slaDcs2c slaDeuler slaDfltin slaDimxv slaDjcal
-	slaDm2av slaDmoon slaDmxm slaDmxv
+	slaDm2av slaDmoon slaDmxm slaDmxv slaDpav
 	slaDrange slaDranrm slaDs2c6 slaDs2tp slaDsep
 	slaDtf2d slaDtp2s slaDtp2v slaDtps2c slaDtpv2c
 	slaDtt slaDv2tp slaDvdv slaDvn slaDvn slaEarth
@@ -139,19 +139,20 @@ The implemented routines are:
 	slaImxv slaInvf slaKbj slaMap
 	slaMappa slaMapqk slaMapqkz slaMoon slaNut
 	slaNutc slaOap slaOapqk slaObs slaPa slaPcd
-	slaPda2h slaPdq2h slaPlanet
+	slaPda2h slaPdq2h slaPlanet slaPlanel slaPlante
 	slaPm slaPolmo slaPrebn slaPrec
 	slaPrecl slaPrenut slaPvobs slaRcc slaRdplan
-	slaRefco slaRefv slaRefz slaRverot
+	slaRefco slaRefcoq slaRefv slaRefz slaRverot
 	slaRvgalc slaRvlg slaRvlsrd slaRvlsrk slaS2tp
 	slaSubet slaSupgal slaUnpcd slaWait slaXy2xy
 	slaZd
 
-Also, slaDpav, slaGresid, slaPlanel, slaPlante, slaRefcoq and
-slaRandom are not in the C library (although they are in the Fortran
-version).  slaWait is implemented using the perl 'select(ready file
-descriptors)' command.
+Also, slaGresid and slaRandom are not in the C library (although they
+are in the Fortran version).  slaWait is implemented using the perl
+'select(ready file descriptors)' command.
 
+In general single precision routines are simply aliases of the
+double precision equivalents.
 
 For more information on the SLALIB routines consult the Starlink
 documentation (Starlink User Note 67 (SUN/67)). This document
@@ -386,6 +387,10 @@ sub ut2lst {
 
 Tim Jenness (t.jenness@jach.hawaii.edu)
 
+=head1 REQUIREMENTS
+
+This module has been tested with the May 1998 release of SLALIB.
+The C version of the library is required for this module to be built.
 
 =head1 COPYRIGHT
 
