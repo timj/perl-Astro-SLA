@@ -37,8 +37,6 @@ print "# Section 4.1.1 - Formatting angles\n";
 
 {
   my $ix = 0;
-  my $i = 1;
-
   my @ints = (-23,567,22);
   my $string = join(" ",@ints);
   my $i = 1;
