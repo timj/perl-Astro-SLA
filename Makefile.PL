@@ -1,20 +1,68 @@
 use ExtUtils::MakeMaker;
 use strict;
-use warnings;
 
-# A makefile can be generated for either the C or Fortran version
-# of SLALIB. Change this flag to control the behaviour of the build.
-# It does not yet determine the C/Fortran-ness of your library
+# A makefile can be generated for either the C or Fortran version of
+# SLALIB. It does not yet determine the C/Fortran-ness of your library
 # automatically.
-# Defaults to using the C interface since that is the most complete
-# implementation (albeit the C library is proprietary)
-my $use_fortran = 1;
 
-# Location of your slalib library (of whichever version)
-# Please update as appropriate
-my $sla_lib = '-L/home/timj/slalib/lib -lsla';
+# Change this flag to control the behaviour of the build.
+# This controls whether we are using the Fortran version (1),
+# the C version (0) or the Starlink Fortran version (-1)
+my $use_fortran = -1;
 
-$sla_lib = " -L/home/timj/star/lib -lsla ";
+# Default location for the library. This is used if we fail to find
+# starlink fortran (in which case it is assumed to be a C library)
+# or use_fortran is set to 0 or 1
+# If you have an explicit non-standard path prepend -L/wherever
+my $sla_lib = ' -L/usr/local/lib -lsla ';
+
+# Same for include files [only relevant for C version] [use -I]
+my $sla_inc = '';
+
+# Check valid range for the fortran switch
+if ($use_fortran != 0 && $use_fortran != -1 && $use_fortran != 1) {
+  print "use_fortran variable set to strange value. Assuming -1 [Starlink]\n";
+}
+
+# Starlink
+if ($use_fortran == -1) {
+  # See if we can find a starlink system
+  use vars qw/ %StarConfig /;
+  eval "use Starlink::Config";
+  if ($@) {
+    # do not have a Starlink configuration so guess /star
+    %StarConfig = (
+		   Star_Inc => '/star/include',
+		   Star_Lib => '/star/lib',
+		   Star_Bin => '/star/bin',
+		  );
+  } else {
+    print "Found Starlink configuration. Using $StarConfig{Star}\n";
+  }
+
+  # This assumes unix - Starlink only works on unix
+  my $lib = $StarConfig{Star_Lib} . "/libsla.a";
+
+  if (-e $lib) {
+    print "Located Starlink SLALIB library in $StarConfig{Star_Lib}\n";
+    $sla_lib = " -L$StarConfig{Star_Lib} -lsla ";
+
+    # See if we can find the version
+    eval { require Starlink::Versions; };
+    if (!$@) {
+      print "It seems to be SLA version " . 
+	Starlink::Versions::starversion_string('sla') ."\n";
+    }
+
+  } else {
+    # Assume the C fallback
+    $use_fortran = 0;
+  }
+
+
+}
+
+
 
 # The #defines, libraries and any additional prerequisites
 my ($defines, $libs, %prereqs);
@@ -31,8 +79,8 @@ if ($use_fortran) {
   # use eval here since we are listing ExtUtils as a prerequisite
   # anyway and so if this does not work we'll still get a message
   # later
-  eval { require ExtUtils::F77; ExtUtils::F77->import };
   my $flibs = '';
+  eval { require ExtUtils::F77; ExtUtils::F77->import };
   if ($@) {
     print "Error determining Fortran library requirements\n";
   } else {
@@ -63,7 +111,7 @@ WriteMakefile(
 			      'Test' => 0,
 			      %prereqs,
 			     },
-	      'INC'       => '',
+	      'INC'       => $sla_inc,
 	      'dist'      => { COMPRESS => "gzip -9f"},
 	      ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
 	       (ABSTRACT_FROM => 'SLA.pm',
