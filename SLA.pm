@@ -42,7 +42,7 @@ use strict;
 use Carp;
 use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
-$VERSION = '0.91';
+$VERSION = '0.92';
 
 @ISA = qw(Exporter DynaLoader); 
 
@@ -50,31 +50,35 @@ $VERSION = '0.91';
 
 %EXPORT_TAGS = (
 		'sla'=>[qw/
-			slaFk45z slaDtf2r slaDaf2r slaDr2af slaDr2tf
-			slaPreces slaEqeqx slaCldj slaDe2h slaDh2e
-			slaDat slaGmst slaDjcl slaDd2tf slaAddet
-			slaAfin slaAirmas slaAmp slaAmpqk slaAop
-			slaAoppa slaAoppat slaAopqk slaAtmdsp slaAv2m
-			slaCaldj slaCalyd slaClyd slaDafin slaDav2m
-			slaDbear slaDbjin slaDc62s slaDcc2s slaDcmpf
-			slaDcs2c slaDeuler slaDfltin slaDimxv slaDjcal
-			slaDm2av slaDmoon slaDmxm slaDmxv slaDpav
-			slaDrange slaDranrm slaDs2c6 slaDs2tp slaDsep
-			slaDtf2d slaDtp2s slaDtp2v slaDtps2c slaDtpv2c
-			slaDtt slaDv2tp slaDvdv slaDvn slaDvn slaEarth
-			slaEcleq slaEcmat slaEcor slaEg50 slaEpb slaEpb2d
-			slaEpco slaEpj slaEpj2d slaEqecl slaEqgal
-			slaEtrms slaEvp slaFk425 sla524 slaFk54z
-			slaGaleq slaGalsup slaGe50 slaGeoc slaGmsta
-			slaImxv slaInvf slaKbj slaMap slaGresid
-			slaMappa slaMapqk slaMapqkz slaMoon slaNut
-			slaNutc slaOap slaOapqk slaObs slaPa slaPcd
+			sla524 slaAddet slaAfin slaAirmas slaAmp slaAmpqk
+			slaAop slaAoppa slaAoppat slaAopqk slaAtmdsp
+			slaAv2m slaBear slaCaf2r slaCaldj slaCalyd
+			slaCc2s slaCc62s slaCd2tf slaCldj slaClyd
+			slaCr2af slaCr2tf slaCs2c6 slaDaf2r slaDafin
+			slaDat slaDav2m slaDbear slaDbjin slaDc62s
+			slaDcc2s slaDcmpf slaDcs2c slaDd2tf slaDe2h
+			slaDeuler slaDfltin slaDh2e slaDimxv slaDjcal
+			slaDjcl slaDm2av slaDmoon slaDmxm slaDmxv slaDpav
+			slaDr2af slaDr2tf slaDrange slaDranrm slaDs2c6
+			slaDs2tp slaDsep slaDtf2d slaDtf2r slaDtp2s
+			slaDtp2v slaDtps2c slaDtpv2c slaDtt slaDv2tp
+			slaDvdv slaDvn slaDvxv slaE2h slaEarth slaEcleq
+			slaEcmat slaEcor slaEg50 slaEpb slaEpb2d slaEpco
+			slaEpj slaEpj2d slaEqecl slaEqeqx slaEqgal
+			slaEtrms slaEuler slaEvp slaFk425 slaFk45z
+			slaFk54z slaFloatin slaGaleq slaGalsup slaGe50
+			slaGeoc slaGmst slaGmsta slaGresid slaH2e slaImxv
+			slaInvf slaKbj slaM2av slaMap slaMappa slaMapqk
+			slaMapqkz slaMoon slaMxm slaMxv slaNut slaNutc
+			slaOap slaOapqk slaObs slaPa slaPav slaPcd
 			slaPda2h slaPdq2h slaPlanel slaPlanet slaPlante
-			slaPm slaPolmo slaPrebn slaPrec slaRandom
-			slaPrecl slaPrenut slaPvobs slaRcc slaRdplan
-			slaRefco slaRefcoq slaRefv slaRefz slaRverot
-			slaRvgalc slaRvlg slaRvlsrd slaRvlsrk slaS2tp
-			slaSubet slaSupgal slaUnpcd slaWait slaXy2xy
+			slaPm slaPolmo slaPrebn slaPrec slaPreces
+			slaPrecl slaPrenut slaPvobs slaRandom slaRange
+			slaRanorm slaRcc slaRdplan slaRefco slaRefcoq
+			slaRefv slaRefz slaRverot slaRvgalc slaRvlg
+			slaRvlsrd slaRvlsrk slaS2tp slaSep slaSubet
+			slaSupgal slaTp2s slaTp2v slaTps2c slaTpv2c
+			slaUnpcd slaV2tp slaVdv slaVxv slaWait slaXy2xy
 			slaZd
 			/],
 
@@ -119,32 +123,31 @@ other time -- although they should be done in C<PDL>).
 
 The implemented routines are:
 
-	slaFk45z slaDtf2r slaDaf2r slaDr2af slaDr2tf
-	slaPreces slaEqeqx slaCldj slaDe2h slaDh2e
-	slaDat slaGmst slaDjcl slaDd2tf slaAddet
-	slaAfin slaAirmas slaAmp slaAmpqk slaAop
-	slaAoppa slaAoppat slaAopqk slaAtmdsp slaAv2m
-	slaCaldj slaCalyd slaClyd slaDafin slaDav2m
-	slaDbear slaDbjin slaDc62s slaDcc2s slaDcmpf
-	slaDcs2c slaDeuler slaDfltin slaDimxv slaDjcal
-	slaDm2av slaDmoon slaDmxm slaDmxv slaDpav
-	slaDrange slaDranrm slaDs2c6 slaDs2tp slaDsep
-	slaDtf2d slaDtp2s slaDtp2v slaDtps2c slaDtpv2c
-	slaDtt slaDv2tp slaDvdv slaDvn slaDvn slaEarth
-	slaEcmat slaEcor slaEg50 slaEpb slaEpb2d
-	slaEpco slaEpj slaEpj2d slaEqecl slaEqgal
-	slaEtrms slaEvp slaFk425 sla524 slaFk54z
-	slaGaleq slaGalsup slaGe50 slaGeoc slaGmsta
-	slaImxv slaInvf slaKbj slaMap
-	slaMappa slaMapqk slaMapqkz slaMoon slaNut
-	slaNutc slaOap slaOapqk slaObs slaPa slaPcd
-	slaPda2h slaPdq2h slaPlanet slaPlanel slaPlante
-	slaPm slaPolmo slaPrebn slaPrec
-	slaPrecl slaPrenut slaPvobs slaRcc slaRdplan
-	slaRefco slaRefcoq slaRefv slaRefz slaRverot
-	slaRvgalc slaRvlg slaRvlsrd slaRvlsrk slaS2tp
-	slaSubet slaSupgal slaUnpcd slaWait slaXy2xy
-	slaZd
+ sla524 slaAddet slaAfin slaAirmas slaAmp slaAmpqk slaAop
+ slaAoppa slaAoppat slaAopqk slaAtmdsp slaAv2m slaBear
+ slaCaf2r slaCaldj slaCalyd slaCc2s slaCc62s slaCd2tf
+ slaCldj slaClyd slaCr2af slaCr2tf slaCs2c6 slaDaf2r
+ slaDafin slaDat slaDav2m slaDbear slaDbjin slaDc62s
+ slaDcc2s slaDcmpf slaDcs2c slaDd2tf slaDe2h slaDeuler
+ slaDfltin slaDh2e slaDimxv slaDjcal slaDjcl slaDm2av
+ slaDmoon slaDmxm slaDmxv slaDpav slaDr2af slaDr2tf
+ slaDrange slaDranrm slaDs2c6 slaDs2tp slaDsep slaDtf2d
+ slaDtf2r slaDtp2s slaDtp2v slaDtps2c slaDtpv2c slaDtt
+ slaDv2tp slaDvdv slaDvn slaDvxv slaE2h slaEarth slaEcleq
+ slaEcmat slaEcor slaEg50 slaEpb slaEpb2d slaEpco slaEpj
+ slaEpj2d slaEqecl slaEqeqx slaEqgal slaEtrms slaEuler
+ slaEvp slaFk425 slaFk45z slaFk54z slaFloatin slaGaleq
+ slaGalsup slaGe50 slaGeoc slaGmst slaGmsta slaGresid slaH2e
+ slaImxv slaInvf slaKbj slaM2av slaMap slaMappa slaMapqk
+ slaMapqkz slaMoon slaMxm slaMxv slaNut slaNutc slaOap
+ slaOapqk slaObs slaPa slaPav slaPcd slaPda2h slaPdq2h
+ slaPlanel slaPlanet slaPlante slaPm slaPolmo slaPrebn
+ slaPrec slaPreces slaPrecl slaPrenut slaPvobs slaRandom
+ slaRange slaRanorm slaRcc slaRdplan slaRefco slaRefcoq
+ slaRefv slaRefz slaRverot slaRvgalc slaRvlg slaRvlsrd
+ slaRvlsrk slaS2tp slaSep slaSubet slaSupgal slaTp2s slaTp2v
+ slaTps2c slaTpv2c slaUnpcd slaV2tp slaVdv slaVxv slaWait
+ slaXy2xy slaZd
 
 Also, slaGresid and slaRandom are not in the C library (although they
 are in the Fortran version).  slaWait is implemented using the perl
@@ -401,9 +404,8 @@ This module is copyright (C) 1998,1999 Tim Jenness and PPARC.  All rights
 reserved.  This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 
-The SLALIB library (C version) is copyrighted by Patrick Wallace
-(ptw@star.rl.ac.uk). Please contact him if you would like a 
-copy of the library.
+The SLALIB library (C version) is proprietary.  Please contact Patrick
+Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 
 =cut
 
