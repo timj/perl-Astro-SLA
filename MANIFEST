@@ -10,3 +10,4 @@ typemap
 t/fk4to5.t
 t/slaObs.t
 t/mjd.t
+stime
