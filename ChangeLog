@@ -1,3 +1,15 @@
+1999-08-03  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.pm: Version now 0.91
+	
+	* SLA.xs: Apply patch for slaEqgal and slaSupgal supplied by
+	Tim Kimball (kimball@stsci.edu)
+	Allow use of single precision names as aliases to double precision 
+	commands.
+	Remove use of static char.
+
+	* SLA.pm: Add DR2S and DR2H to the export list. 
+
 1999-05-17  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* SLA.pm: Version now 0.90 in preparation for CPAN release.
