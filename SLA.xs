@@ -1848,8 +1848,8 @@ slaPreces(system, ep0, ep1, ra, dc)
   char *system
   double ep0
   double ep1
-  double ra = NO_INIT
-  double dc = NO_INIT
+  double ra
+  double dc
  PROTOTYPE: $$$$$
  CODE:
   slaPreces(system, ep0, ep1, &ra, &dc);

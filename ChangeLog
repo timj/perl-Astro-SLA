@@ -1,5 +1,10 @@
 2000-11-21  Tim Jenness  <timj@jach.hawaii.edu>
 
+	* t/preces.t: Add test for slaPreces
+
+	* SLA.xs: slaPreces - the ra and dec variables are input and
+	output not just output.
+
 	* t/fk4to5.t: Use Test module
 
 2000-04-11  Tim Jenness  <timj@jach.hawaii.edu>
