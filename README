@@ -81,7 +81,7 @@ SLALIB itself. For more information on SLALIB see:
 Copyright
 ---------
 
-This module is copyright (C) 1998-2001 Tim Jenness and 
+This module is copyright (C) 1998-2002 Tim Jenness and 
 the UK Particle Physics and Astronomy Research Council.  All rights
 reserved.  This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. 
@@ -97,6 +97,9 @@ Changes
 
 See the ChangeLog file for a full list of changes.
 
+Changes for release 0.95:
+
+  - Fix bug in slaPlante (it simply didn't work)
 
 Changes for release 0.94:
 
