@@ -204,7 +204,7 @@ slaAmp(ra, da, date, eq, rm, dm)
  PROTOTYPE: $$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  TRAIL(sla_amp)(&ra, &da, &date, eq, &rm, &dm);
+  TRAIL(sla_amp)(&ra, &da, &date, &eq, &rm, &dm);
 #else
   slaAmp(ra, da, date, eq, &rm, &dm);
 #endif
