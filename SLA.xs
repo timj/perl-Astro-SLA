@@ -7,6 +7,8 @@
   This program is free software; you can redistribute it and/or
   modify it under the same terms as Perl itself.
 
+  Has been tested with the May 1998 release of SLALIB
+
  */
  
  
@@ -257,9 +259,9 @@ slaAv2m(axvec, rmat)
   rmat
 
 
-### SKIP: slaBear - use DOUBLE precisions version
+### SKIP: slaBear - use DOUBLE precisions version - slaDbear
 
-### SKIP: slaCaf2r - use DOUBLE precisions version
+### SKIP: slaCaf2r - use DOUBLE precisions version - slaDaf2r
 
 
 void
@@ -292,9 +294,9 @@ slaCalyd(iy, im, id, ny, nd, j)
   nd
   j
 
-### SKIP: slaCc2s - use Double precision version
-### SKIP: slaCc62s - use Double precision version
-### SKIP: slaCd2tf - use Double precision version
+### SKIP: slaCc2s - use Double precision version - slaDc2s
+### SKIP: slaCc62s - use Double precision version - slaDc62s
+### SKIP: slaCd2tf - use Double precision version - slaDd2tf
 
 # Calendar to MJD
 
@@ -331,10 +333,10 @@ slaClyd(iy, im, id, ny, nd, j)
   j
 
 
-### SKIP: slaCr2af - use DOUBLE instead
-### SKIP: slaCr2tf - use DOUBLE instead
-### SKIP: slaCs2c - use DOUBLE instead
-### SKIP: slaCs2c6 - use DOUBLE instead
+### SKIP: slaCr2af - use DOUBLE instead - slaDr2af
+### SKIP: slaCr2tf - use DOUBLE instead - slaDr2tf
+### SKIP: slaCs2c - use DOUBLE instead 
+### SKIP: slaCs2c6 - use DOUBLE instead - slaDs2c6
 ### SKIP: slaCtf2d - use DOUBLE instead
 ### SKIP: slaCtf2r - use DOUBLE instead
 
@@ -349,6 +351,8 @@ slaDaf2r(ideg, iamin, asec, rad, j)
   double asec 
   double  rad = NO_INIT
   int  j = NO_INIT
+ ALIAS:
+  slaCaf2r = 1
  PROTOTYPE: $$$$$
  CODE:
   slaDaf2r(ideg, iamin, asec, &rad, &j);
@@ -407,6 +411,8 @@ slaDbear(a1, b1, a2, b2)
   double b1
   double a2
   double b2
+ ALIAS:
+  slaBear = 1
  PROTOTYPE: $$$$
  CODE:
   RETVAL = slaDbear(a1, b1, a2, b2);
@@ -438,6 +444,8 @@ slaDc62s(v, a, b, r, ad, bd, rd)
   double ad = NO_INIT
   double bd = NO_INIT
   double rd = NO_INIT
+ ALIAS:
+  slaCc62s = 1
  PROTOTYPE: \@$$$$$$
  CODE:
   slaDc62s(v, &a, &b, &r, &ad, &bd, &rd);
@@ -455,6 +463,8 @@ slaDcc2s(v,a,b)
   double * v
   double a = NO_INIT
   double b = NO_INIT
+ ALIAS:
+  slaCc2s = 1
  PROTOTYPE: \@$$
  CODE:
   slaDcc2s(v, &a, &b);
@@ -504,6 +514,8 @@ slaDd2tf(ndp, days, sign, ihmsf)
   double  days
   char sign = NO_INIT
   int * ihmsf = NO_INIT
+ ALIAS:
+  slaCd2tf = 1
  PROTOTYPE: $$$\@
  CODE:
   ihmsf = get_mortalspace(4,'i');
@@ -683,15 +695,13 @@ slaDmxv(dm, va, vb)
   vb
 
 
-#### slaDpav is not in libcsla!
 double
 slaDpav(v1, v2)
   double * v1
   double * v2
  PROTOTYPE: \@\@
  CODE:
-  /* RETVAL = slaDpav(v1, v2); */
-  croak("NOT implemented: slaDpav is not implemented\n");
+  RETVAL = slaDpav(v1, v2);
  OUTPUT:
   RETVAL
 
@@ -703,6 +713,8 @@ slaDr2tf(ndp, angle, sign, ihmsf)
   double angle
   char sign = NO_INIT
   int * ihmsf = NO_INIT
+ ALIAS:
+  slaCr2tf = 1
  PROTOTYPE: $$$\@
  CODE:
   ihmsf = get_mortalspace(4,'i');
@@ -739,6 +751,8 @@ slaDr2af(ndp, angle, sign, idmsf)
   double angle
   char sign = NO_INIT
   int * idmsf = NO_INIT
+ ALIAS:
+  slaCr2af = 1
  PROTOTYPE: $$$\@
  CODE:
   idmsf = get_mortalspace(4,'i');
@@ -761,6 +775,8 @@ slaDs2c6(a, b, r, ad, bd, rd, v)
   double bd
   double rd
   double * v = NO_INIT
+ ALIAS:
+  slaCs2c6 = 1
  PROTOTYPE: $$$$$$\@
  CODE:
   v = get_mortalspace(6,'d');
@@ -1649,8 +1665,6 @@ slaPdq2h(p, d, q, h1, j1, h2, j2)
   j2
 
 
-# slaPlanel is not in C library
-#
 void
 slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, jstat)
   double date
@@ -1667,10 +1681,9 @@ slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, jstat
   int jstat = NO_INIT
  PROTOTYPE: $$$$$$$$$$\@$
  CODE:
-  /* pv = get_mortalspace(6, 'd');
+  pv = get_mortalspace(6, 'd');
   slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, &jstat);
-  unpack1D( (SV*)ST(10), (void *)pv, 'd', 6); */
-  croak("NOT implemented: slaPlanel is not implemented\n");
+  unpack1D( (SV*)ST(10), (void *)pv, 'd', 6);
  OUTPUT:
   pv
   jstat
@@ -1690,8 +1703,6 @@ slaPlanet(date, np, pv, jstat)
   pv
   jstat
 
-#### slaPlante is not in C library
-#
 void
 slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, ra,dec, diam, r, jstat)
   double date
@@ -1713,9 +1724,7 @@ slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm
   int jstat = NO_INIT
  PROTOTYPE: $$$$$$$$$$$$$$$$$
  CODE:
-  /* slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, &ra, &dec, &diam, &r, &jstat);
-   */
-  croak("NOT implemented: slaPlante is not implemented\n");
+  slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, &ra, &dec, &diam, &r, &jstat);
  OUTPUT:
   ra
   dec
@@ -1854,7 +1863,7 @@ slaPvobs(p, h, stl, pv)
 ###### Skip slaPxy - do later
 
 
-##### slaRandom does not seem to be in the libsla.a!!!!
+##### slaRandom is not implemented
 float
 slaRandom(seed)
   float seed
@@ -1921,8 +1930,6 @@ slaRefco(hm, tdk, pmb, rh, wl, phi, tlr, eps, refa, refb)
   refa
   refb
 
-### slaRefcoq is not in C library
-
 void
 slaRefcoq(tdk, pmb, rh, wl, refa, refb)
   double tdk
@@ -1933,8 +1940,7 @@ slaRefcoq(tdk, pmb, rh, wl, refa, refb)
   double refb = NO_INIT
  PROTOTYPE: $$$$$$
  CODE:
-  /* slaRefcoq(tdk, pmb, rh, wl, &refa, &refb); */
-  croak("NOT implemented: slaRefcoq is not implemented\n");
+  slaRefcoq(tdk, pmb, rh, wl, &refa, &refb);
  OUTPUT:
   refa
   refb
@@ -2118,16 +2124,8 @@ slaUnpcd(disco, x, y)
 ##### Skip slaVn - use slaDvn
 ##### Skip slaVxv - use slaDvxv
 
-# Not in C library -- implemented in perl via select()
+# slaWait Not in C library -- implemented in perl via select()
 
-#void
-#slaWait(delay)
-#  float delay
-# PROTOTYPE: $
-# CODE:
-#  /* slaWait(delay); */
-
- 
 ##### Skip slaXy2xy for now
 
 void
