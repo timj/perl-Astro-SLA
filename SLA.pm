@@ -2,7 +2,7 @@ package Astro::SLA;
 
 =head1 NAME
 
-Astro::SLA - perl interface to SLAlib positional astronomy library
+Astro::SLA - Perl interface to SLAlib positional astronomy library
 
 =head1 SYNOPSIS
 
@@ -17,8 +17,8 @@ Astro::SLA - perl interface to SLAlib positional astronomy library
 
 =head1 DESCRIPTION
 
-This modules provides a perl interface to the C version of the
-SLALIB astrometry library written by Pat Wallace.
+This modules provides a Perl interface to either the C or Fortran
+versions of the SLALIB astrometry library written by Pat Wallace.
 
 In general the single precision routines have not been 
 implemented since perl can work in double precision.
@@ -460,18 +460,29 @@ Tim Jenness E<gt>t.jenness@jach.hawaii.eduE<lt>
 
 =head1 REQUIREMENTS
 
-This module has been tested with the May 1998 and January 2000
-releases of SLALIB.  The C version of the library is required for this
-module to be built.
+This module has been tested with the Starlink Fortran library v2.4-8
+(released September 2001) and the April 2002 release of the C
+library. If you are working with orbital elements you need a version
+of the library released sometime in 2002.
 
-=head1 COPYRIGHT
+You must have either the C version of the library or the Starlink
+Fortran version of the library in order to build this module.
 
-This module is copyright (C) 1998-2001 Tim Jenness and PPARC.  All rights
-reserved.  This program is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
+The Fortran version of SLALIB is available from Starlink under the
+Starlink Software Licence (effectively meaning free for non-commercial
+use). You can download it from Starlink (http://www.starlink.rl.ac.uk)
+using the Starlink Software Store
+(http://www.starlink.rl.ac.uk/Software/software_store.htm).
+Specifically: http://www.starlink.rl.ac.uk/cgi-store/storeform1?SLA
 
 The SLALIB library (C version) is proprietary.  Please contact Patrick
 Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
+
+=head1 COPYRIGHT
+
+This module is copyright (C) 1998-2002 Tim Jenness and PPARC.  All rights
+reserved.  This program is free software; you can redistribute it
+and/or modify it under the same terms as Perl itself.
 
 =cut
 

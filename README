@@ -1,9 +1,9 @@
-Astro::SLA -- interface to C SLALIB library
+Astro::SLA -- interface to C or Fortran SLALIB library
 ==========
 
-This module provides an interface layer to the C version of the SLALIB
-library.  From the abstract of the SLALIB manual (written by Pat
-Wallace):
+This module provides an interface layer to the C or Fortran version of
+the SLALIB library.  From the abstract of the SLALIB manual (written
+by Pat Wallace):
 
    "SLALIB is a library used by writers of positional-astronomy
    applications. Most of the 171 routines are concerned with
@@ -16,46 +16,64 @@ current time (modified Julian day and local sidereal time for the JCMT).
 Requirements:
 -------------
 
-This module requires the C version of the SLALIB library written by
-Pat Wallace. It will not work with the Starlink (FORTRAN) version of
-SLALIB. Please contact Pat Wallace (ptw@tpsoft.demon.co.uk) for
-details of how to obtain the (proprietary) C SLALIB library.
+This module requires either the C or Fortran version of the SLALIB
+library written by Pat Wallace. 
 
-It has been tested with the May 1998 and January 2000 releases of SLALIB.
+This module has been tested with the Starlink Fortran library v2.4-8
+(released September 2001) and the April 2002 release of the C
+library. If you are working with orbital elements you need a version
+of the library released sometime in 2002.
 
-A C compiler is required - this is an XS module.
+You must have either the C version of the library or the Starlink
+Fortran version of the library in order to build this module.
+
+The Fortran version of SLALIB is available from Starlink under the
+Starlink Software Licence (effectively meaning free for non-commercial
+use). You can download it from Starlink (http://www.starlink.rl.ac.uk)
+using the Starlink Software Store
+(http://www.starlink.rl.ac.uk/Software/software_store.htm).
+Specifically: http://www.starlink.rl.ac.uk/cgi-store/storeform1?SLA
+
+Please contact Pat Wallace (ptw@tpsoft.demon.co.uk) for details of how
+to obtain the (proprietary) C SLALIB library.
+
+A C compiler is required - this is an XS module. A Fortran compiler (such
+as g77) is required if you are building against the Fortran library [or
+at least the Fortran runtime libraries].
 
 Platforms:
 ----------
 
    This module has been tested on the following platforms:
 
-   - SPARC Solaris 2.6, Sun CC, perl5.005_03
-   - RedHat Linux 6.1, egcs, perl5.005_03
-   - RedHat Linux 6.1, egcs, perl5.6.0
-   - RedHat Linux 7, gcc2.96, perl5.6.0
+   - Sparc Solaris 8, Sun Compiler 6, perl 5.005_03
+   - Sparc Solaris 8, Sun Compiler 6, perl 5.6.1
+   - RedHat Linux 7.3, gcc2.96, perl5.8.0
+   - RedHat Linux 7.3, gcc2.96, perl5.6.1
+
 
 Installation:
 -------------
 
  - Edit the Makefile.PL so that the location of the SLA
-   library and include files are correct.
+   library and include files are correct. [see variables $sla_lib and
+   $sla_inc]. By default the module attempts to find the Starlink
+   installation and then falls back to assuming the C version is 
+   installed. Change the value of $use_fortran if you know you are
+   using an explicit C or Fortran version.
  
-   In general you will have a libsla.a or a libcsla.a.
-   The default is to search for libcsla.a. You will have 
-   to change the LIBS entry if you use libsla.a for the C version.
-   It is assumed the library is available from /usr/local/lib by default.
+   It is assumed the C library is available from /usr/local/lib by default.
 
-   The includes files, slamac.h and slalib.h, should be available
+   The includes files, slalib.h, should be available
    in the default path. If they are somewhere else the Makefile.PL 
    should be edited to reflect this location. For example,
    change the line
  
-     INC => '',
+     my $sla_inc => '',
 
    to
 
-     INC => '-I/home/me/include',
+     my $sla_inc => '-I/home/me/include',
 
    to pick them up from /home/me/include
 
@@ -66,7 +84,10 @@ Then:
   % make test
   % make install
 
-Currently there is only one test (converting B1950 to J2000).
+The tests only test part of the build. Some functions remain untested.
+In particular orbital element support will not be very good unless you
+have a modern installation of SLALIB (sometime from 2002). Astro::Coords
+will require a new module.
 
 Documentation:
 --------------
@@ -89,6 +110,9 @@ modify it under the same terms as Perl itself.
 The SLALIB library (C version) is proprietary.  Please contact Patrick
 Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 
+The Starlink SLALIB library (Fortran) is available from Starlink
+under the Starlink Software licence for non-commercial use.
+
 The array handling code was written by Karl Glazebrook.
 
 
@@ -96,6 +120,14 @@ Changes
 -------
 
 See the ChangeLog file for a full list of changes.
+
+Changes for release 0.96:
+
+  - Now includes Fortran support
+
+  - Add slaPertel and slaPertue
+
+  - Fix slaOap
 
 Changes for release 0.95:
 
