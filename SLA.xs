@@ -1086,7 +1086,7 @@ slaEg50(dr, dd, dl, db)
   double db = NO_INIT
  PROTOTYPE: $$$$
  CODE: 
-   slaEg50(dd, dr, &dl, &db);
+   slaEg50(dr, dd, &dl, &db);
  OUTPUT:
   dl
   db
@@ -1610,8 +1610,18 @@ slaOapqk(type, ob1, ob2, aoprms, rap, dap)
   rap
   dap
 
+
+# If c is undef we need to convert to a blank since slalib
+# will generate segmentation violation if it receieves an undef
+# value for the string (the strcpy fails for some reason).
+# overcome this by providing a wrapper in the .pm file to check
+# for this case. Have not got the time to work out a fix at the
+# XS level. 'c' can be an input or output variable but must be
+# guaranteed to contain a valid pointer to char.
+#  slaObs is now defined in the .pm file
+
 void
-slaObs(n, c, name, w, p, h)
+_slaObs(n, c, name, w, p, h)
   int n
   char * c
   char * name = NO_INIT
@@ -1620,7 +1630,7 @@ slaObs(n, c, name, w, p, h)
   double h = NO_INIT
  PROTOTYPE: $$$$$$
  PREINIT:
-  char string[256];
+  char string[40];
  CODE:
   name = string;
   slaObs(n, c, name, &w, &p, &h);
