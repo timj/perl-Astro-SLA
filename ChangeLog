@@ -1,0 +1,17 @@
+1998-06-02  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.pm: Complete 99% + add lst routines
+
+	* SLA.xs: Complete 99%
+	
+
+1998-05-27  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.xs (slaDd2tf): Add slaDd2tf and slaDjcl
+
+1998-04-01  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.pm: Added slaPreces
+
+	* SLA.xs (slaPreces): Added slaPreces
+
