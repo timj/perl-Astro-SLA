@@ -49,6 +49,8 @@ ok(sprintf("%.4f",$MJD),"50745.7083", "Verify MJD");
 my $offset = Astro::SLA::slaDtt( $MJD );
 $MJD += ($offset / (86_400));
 
+print "# TT MJD = $MJD\n";
+
 # Perturb the elements
 my $jform = 3;
 Astro::SLA::slaPertel($jform,$halebopp{EPOCH},$MJD,
