@@ -1,3 +1,14 @@
+2004-02-01  Tim Jenness  <tjenness@cpan.org>
+
+	* t/sun67.t: Add 70 new tests based on the examples in SUN/67
+
+2004-01-31  Tim Jenness  <tjenness@cpan.org>
+
+	* SLA.xs: Mods for slaObs update. Added support for slaIntin
+
+	* SLA.pm (slaObs): Can now be called with a constant string as
+	second argument. [also modified slaObs.t to match]
+
 2003-10-22  Tim Jenness  <timj@jach.hawaii.edu>
 
 	--- VERSION 0.98 on CPAN ---
