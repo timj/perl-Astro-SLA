@@ -1,3 +1,7 @@
+2003-07-14  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.xs: Need to add aTHX_ for Perl_croak to work with threads
+
 2003-07-03  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* SLA.xs: Fix error in slaOap fortran interface. This was breaking

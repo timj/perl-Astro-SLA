@@ -69,7 +69,7 @@
 /* This function is used to raise an error if we have not
    implemented the Fortran interface */
 void not_impl( char * s ) {
-  Perl_croak("%s Fortran interface not yet implemented. Please inform the module author.",
+  Perl_croak(aTHX_ "%s Fortran interface not yet implemented. Please inform the module author.",
 	s);
 }
 
