@@ -1706,6 +1706,52 @@ slaPdq2h(p, d, q, h1, j1, h2, j2)
   h2
   j2
 
+void
+slaPertel(jform,date0,date1,epoch0,orbi0,anode0,perih0,aorq0,e0,am0,epoch1,orbi1,anode1,perih1,aorq1,e1,am1,jstat)
+  int jform
+  double date0
+  double date1
+  double epoch0
+  double orbi0
+  double anode0
+  double perih0
+  double aorq0
+  double e0
+  double am0
+  double epoch1 = NO_INIT
+  double orbi1 = NO_INIT
+  double anode1 = NO_INIT
+  double perih1 = NO_INIT
+  double aorq1 = NO_INIT
+  double e1 = NO_INIT
+  double am1 = NO_INIT
+  int    jstat = NO_INIT
+ PROTOTYPE: $$$$$$$$$$$$$$$$$$
+ CODE:
+  slaPertel(jform,date0,date1,epoch0,orbi0,anode0,perih0,aorq0,e0,am0,&epoch1,&orbi1,&anode1,&perih1,&aorq1,&e1,&am1,&jstat);
+ OUTPUT:
+  epoch1
+  orbi1
+  anode1
+  perih1
+  aorq1
+  e1
+  am1
+  jstat
+
+void
+slaPertue(date,u,jstat)
+  double date
+  double * u
+  int    jstat = NO_INIT
+ PROTOTYPE: $\@$
+ CODE:
+  slaPertue(date,u,&jstat);
+  unpack1D( (SV*)ST(1), (void *)u, 'd', 13);
+ OUTPUT:
+  u
+  jstat
+
 
 void
 slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, jstat)

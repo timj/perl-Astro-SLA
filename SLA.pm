@@ -42,7 +42,7 @@ use strict;
 use Carp;
 use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
-$VERSION = '0.95';
+$VERSION = '0.96';
 
 @ISA = qw(Exporter DynaLoader);
 
@@ -71,6 +71,7 @@ $VERSION = '0.95';
 			slaInvf slaKbj slaM2av slaMap slaMappa slaMapqk
 			slaMapqkz slaMoon slaMxm slaMxv slaNut slaNutc
 			slaOap slaOapqk slaObs slaPa slaPav slaPcd
+			slaPertue slaPertel
 			slaPda2h slaPdq2h slaPlanel slaPlanet slaPlante
 			slaPm slaPolmo slaPrebn slaPrec slaPreces
 			slaPrecl slaPrenut slaPvobs slaRandom slaRange
