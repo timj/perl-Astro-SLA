@@ -42,7 +42,7 @@ use strict;
 use Carp;
 use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
-$VERSION = '0.92';
+$VERSION = '0.93';
 
 @ISA = qw(Exporter DynaLoader); 
 
@@ -92,7 +92,7 @@ $VERSION = '0.92';
 			  /]
 	       ); 
  
- 
+
 Exporter::export_tags('sla','constants','funcs');
 
 bootstrap Astro::SLA;
@@ -165,12 +165,27 @@ http://star-www.rl.ac.uk/cgi-bin/htxserver/sun67.htx/sun67.html]]
 
 =cut
 
+# Implement at the perl level (command is unimplemented at C level)
+
 sub slaWait ($) {
   my $delay = shift;
   select (undef, undef, undef, $delay);
 
 }
 
+
+# slaObs
+#   In order to overcome a segmentation violation under linux (at least)
+#   occuring when 'c' is set to undef but is to be a return value
+#   have a perl layer that replaces undef with '' in order to fix the
+#   issue
+
+sub slaObs ($$$$$$) {
+  my $c = (defined $_[1] ? $_[1] : '');
+  _slaObs($_[0], $c, $_[2], $_[3], $_[4], $_[5]);
+  $_[1] = $c; # use aliasing
+  return;
+}
 
 =head2 Constants
 
@@ -278,10 +293,15 @@ use constant D15B2P => 2.3873241463784300365332564505877154305168946861068;
 
 =over 4
 
-=item ($lst, $mjd) = lstnow_tel($tel);
+=item B<lstnow_tel>
 
 Return current LST (in radians) and MJD for a given telescope.
 The telescope identifiers should match those present in slaObs.
+The supplied telescope name is converted to upper case.
+
+   ($lst, $mjd) = lstnow_tel($tel);
+
+Aborts if telescope name is unknown.
 
 =cut
 
@@ -290,26 +310,36 @@ sub lstnow_tel {
   croak 'Usage: lstnow($tel)' unless scalar(@_) == 1;
 
   my $tel = shift;
+ 
+  # Upper case the telescope
+  $tel = uc($tel);
 
   my ($w, $p, $h, $name);
 
   # Find the longitude of this telescope
   slaObs(-1, $tel, $name, $w, $p, $h);
 
+  # Check telescope name
+  if ($name eq '?') {
+    croak "Telescope name $tel unrecognised by slaObs()";
+  }
+
   # Convert longitude to west negative
   $w *= -1.0;
 
   # Run lstnow
-  my ($lst, $mjd) = lstnow($w);
+  lstnow($w);
 
 }
 
 
-=item ($lst, $mjd) = lstnow($long);
+=item B<lstnow>
 
 Return current LST (in radians) and MJD (days)
 Longitude should be negative if degrees west
 and in radians.
+
+  ($lst, $mjd) = lstnow($long);
 
 =cut
 
@@ -329,18 +359,17 @@ sub lstnow {
    $mon++;
    my ($lst, $mjd) = ut2lst($year, $mon, $mday, $hour, $min, $sec, $long);
 
-#   slaDr2tf(1, $lst, $sign, \@ihmsf);
-#   print "LST: $sign$ihmsf[0] $ihmsf[1] $ihmsf[2]\n";
-     
    return ($lst, $mjd);
 
 }
 
 
-=item ($lst, $mjd) = ut2lst(yy, mn, dd, hh, mm, ss, long)
+=item B<ut2lst>
 
 Given the UT time, calculate the Modified Julian date and the 
 local sidereal time (radians) for the specified longitude.
+
+ ($lst, $mjd) = ut2lst(yy, mn, dd, hh, mm, ss, long)
 
 Longitude should be negative if degrees west and in radians.
 
