@@ -1746,7 +1746,7 @@ slaPlanet(date, np, pv, jstat)
   jstat
 
 void
-slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, ra,dec, diam, r, jstat)
+slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, ra,dec, r, jstat)
   double date
   double elong
   double phi

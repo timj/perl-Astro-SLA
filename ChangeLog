@@ -1,3 +1,7 @@
+2002-04-12  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.xs: slaPlante had wrong calling arguments
+
 2001-04-24  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* SLA.xs: update copyright
