@@ -1,28 +1,24 @@
 #!/bin/perl
 
 use strict;
+use Test;
+BEGIN { plan tests => 6 }
 use Astro::SLA;
 
 ###########################################################################
-
-# Only one test
-print "1..3\n";
 
 # Test a simple example
 my $ra = "6 10 23.9";
 my $dec = "-6 12 21.0";
 
-print "Input (B1950): RA=$ra DEC=$dec\n";
+print "# Input (B1950): RA=$ra DEC=$dec\n";
 
 my ($nra,$ndec) = &btoj($ra,$dec);
 
-if ($nra eq "6 12 50.37" && $ndec eq "-6 13 11.76") {
-  print "ok\n";
-} else {
-  print "not ok\n";
-}
+ok($nra, "6 12 50.37");
+ok($ndec, "-6 13 11.76");
 
-print "Output (J2000): RA=$nra DEC=$ndec\n";
+print "# Output (J2000): RA=$nra DEC=$ndec\n";
 
 # Now test for the usual  '-00 00 01' case since sometimes
 # this coordinate is treated as a positive dec.
@@ -30,32 +26,26 @@ print "Output (J2000): RA=$nra DEC=$ndec\n";
 $ra = "02 40 7.04";     # NGC 1068
 $dec = "-00 13 31.66";
 
-print "Input (B1950): RA=$ra DEC=$dec\n";
+print "# Input (B1950): RA=$ra DEC=$dec\n";
 
 ($nra,$ndec) = &btoj($ra,$dec);
 
-if ($nra eq "2 42 40.70" && $ndec eq "-0 0 47.80") {
-  print "ok\n";
-} else {
-  print "not ok\n";
-}
+ok($nra,"2 42 40.70" );
+ok($ndec, "-0 0 47.80");
 
-print "Output (J2000): RA=$nra DEC=$ndec\n";
+print "# Output (J2000): RA=$nra DEC=$ndec\n";
 
 $ra = "12 34 37.25";   # Hubble deep field
 $dec = "62 29 22.28";
 
-print "Input (B1950): RA=$ra DEC=$dec\n";
+print "# Input (B1950): RA=$ra DEC=$dec\n";
 
 ($nra,$ndec) = &btoj($ra,$dec);
 
-if ($nra eq "12 36 51.20" && $ndec eq "+62 12 52.50") {
-  print "ok\n";
-} else {
-  print "not ok\n";
-}
+ok($nra, "12 36 51.20");
+ok($ndec, "+62 12 52.50");
 
-print "Output (J2000): RA=$nra DEC=$ndec\n";
+print "# Output (J2000): RA=$nra DEC=$ndec\n";
 
 
 # Now test a positive declination
