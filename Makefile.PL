@@ -122,6 +122,8 @@ WriteMakefile(
 	      'DEFINE'    => $defines,
               'PREREQ_PM' => {
 			      'Test' => 0,
+			      'Pod::Usage' => 0,
+			      'Getopt::Long' => 0,
 			      %prereqs,
 			     },
 	      'INC'       => $sla_inc,
