@@ -1,3 +1,8 @@
+2003-07-02  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* t/comet.t: Add a test for perturbation of orbital elements since
+	that is key functionality for some users.
+
 2002-09-15  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* SLA.pm: Announce Fortran version support in documentation
