@@ -1823,7 +1823,7 @@ slaGresid(s)
   RETVAL = TRAIL(sla_gresid)(&s);
 #else
   /* RETVAL = slaGresid(s); */
-  Perl_croak("NOT implemented: slaGresid is not implemented in C slalib\n");
+  Perl_croak(aTHX_ "NOT implemented: slaGresid is not implemented in C slalib\n");
 #endif
  OUTPUT:
   RETVAL
@@ -2514,7 +2514,7 @@ slaRandom(seed)
   RETVAL = TRAIL(sla_random)(&seed);
 #else
   /* RETVAL = slaRandom(&seed); */
-  Perl_croak("NOT implemented: slaRandom is not implemented in C slalib\n");
+  Perl_croak(aTHX_ "NOT implemented: slaRandom is not implemented in C slalib\n");
 #endif
  OUTPUT:
   RETVAL
