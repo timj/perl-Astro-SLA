@@ -1728,6 +1728,7 @@ slaPertel(jform,date0,date1,epoch0,orbi0,anode0,perih0,aorq0,e0,am0,epoch1,orbi1
   int    jstat = NO_INIT
  PROTOTYPE: $$$$$$$$$$$$$$$$$$
  CODE:
+  jstat = 0;
   slaPertel(jform,date0,date1,epoch0,orbi0,anode0,perih0,aorq0,e0,am0,&epoch1,&orbi1,&anode1,&perih1,&aorq1,&e1,&am1,&jstat);
  OUTPUT:
   epoch1
@@ -1746,6 +1747,7 @@ slaPertue(date,u,jstat)
   int    jstat = NO_INIT
  PROTOTYPE: $\@$
  CODE:
+  jstat = 0;
   slaPertue(date,u,&jstat);
   unpack1D( (SV*)ST(1), (void *)u, 'd', 13);
  OUTPUT:
