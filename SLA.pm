@@ -42,7 +42,7 @@ use strict;
 use Carp;
 use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
-$VERSION = '0.90';
+$VERSION = '0.91';
 
 @ISA = qw(Exporter DynaLoader); 
 
@@ -62,7 +62,7 @@ $VERSION = '0.90';
 			slaDrange slaDranrm slaDs2c6 slaDs2tp slaDsep
 			slaDtf2d slaDtp2s slaDtp2v slaDtps2c slaDtpv2c
 			slaDtt slaDv2tp slaDvdv slaDvn slaDvn slaEarth
-			slaEcmat slaEcor slaEg50 slaEpb slaEpb2d
+			slaEcleq slaEcmat slaEcor slaEg50 slaEpb slaEpb2d
 			slaEpco slaEpj slaEpj2d slaEqecl slaEqgal
 			slaEtrms slaEvp slaFk425 sla524 slaFk54z
 			slaGaleq slaGalsup slaGe50 slaGeoc slaGmsta
@@ -80,7 +80,7 @@ $VERSION = '0.90';
 
 		'constants'=>[qw/
 			      DPI D2PI D1B2PI D4PI D1B4PI DPISQ DSQRPI DPIBY2 
-			      DD2R DR2D DAS2R DR2AS DH2R DS2R D15B2P
+			      DD2R DR2D DAS2R DR2AS DH2R DR2H DS2R DR2S D15B2P
 			      /],
 
 		'funcs'=>[qw/
@@ -208,11 +208,15 @@ L<constant> pragma):
 
 =item DR2S - 12*3600/pi: radians to seconds of time
 
-=item 15/(2*pi) - hours to degrees * radians to turns
+=item D15B2PI - 15/(2*pi): hours to degrees * radians to turns
 
 =back
 
 =cut
+
+
+# Could implement these directly via the include file in the XS layer.
+# Since these cant change - implement them explicitly.
 
 # Pi
 use constant DPI => 3.1415926535897932384626433832795028841971693993751;
@@ -393,7 +397,7 @@ The C version of the library is required for this module to be built.
 
 =head1 COPYRIGHT
 
-This module is copyright (C) 1998 Tim Jenness and PPARC.  All rights
+This module is copyright (C) 1998,1999 Tim Jenness and PPARC.  All rights
 reserved.  This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 
