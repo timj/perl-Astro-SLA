@@ -8,16 +8,16 @@ use strict;
 # Change this flag to control the behaviour of the build.
 # This controls whether we are using the Fortran version (1),
 # the C version (0) or the Starlink Fortran version (-1)
-my $use_fortran = -1;
+my $use_fortran = 0;
 
 # Default location for the library. This is used if we fail to find
 # starlink fortran (in which case it is assumed to be a C library)
 # or use_fortran is set to 0 or 1
 # If you have an explicit non-standard path prepend -L/wherever
-my $sla_lib = ' -L/usr/local/lib -lsla ';
+my $sla_lib = ' -L/jac_sw/external/lib -lsla ';
 
 # Same for include files [only relevant for C version] [use -I]
-my $sla_inc = '';
+my $sla_inc = ' -I/jac_sw/external/include';
 
 # Check valid range for the fortran switch
 if ($use_fortran != 0 && $use_fortran != -1 && $use_fortran != 1) {
