@@ -26,18 +26,30 @@ if ($use_fortran != 0 && $use_fortran != -1 && $use_fortran != 1) {
 
 # Starlink
 if ($use_fortran == -1) {
-  # See if we can find a starlink system
   use vars qw/ %StarConfig /;
-  eval "use Starlink::Config";
-  if ($@) {
-    # do not have a Starlink configuration so guess /star
+
+  # See if we can find a starlink system
+  # $STARLINK env overrides everything
+  if (exists $ENV{STARLINK} && defined $ENV{STARLINK}) {
+    print "Using STARLINK environment variable: $ENV{STARLINK}\n";
     %StarConfig = (
-		   Star_Inc => '/star/include',
-		   Star_Lib => '/star/lib',
-		   Star_Bin => '/star/bin',
-		  );
+		   Star_Inc => $ENV{STARLINK}."/include",
+		   Star_Lib => $ENV{STARLINK}."/lib",
+		   Star_Bin => $ENV{STARLINK}."/bin",
+                  );
   } else {
-    print "Found Starlink configuration. Using $StarConfig{Star}\n";
+    # Must look for it
+    eval "use Starlink::Config";
+    if ($@) {
+      # do not have a Starlink configuration so guess /star
+      %StarConfig = (
+  		     Star_Inc => '/star/include',
+		     Star_Lib => '/star/lib',
+		     Star_Bin => '/star/bin',
+		    );
+    } else {
+      print "Found Starlink configuration. Using $StarConfig{Star}\n";
+    }
   }
 
   # This assumes unix - Starlink only works on unix
