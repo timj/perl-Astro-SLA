@@ -43,7 +43,7 @@ use strict;
 use Carp;
 use vars qw(@ISA $VERSION %EXPORT_TAGS);
 
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 @ISA = qw(Exporter DynaLoader); 
 
