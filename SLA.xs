@@ -1,7 +1,11 @@
 /*        -*- C -*-
   
-  perl-SLA glue - 1% complete
-                                        timj@jach.hawaii.edu
+  perl-SLA glue - 99% complete
+                                        t.jenness@jach.hawaii.edu
+
+  Copyright (C) 1998 Tim Jenness.  All rights reserved.
+  This program is free software; you can redistribute it and/or
+  modify it under the same terms as Perl itself.
 
  */
  
@@ -345,7 +349,7 @@ slaDaf2r(ideg, iamin, asec, rad, j)
   double asec 
   double  rad = NO_INIT
   int  j = NO_INIT
- PROTOTYPE: $;$;$;$;$
+ PROTOTYPE: $$$$$
  CODE:
   slaDaf2r(ideg, iamin, asec, &rad, &j);
  OUTPUT:
@@ -679,13 +683,15 @@ slaDmxv(dm, va, vb)
   vb
 
 
+#### slaDpav is not in libcsla!
 double
 slaDpav(v1, v2)
   double * v1
   double * v2
  PROTOTYPE: \@\@
  CODE:
-  RETVAL = slaDpav(v1, v2);
+  /* RETVAL = slaDpav(v1, v2); */
+  croak("NOT implemented: slaDpav is not implemented\n");
  OUTPUT:
   RETVAL
 
@@ -733,7 +739,7 @@ slaDr2af(ndp, angle, sign, idmsf)
   double angle
   char sign = NO_INIT
   int * idmsf = NO_INIT
- PROTOTYPE: $;$;$;@
+ PROTOTYPE: $$$\@
  CODE:
   idmsf = get_mortalspace(4,'i');
   slaDr2af(ndp, angle, &sign, idmsf);
@@ -828,7 +834,7 @@ slaDtf2r(ihour, imin, sec, rad, j)
   double sec
   double  rad = NO_INIT
   int  j = NO_INIT
- PROTOTYPE: $;$;$;$;$
+ PROTOTYPE: $$$$$
  CODE:
   slaDtf2r(ihour, imin, sec, &rad, &j);
  OUTPUT:
@@ -1029,14 +1035,14 @@ slaEcor(rm, dm, iy, id, fd, rv, tl)
   tl
 
 void
-slaEq50(dr, dd, dl, db)
+slaEg50(dr, dd, dl, db)
   double dr
   double dd
   double dl = NO_INIT
   double db = NO_INIT
  PROTOTYPE: $$$$
  CODE: 
-   slaEq50(dd, dr, &dl, &db);
+   slaEg50(dd, dr, &dl, &db);
  OUTPUT:
   dl
   db
@@ -1209,7 +1215,7 @@ slaFk45z(r1950, d1950, bepoch, r2000, d2000)
   double bepoch
   double r2000 = NO_INIT
   double d2000 = NO_INIT
- PROTOTYPE: $;$;$;$;$
+ PROTOTYPE: $$$$$
  CODE:
   slaFk45z(r1950, d1950, bepoch, &r2000, &d2000);
  OUTPUT:
@@ -1341,12 +1347,15 @@ slaGmsta(date, ut1)
   RETVAL
 
 
+# slaGresid is not in C version
+
 float
 slaGresid(s)
   float s
  PROTOTYPE: $
  CODE:
-  RETVAL = slaGresid(s);
+  /* RETVAL = slaGresid(s); */
+  croak("NOT implemented: slaGresid is not implemented\n");
  OUTPUT:
   RETVAL
 
@@ -1639,6 +1648,9 @@ slaPdq2h(p, d, q, h1, j1, h2, j2)
   h2
   j2
 
+
+# slaPlanel is not in C library
+#
 void
 slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, jstat)
   double date
@@ -1655,9 +1667,10 @@ slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, jstat
   int jstat = NO_INIT
  PROTOTYPE: $$$$$$$$$$\@$
  CODE:
-  pv = get_mortalspace(6, 'd');
+  /* pv = get_mortalspace(6, 'd');
   slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, &jstat);
-  unpack1D( (SV*)ST(10), (void *)pv, 'd', 6);
+  unpack1D( (SV*)ST(10), (void *)pv, 'd', 6); */
+  croak("NOT implemented: slaPlanel is not implemented\n");
  OUTPUT:
   pv
   jstat
@@ -1677,6 +1690,8 @@ slaPlanet(date, np, pv, jstat)
   pv
   jstat
 
+#### slaPlante is not in C library
+#
 void
 slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, ra,dec, diam, r, jstat)
   double date
@@ -1698,13 +1713,16 @@ slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm
   int jstat = NO_INIT
  PROTOTYPE: $$$$$$$$$$$$$$$$$
  CODE:
-  slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, &ra, &dec, &diam, &r, &jstat);
+  /* slaPlante(date, elong, phi, jform, epoch, orbinc, anode, perih, aorq,e, aorl, dm, &ra, &dec, &diam, &r, &jstat);
+   */
+  croak("NOT implemented: slaPlante is not implemented\n");
  OUTPUT:
   ra
   dec
   diam
   r
   jstat
+
 
 void
 slaPm(r0,d0,pr,pd,px,rv,ep0,ep1,r1,d1)
@@ -1783,7 +1801,7 @@ slaPreces(system, ep0, ep1, ra, dc)
   double ep1
   double ra = NO_INIT
   double dc = NO_INIT
- PROTOTYPE: $;$;$;$;$
+ PROTOTYPE: $$$$$
  CODE:
   slaPreces(system, ep0, ep1, &ra, &dc);
  OUTPUT:
@@ -1842,7 +1860,8 @@ slaRandom(seed)
   float seed
  PROTOTYPE: $
  CODE:
-  RETVAL = slaRandom(seed);
+  /* RETVAL = slaRandom(&seed); */
+  croak("NOT implemented: slaRandom is not implemented\n");
  OUTPUT:
   RETVAL
   seed
@@ -1902,6 +1921,7 @@ slaRefco(hm, tdk, pmb, rh, wl, phi, tlr, eps, refa, refb)
   refa
   refb
 
+### slaRefcoq is not in C library
 
 void
 slaRefcoq(tdk, pmb, rh, wl, refa, refb)
@@ -1913,7 +1933,8 @@ slaRefcoq(tdk, pmb, rh, wl, refa, refb)
   double refb = NO_INIT
  PROTOTYPE: $$$$$$
  CODE:
-  slaRefcoq(tdk, pmb, rh, wl, &refa, &refb);
+  /* slaRefcoq(tdk, pmb, rh, wl, &refa, &refb); */
+  croak("NOT implemented: slaRefcoq is not implemented\n");
  OUTPUT:
   refa
   refb
@@ -1973,7 +1994,7 @@ slaRverot(phi, ra, da, st)
   float st
  PROTOTYPE: $$$$
  CODE:
-  RETVAL = salRverot(phi, ra, da, st);
+  RETVAL = slaRverot(phi, ra, da, st);
  OUTPUT:
   RETVAL
 
@@ -2097,12 +2118,14 @@ slaUnpcd(disco, x, y)
 ##### Skip slaVn - use slaDvn
 ##### Skip slaVxv - use slaDvxv
 
-void
-slaWait(delay)
-  float delay
- PROTOTYPE: $
- CODE:
-  slaWait(delay);
+# Not in C library -- implemented in perl via select()
+
+#void
+#slaWait(delay)
+#  float delay
+# PROTOTYPE: $
+# CODE:
+#  /* slaWait(delay); */
 
  
 ##### Skip slaXy2xy for now
