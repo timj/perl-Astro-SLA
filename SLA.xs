@@ -3,7 +3,7 @@
   perl-SLA glue - 99% complete
                                         t.jenness@jach.hawaii.edu
 
-  Copyright (C) 1998, 1999 Tim Jenness.  All rights reserved.
+  Copyright (C) 1998-2001 Tim Jenness.  All rights reserved.
   This program is free software; you can redistribute it and/or
   modify it under the same terms as Perl itself.
 

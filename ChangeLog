@@ -1,3 +1,13 @@
+2001-04-24  Tim Jenness  <timj@jach.hawaii.edu>
+
+	* SLA.xs: update copyright
+
+	* MANIFEST: Add t/preces.t
+
+	* README: Tweak for 0.94 
+
+	* SLA.pm: Version 0.94. Update copyright.
+
 2000-11-21  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* t/preces.t: Add test for slaPreces
