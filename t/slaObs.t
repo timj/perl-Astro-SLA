@@ -29,6 +29,6 @@ ok($w1, $w2);
 ok($p1, $p2);
 ok($h1, $h2);
 
-print "$i $n $name2 $w2 $p2 $h2\n";
+print "# $i $n $name2 $w2 $p2 $h2\n";
 
 

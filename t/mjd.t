@@ -4,7 +4,7 @@
 use strict;
 use Test;
 
-BEGIN {plan tests => 3 }
+BEGIN {plan tests => 4 }
 
 use Astro::SLA;
 
@@ -32,5 +32,8 @@ slaCd2tf(0, $frac, my $sign, @ihmsf);
 # ut2lst_tel() command [mainly to test that command as well]
 
 my ($lst, $mjd) = ut2lst_tel($iy, $im, $id, $ihmsf[0], $ihmsf[1], $ihmsf[2], 'JCMT');
-print "MJD is $mjd and expected ". MJD ."\n";
+print "# MJD is $mjd and expected ". MJD ."\n";
 ok($mjd, MJD);
+
+# and test LST because at one point we broke it
+ok(sprintf("%.3f",$lst),"3.196");
