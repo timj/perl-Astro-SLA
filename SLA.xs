@@ -1588,7 +1588,7 @@ slaOap(type, ob1, ob2, date, dut, elongm, phim, hm, xp, yp, tdk, pmb, rh, wl, tl
   double tlr
   double rap = NO_INIT
   double dap = NO_INIT
- PROTOTYPE: $$$$$$$$$$$$$$$
+ PROTOTYPE: $$$$$$$$$$$$$$$$$
  CODE:
    slaOap(type, ob1, ob2, date, dut, elongm, phim, hm, xp, yp, tdk, pmb, rh, wl, tlr, &rap, &dap);
  OUTPUT:
