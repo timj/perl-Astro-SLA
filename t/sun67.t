@@ -362,16 +362,16 @@ print "# Section 4.18 - Ephemerides\n";
 
   # These are the results from the fortran code:
 my $ref = <<"EOF";
- Sun       06 28 14.03  +23 17 17.3  1887.8
- Mercury   08 08 58.60  +19 20 57.1     9.3
- Venus     09 38 53.61  +15 35 32.8    22.8
- Moon      06 28 15.95  +23 17 21.3  1902.3
- Mars      09 06 49.34  +17 52 26.6     4.0
- Jupiter   00 11 12.08  -00 10 57.5    41.1
- Saturn    16 01 43.35  -18 36 55.9    18.2
- Uranus    00 13 33.54  +00 39 36.1     3.5
- Neptune   09 49 35.76  +13 38 40.8     2.2
- Pluto     07 05 29.51  +21 25 04.2     0.1
+      Sun       06 28 14.04  +23 17 17.5  1887.8
+      Mercury   08 08 58.63  +19 20 57.2     9.3
+      Venus     09 38 53.65  +15 35 32.9    22.8
+      Moon      06 28 18.31  +23 18 37.3  1903.9
+      Mars      09 06 49.35  +17 52 26.6     4.0
+      Jupiter   00 11 12.07  -00 10 57.5    41.1
+      Saturn    16 01 43.35  -18 36 55.9    18.2
+      Uranus    00 13 33.54  +00 39 36.1     3.5
+      Neptune   09 49 35.76  +13 38 40.8     2.2
+      Pluto     07 05 29.51  +21 25 04.2      .1
 EOF
 
   # Parse the results into a comparison array
@@ -380,8 +380,10 @@ EOF
   for (@lines) {
     s/^\s+//;
     s/\s+$//;
-    if ( /(\w+)\s+(\d+\s\d+\s\d+\.\d+)\s+([+-]\d+\s\d+\s\d+\.\d+)\s+(\d+\.\d+)/ ) {
-      $cmp{$1} = [ $2, $3, $4 ];
+    if ( /(\w+)\s+(\d+\s\d+\s\d+\.\d+)\s+([+-]\d+\s\d+\s\d+\.\d+)\s+(\d*\.\d+)/ ) {
+      # Numify the diameter
+      my $diam = $4 + 0.0;
+      $cmp{$1} = [ $2, $3, $diam ];
     }
   }
 
@@ -392,8 +394,8 @@ EOF
 
   # Use the values given in the example
   my $date = "1927 6 29";
-  my $time = "5 25";
-  my $long = "-2 42"; # Preston
+  my $time = "5 25"; # TT
+  my $long = "2 42"; # Preston
   my $lat  = "53 46";
 
   # Now parse the strings (to be authentic)
@@ -404,12 +406,12 @@ EOF
   Astro::SLA::slaIntin($date,$i,my $im=0, $j);
   Astro::SLA::slaIntin($date,$i,my $id=0, $j);
 
-  # Parse the time
+  # Parse the time (which is meant to be in dynamical time)
   $i = 1;
   Astro::SLA::slaDafin($time,$i,my $fd, $j);
   $fd *= Astro::SLA::D15B2P;
 
-  # Generate MJD
+  # Generate MJD (TT)
   Astro::SLA::slaCldj($iy,$im,$id,my $djm,$j);
   $djm += $fd;
 
@@ -432,7 +434,8 @@ EOF
     my $arr = $cmp{$pnames[$np]};
     is($refRA, $arr->[0], "Compare RA for $pnames[$np]");
     is($refDEC, $arr->[1], "Compare Dec for $pnames[$np]");
-    is(sprintf("%.1f",$diam), $arr->[2], "Compare diameter for $pnames[$np]");
+    is(sprintf("%.1f",$diam), 
+       sprintf("%.1f",$arr->[2]), "Compare diameter for $pnames[$np]");
 
     printf("# %-10s %s %s   %6.1f\n", $pnames[$np], r2rasex($ra,2),
 	   r2decsex($dec,1), $diam);
