@@ -7,6 +7,9 @@ WriteMakefile(
 	      'LIBS'      => [
 			      '-L/usr/local/lib -lcsla -lm',
 			     ],
+              'PREREQ_PM' => {
+			      'Test' => undef,
+			     },
 	      'INC'       => '',
 	      'dist'      => { COMPRESS => "gzip -9f"},
 	      ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
