@@ -7,6 +7,8 @@ Requirements:
    written by Pat Wallace. It will not work with the Starlink
    (FORTRAN) version of SLALIB.
 
+   It has been tested with the May 1998 release of SLALIB.
+
 
 Installation:
 
