@@ -62,8 +62,9 @@ if ($use_fortran == -1) {
     # See if we can find the version
     eval { require Starlink::Versions; };
     if (!$@) {
-      print "It seems to be SLA version " . 
-	Starlink::Versions::starversion_string('sla') ."\n";
+      my $ver = Starlink::Versions::starversion_string('sla');
+      $ver = ( defined $ver ? $ver : "****** undefined ******" );
+      print "It seems to be SLA version $ver\n";
     }
 
   } else {
