@@ -16,6 +16,10 @@
 #include "perl.h"     /* std perl include */
 #include "XSUB.h"     /* XSUB include */
 
+/* Dummy main required for some fortran compilers */
+void MAIN_ () {}
+
+
 /* Control whether we are using trailing underscores in fortran
    names */
 #ifdef HAS_UNDERSCORE
