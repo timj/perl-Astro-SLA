@@ -1,11 +1,12 @@
-# perl
+#!perl
 
 # Simple test of precession [to test for a reported bug and its fix]
 
 use strict;
-use Test;
-BEGIN { plan tests => 4 }
-use Astro::SLA;
+use Test::More tests => 5;
+BEGIN {
+  use_ok "Astro::SLA";
+}
 
 my $ra =   1.43173721864225;
 my $dec =  0.597125618475371;
@@ -22,8 +23,8 @@ slaPreces('FK4', $eqxc, $eqxn, my $nra = $ra, my $ndec = $dec);
 
 print "# Precessed: $nra $ndec\n";
 
-ok(substr($nra,0,8),  $pra);
-ok(substr($ndec,0,8), $pdec);
+is(substr($nra,0,8),  $pra, "RA");
+is(substr($ndec,0,8), $pdec, "dec");
 
 # Now do the precession "by hand" the long way for comparison
 
@@ -45,6 +46,6 @@ $nra = slaDranrm( $nra );
 
 print "# Precessed: $nra, $ndec\n";
 
-ok(substr($nra,0,8),  $pra);
-ok(substr($ndec,0,8), $pdec);
+is(substr($nra,0,8),  $pra, "RA");
+is(substr($ndec,0,8), $pdec, "Dec");
 

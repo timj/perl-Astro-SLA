@@ -138,7 +138,7 @@ Astro::SLA::slaPertel( 3, $elem{EPOCH}, $now,
 		       my $EPOCH1, my $ORBINC1, my $ANODE1, my $PERIH1,
 		       my $AORQ1, my $E1, my $AORL1, my $J);
 
-is( $J, 0, "# Test perturbation of elements for 3200 Phaethon" );
+is( $J, 0, "Test perturbation of elements for 3200 Phaethon" );
 
 exit;
 

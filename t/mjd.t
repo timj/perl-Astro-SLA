@@ -1,15 +1,12 @@
-
+#!perl
 # Simple test of Modified Julian Date commands
 
 use strict;
-use Test;
+use Test::More tests => 4;
 
-BEGIN {plan tests => 4 }
-
-use Astro::SLA;
-
-# Pass first test by loading
-ok(1);
+BEGIN {
+  use_ok "Astro::SLA";
+}
 
 # Pick a MJD
 
@@ -20,7 +17,7 @@ use constant MJD => 51603.5;  # midday on 29 Feb 2000
 
 slaDjcl(MJD, my $iy, my $im, my $id, my $frac, my $status);
 
-ok($status, 0);
+is($status, 0, "Check status from MJD to dmy");
 
 # Convert the fraction to hour/min/sec
 
@@ -33,7 +30,7 @@ slaCd2tf(0, $frac, my $sign, @ihmsf);
 
 my ($lst, $mjd) = ut2lst_tel($iy, $im, $id, $ihmsf[0], $ihmsf[1], $ihmsf[2], 'JCMT');
 print "# MJD is $mjd and expected ". MJD ."\n";
-ok($mjd, MJD);
+is($mjd, MJD, "Compare MJD");
 
 # and test LST because at one point we broke it
-ok(sprintf("%.3f",$lst),"3.196");
+is(sprintf("%.3f",$lst),"3.196","LST");

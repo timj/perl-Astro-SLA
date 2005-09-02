@@ -1,9 +1,11 @@
 #!/bin/perl
 
 use strict;
-use Test;
-BEGIN { plan tests => 6 }
-use Astro::SLA;
+use Test::More tests => 7;
+
+BEGIN {
+  use_ok "Astro::SLA";
+}
 
 ###########################################################################
 
@@ -15,8 +17,8 @@ print "# Input (B1950): RA=$ra DEC=$dec\n";
 
 my ($nra,$ndec) = &btoj($ra,$dec);
 
-ok($nra, "6 12 50.37");
-ok($ndec, "-6 13 11.76");
+is($nra, "6 12 50.37", "RA J2000");
+is($ndec, "-6 13 11.76", "Dec J2000");
 
 print "# Output (J2000): RA=$nra DEC=$ndec\n";
 
@@ -30,8 +32,8 @@ print "# Input (B1950): RA=$ra DEC=$dec\n";
 
 ($nra,$ndec) = &btoj($ra,$dec);
 
-ok($nra,"2 42 40.70" );
-ok($ndec, "-0 0 47.80");
+is($nra,"2 42 40.70", "RA" );
+is($ndec, "-0 0 47.80", "Dec");
 
 print "# Output (J2000): RA=$nra DEC=$ndec\n";
 
@@ -42,8 +44,8 @@ print "# Input (B1950): RA=$ra DEC=$dec\n";
 
 ($nra,$ndec) = &btoj($ra,$dec);
 
-ok($nra, "12 36 51.20");
-ok($ndec, "+62 12 52.50");
+is($nra, "12 36 51.20","RA");
+is($ndec, "+62 12 52.50","Dec");
 
 print "# Output (J2000): RA=$nra DEC=$ndec\n";
 
