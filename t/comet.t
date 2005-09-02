@@ -14,13 +14,15 @@
 # update slalib to a version that can handle perturbation of
 # elements correctly.
 
-# Copyright (C) 2003 Particle Physics and Astronomy Research Council
+# Copyright (C) 2003-2005 Particle Physics and Astronomy Research Council
 # All Rights Reserved.
 
 use strict;
-use Test;
-BEGIN { plan tests => 8 }
-use Astro::SLA;
+use Test::More tests => 10;
+
+BEGIN {
+  use_ok(  "Astro::SLA" );
+}
 
 # Elements
 my %halebopp = (
@@ -44,7 +46,7 @@ my $dd = 24;
 my $hh = 17;
 my ($lst, $MJD) = ut2lst_tel($yy, $mm, $dd, $hh, 0, 0, 'JCMT');
 
-ok(sprintf("%.4f",$MJD),"50745.7083", "Verify MJD");
+is(sprintf("%.4f",$MJD),"50745.7083", "Verify MJD");
 
 # Correct to TT
 my $offset = Astro::SLA::slaDtt( $MJD );
@@ -63,7 +65,7 @@ Astro::SLA::slaPertel($jform,$halebopp{EPOCH},$MJD,
 		      $halebopp{AORL},
 		      my $jstat);
 
-ok( $jstat, 0, "Status return from perturbing the elements");
+is( $jstat, 0, "Status return from perturbing the elements");
 
 # Telescope information
 my $name = 'JCMT';
@@ -79,7 +81,7 @@ Astro::SLA::slaPlante($MJD, $long, $lat, $jform,
 		      $halebopp{DM},
 		      my $ra, my $dec, my $dist, my $j);
 
-ok( $j, 0, "Status from slaPlante");
+is( $j, 0, "Status from slaPlante");
 
 # Convert from observed to apparent place
 Astro::SLA::slaOap("r", $ra, $dec, $MJD, 0.0, $long, $lat, 
@@ -91,13 +93,13 @@ my $ra_str = fromrad( $ra / 15 );
 my $dec_str = fromrad( $dec );
 print "# app RA: $ra -> $ra_str  App Dec: $dec -> $dec_str \n";
 
-ok(substr($ra_str,1,8),"08:09:03","Hale-Bopp app RA");
-ok(substr($dec_str,0,11),"-47:24:51.5","Hale-Bopp app Dec");
+is(substr($ra_str,1,8),"08:09:03","Hale-Bopp app RA");
+is(substr($dec_str,0,11),"-47:24:51.5","Hale-Bopp app Dec");
 
 
 # Calculate hour angle
 my $ha = $lst -$ra;
-ok(sprintf("%.2f",($ha * Astro::SLA::DR2H)), "0.69", "Hour Angle");
+is(sprintf("%.2f",($ha * Astro::SLA::DR2H)), "0.69", "Hour Angle");
 
 Astro::SLA::slaDe2h($ha, $dec, $lat, my $az, my $el);
 
@@ -105,9 +107,38 @@ $az *= Astro::SLA::DR2D;
 $el *= Astro::SLA::DR2D;
 print "# Az: $az El: $el\n";
 
-ok( sprintf("%.1f",$el),"22.1", "EL");
-ok( sprintf("%.2f",$az),"187.57", "AZ");
+is( sprintf("%.1f",$el),"22.1", "EL");
+is( sprintf("%.2f",$az),"187.57", "AZ");
 
+# Now switch to 3200 Phaethon. This caused real problems with some
+# slalib versions and architectures
+print "# Testing 3200 Phaethon. Will not pass in older SLA versions (<2.5.3)\n";
+
+my %elem = (
+	    'AORQ' => '0.139854192733765',
+	    'E' => '0.889994084835052',
+	    'EPOCHPERIH' => '53431.54296875',
+	    'PERIH' => '5.61957263946533',
+	    'ORBINC' => '0.386924684047699',
+	    'ANODE' => '4.63256978988647',
+	    'EPOCH' => '53200',
+	    'AORL' => 0,
+	   );
+
+my $now = 53613.09;
+
+Astro::SLA::slaPertel( 3, $elem{EPOCH}, $now,
+		       $elem{EPOCHPERIH},
+		       $elem{ORBINC},
+		       $elem{ANODE},
+		       $elem{PERIH},
+		       $elem{AORQ},
+		       $elem{E},
+		       $elem{AORL},
+		       my $EPOCH1, my $ORBINC1, my $ANODE1, my $PERIH1,
+		       my $AORQ1, my $E1, my $AORL1, my $J);
+
+is( $J, 0, "# Test perturbation of elements for 3200 Phaethon" );
 
 exit;
 

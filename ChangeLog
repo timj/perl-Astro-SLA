@@ -1,3 +1,7 @@
+2005-09-02  Tim Jenness  <tjenness@cpan.org>
+
+	* t/comet.t: Add 3200 Phaethon torture test and switch to Test::More
+
 2004-02-03  Tim Jenness  <timj@jach.hawaii.edu>
 
 	* stime: Tidy up. Add -epoch, -h and -man options.
