@@ -467,19 +467,11 @@ Tim Jenness E<gt>tjenness@cpan.orgE<lt>
 
 =head1 REQUIREMENTS
 
-This module has been tested with the Starlink Fortran library v2.4-8
-(released September 2001) and 2.4-11 (released spring 2003) and the
-April 2002 and 2003 releases of the C library. If you are working with
-orbital elements you need a version of the library released sometime
-in 2002.
-
-You must have either the C version of the library or the Starlink
-Fortran version of the library in order to build this module.
-
 The Fortran version of SLALIB is available from Starlink under the
 Gnu GPL. You can download it from Starlink (http://www.starlink.rl.ac.uk)
 using the Starlink Software Store
-(http://www.starlink.rl.ac.uk/Software/software_store.htm).
+(http://www.starlink.rl.ac.uk/Software/software_store.htm) or
+developers CVS (http://dev.starlink.ac.uk).
 Specifically: http://www.starlink.rl.ac.uk/cgi-store/storeform1?SLA
 
 The SLALIB library (C version) is proprietary.  Please contact Patrick
@@ -487,7 +479,7 @@ Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 
 =head1 COPYRIGHT
 
-This module is copyright (C) 1998-2004 Tim Jenness and PPARC.  All rights
+This module is copyright (C) 1998-2005 Tim Jenness and PPARC.  All rights
 reserved.  This program is free software; you can redistribute it
 and/or modify it under the same terms as Perl itself.
 
