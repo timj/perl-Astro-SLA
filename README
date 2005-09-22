@@ -19,11 +19,15 @@ Requirements:
 This module requires either the C or Fortran version of the SLALIB
 library written by Pat Wallace. 
 
-This module has been tested with the Starlink Fortran library v2.4-8
-(released September 2001) and v2.4-11 (spring 2003), and the April
-2002 and 2003 releases of the C library. If you are working with
-orbital elements you need a version of the library released sometime
-in 2002.
+This module has been tested with the Starlink Fortran library v2.5
+(released 2005), and 2004 releases of the C library. It should work
+fine with older versions (up to 2002).
+
+If you are working with orbital elements you need a version of the
+library released sometime in 2002. Recent improvements (mid-2005) to
+the accuracy of the calculations for moving sources (comets and
+asteroids) means that not all the tests will pass for the orbital
+elements tests if you are using a relatively old Slalib.
 
 You must have either the C version of the library or the Starlink
 Fortran version of the library in order to build this module.
@@ -34,8 +38,8 @@ use). You can download it from Starlink (http://www.starlink.rl.ac.uk)
 using the Starlink Software Store
 (http://www.starlink.rl.ac.uk/Software/software_store.htm).
 Specifically: http://www.starlink.rl.ac.uk/cgi-store/storeform1?SLA
-Starlink have approved the release of this library using a GPL licence
-but the package has not yet been made available.
+The GPL Fortran version of slalib is available from the Starlink developer
+site (http://dev.starlink.ac.uk).
 
 Please contact Pat Wallace (ptw@tpsoft.demon.co.uk) for details of how
 to obtain the (proprietary) C SLALIB library.
@@ -47,13 +51,13 @@ at least the Fortran runtime libraries].
 Platforms:
 ----------
 
-   This module has been tested on the following platforms:
+This module has been tested on the following platforms:
 
-   - Sparc Solaris 8, Sun Compiler 6, perl 5.005_03
-   - Sparc Solaris 8, Sun Compiler 6, perl 5.6.1
-   - RedHat Linux 7.3, gcc2.96, perl5.8.0
-   - RedHat Linux 7.3, gcc2.96, perl5.6.1
-   - RedHat Linux 9, gcc 3, perl 5.8.1
+   - Mac OS X, gcc4, perl 5.8.7
+   - White Box Linux 4, gcc3.4, perl 5.8.3
+
+but should be fairly portable.
+
 
 Installation:
 -------------
@@ -106,7 +110,7 @@ SLALIB itself. For more information on SLALIB see:
 Copyright
 ---------
 
-This module is copyright (C) 1998-2003 Tim Jenness and 
+This module is copyright (C) 1998-2005 Tim Jenness and 
 the UK Particle Physics and Astronomy Research Council.  All rights
 reserved.  This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. 
@@ -114,8 +118,8 @@ modify it under the same terms as Perl itself.
 The SLALIB library (C version) is proprietary.  Please contact Patrick
 Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 
-The Starlink SLALIB library (Fortran) is available from Starlink,
-currently under the Starlink Software licence for non-commercial use.
+The Starlink SLALIB library (Fortran) is available from Starlink
+under the GPL.
 
 The array handling code was written by Karl Glazebrook.
 
@@ -124,6 +128,20 @@ Changes
 -------
 
 See the ChangeLog file for a full list of changes.
+
+Changes for release 0.99:
+
+  - slaObs can now be called with a constant string (required by
+    Astro::Telescope).
+
+  - Added slaIntin (for completeness)
+
+  - The tests have been updated considerably. All the examples
+    from the slalib documentation are now included in the test suite.
+
+  - Test::More is now required for the tests.
+
+  - stime has added arguments (-epoch, -h and -man)
 
 Changes for release 0.98:
 
