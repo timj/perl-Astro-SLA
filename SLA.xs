@@ -17,8 +17,10 @@
 #include "XSUB.h"     /* XSUB include */
 
 /* Dummy main required for some fortran compilers */
+#ifdef USE_FORTRAN
 void MAIN_ () {}
-
+void MAIN__ () {}
+#endif
 
 /* Control whether we are using trailing underscores in fortran
    names */
