@@ -94,7 +94,7 @@ my $dec_str = fromrad( $dec );
 print "# app RA: $ra -> $ra_str  App Dec: $dec -> $dec_str \n";
 
 is(substr($ra_str,1,8),"08:09:03","Hale-Bopp app RA");
-is(substr($dec_str,0,11),"-47:24:51.5","Hale-Bopp app Dec");
+is(substr($dec_str,0,11),"-47:24:51.4","Hale-Bopp app Dec");
 
 
 # Calculate hour angle
