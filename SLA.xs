@@ -1,13 +1,13 @@
 /*        -*- C -*-
   
-  perl-SLA glue - 99% complete
+  perl-SLA glue - 99.9% complete
                                         t.jenness@jach.hawaii.edu
 
-  Copyright (C) 1998-2003 Tim Jenness.  All rights reserved.
+  Copyright (C) 1998-2005 Tim Jenness.  All rights reserved.
   This program is free software; you can redistribute it and/or
   modify it under the same terms as Perl itself.
 
-  Has been tested with the Jan 2003 release of SLALIB
+  Has been tested with the Sep 2005 release of SLALIB
   (C and Fortran)
  */
  
