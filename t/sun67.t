@@ -42,7 +42,7 @@ print "# Section 4.1.1 - Formatting angles\n";
   my $i = 1;
   for my $tst (@ints) {
     Astro::SLA::slaIntin($string,$i, $ix, my $j);
-    is($tst, $ix, "Compare input with parsed integer");
+    is($ix, $tst, "Compare input with parsed integer");
     if ($tst >= 0) {
       is($j,0,"Status from integer parse");
     } else {
