@@ -316,8 +316,6 @@ slaAoppa(date,dut,elongm,phim,hm,xp,yp,tdk,pmb,rh,wl,tlr,aoprms)
   slaAoppa(date,dut,elongm,phim,hm,xp,yp,tdk,pmb,rh,wl,tlr,aoprms);
 #endif
   unpack1D( (SV*)ST(12), (void *)aoprms, 'd', 14);
- OUTPUT:
-  aoprms
 
 ### FLAG: Can give 13 input arguments and receive 14 for slaAoppat
 ### Must make absolutely sure that we have 14 args going in.
@@ -337,8 +335,6 @@ slaAoppat(date, aoprms)
   slaAoppat(date, aoprms);
 #endif
   unpack1D( (SV*)ST(1), (void *)aoprms, 'd', 14);
- OUTPUT:
-  aoprms
 
 void
 slaAopqk(rap, dap, aoprms, aob, zob, hob, dob, rob)
@@ -402,9 +398,6 @@ slaAv2m(axvec, rmat)
   slaAv2m(axvec, (void*)rmat);
 #endif
   unpack1D( (SV*)ST(1), (void *)rmat, 'f', 9);
- OUTPUT:
-  rmat
-
 
 ### SKIP: slaBear - use DOUBLE precisions version - slaDbear
 
@@ -580,9 +573,6 @@ slaDav2m(axvec, rmat)
   slaDav2m(axvec, (void*)rmat);
 #endif
   unpack1D( (SV*)ST(1), (void *)rmat, 'd', 9);
- OUTPUT:
-  rmat
-
 
 double
 slaDbear(a1, b1, a2, b2)
@@ -706,8 +696,6 @@ slaDcs2c(a, b, v)
   slaDcs2c(a, b, v);
 #endif
   unpack1D( (SV*)ST(2), (void *)v, 'd', 3);
- OUTPUT:
-  v
 
 #   Converts decimal day to hours minutes and seconds
 
@@ -729,9 +717,7 @@ slaDd2tf(ndp, days, sign, ihmsf)
 #endif
   unpack1D( (SV*)ST(3), (void *)ihmsf, 'i', 4);
  OUTPUT:
- sign
- ihmsf
-
+  sign
 
 # Equatorial to horizontal
 
@@ -774,9 +760,6 @@ slaDeuler(order, phi, theta, psi, rmat)
   slaDeuler(order, phi, theta, psi, (void*)rmat);
 #endif
   unpack1D( (SV*)ST(4), (void *)rmat, 'd', 9);
- OUTPUT:
-  rmat
-
 
 void
 slaDfltin(string, nstrt, dreslt, jflag)
@@ -834,9 +817,6 @@ slaDimxv(dm, va, vb)
   slaDimxv((void*)dm, va, vb);
 #endif
   unpack1D( (SV*)ST(2), (void *)vb, 'd', 3);
- OUTPUT: 
-  vb
-
 
 void
 slaDjcal(ndp, djm, iymdf, j)
@@ -854,7 +834,6 @@ slaDjcal(ndp, djm, iymdf, j)
 #endif
    unpack1D( (SV*)ST(2), (void *)iymdf, 'i', 4);
  OUTPUT:
-  iymdf
   j 
 
 # MJD to UT
@@ -896,9 +875,6 @@ slaDm2av(rmat, axvec)
   slaDm2av((void*)rmat, axvec);
 #endif
   unpack1D( (SV*)ST(1), (void *)axvec, 'd', 3);
- OUTPUT:
-  axvec
-
 
 ###### FLAG:   Do slaDmat at the end
 
@@ -915,9 +891,6 @@ slaDmoon(date, pv)
    slaDmoon(date, pv);
 #endif
    unpack1D( (SV*)ST(1), (void *)pv, 'd', 6);
- OUTPUT:
-  pv
-
 
 #### FLAG : Matrix manipulation should be using PDLs
 
@@ -937,8 +910,6 @@ slaDmxm(a, b, c)
   slaDmxm((void*)a,(void*)b,(void*)c);
 #endif
   unpack1D( (SV*)ST(2), (void *)c, 'd', 9);
- OUTPUT:
-  c
 
 void
 slaDmxv(dm, va, vb)
@@ -956,9 +927,6 @@ slaDmxv(dm, va, vb)
   slaDmxv((void*)dm, va, vb);
 #endif
   unpack1D( (SV*)ST(2), (void *)vb, 'd', 3);
- OUTPUT:
-  vb
-
 
 double
 slaDpav(v1, v2)
@@ -996,8 +964,7 @@ slaDr2tf(ndp, angle, sign, ihmsf)
 #endif
   unpack1D( (SV*)ST(3), (void *)ihmsf, 'i', 4);
  OUTPUT:
- sign
- ihmsf
+  sign
 
 double
 slaDrange(angle)
@@ -1050,12 +1017,7 @@ slaDr2af(ndp, angle, sign, idmsf)
 #endif
   unpack1D( (SV*)ST(3), (void *)idmsf, 'i', 4);
  OUTPUT:
- sign
- idmsf
-
-
-
-
+  sign
 
 void
 slaDs2c6(a, b, r, ad, bd, rd, v)
@@ -1077,8 +1039,6 @@ slaDs2c6(a, b, r, ad, bd, rd, v)
   slaDs2c6(a, b, r, ad, bd, rd, v);
 #endif
   unpack1D( (SV*)ST(6), (void *)v, 'd', 6);
- OUTPUT:
-  v
 
 void
 slaDs2tp(ra, dec, raz, decz, xi, eta, j)
@@ -1214,8 +1174,6 @@ slaDtp2v(xi, eta, v0, v)
   slaDtp2v(xi, eta, v0, v);
 #endif
   unpack1D( (SV*)ST(3), (void *)v, 'd', 3);
- OUTPUT:
-  v
 
 void
 slaDtps2c(xi, eta, ra, dec, raz1, decz1, raz2, decz2, n)
@@ -1266,8 +1224,6 @@ slaDtpv2c(xi, eta, v, v01, v02, n)
   unpack1D( (SV*)ST(3), (void *)v01, 'd', 3);
   unpack1D( (SV*)ST(4), (void *)v02, 'd', 3);
  OUTPUT:
-  v01
-  v02
   n
 
 
@@ -1338,7 +1294,6 @@ slaDvn(v, uv, vm)
 #endif
   unpack1D( (SV*)ST(1), (void *)uv, 'd', 3);
  OUTPUT:
-  uv
   vm
 
 void
@@ -1357,8 +1312,6 @@ slaDvxv(va, vb, vc)
   slaDvxv(va,vb,vc);
 #endif
   unpack1D( (SV*)ST(2), (void *)vc, 'd', 3);
- OUTPUT:
-  vc
 
 #### slaE2h - use Double precision
 
@@ -1378,8 +1331,6 @@ slaEarth(iy, id, fd, pv)
    slaEarth(iy, id, fd, pv);
 #endif
    unpack1D( (SV*)ST(3), (void *)pv, 'f', 6);
- OUTPUT:
-  pv
   
 void
 slaEcleq(dl, db, date, dr, dd)
@@ -1412,8 +1363,6 @@ slaEcmat(date, rmat)
   slaEcmat(date, (void*)rmat);
 #endif
   unpack1D( (SV*)ST(1), (void *)rmat, 'd', 9);
- OUTPUT:
-  rmat
 
 void
 slaEcor(rm, dm, iy, id, fd, rv, tl)
@@ -1585,9 +1534,6 @@ slaEtrms(ep, ev)
   slaEtrms(ep, ev);
 #endif
   unpack1D( (SV*)ST(1), (void *)ev, 'd', 3);
- OUTPUT:
-  ev
-
 
 #### FLAG:: slaEuler skipped in favcour of double prec version
 
@@ -1615,11 +1561,6 @@ slaEvp(date, deqx, dvb, dpb, dvh, dph)
    unpack1D( (SV*)ST(3), (void *)dpb, 'd', 3);
    unpack1D( (SV*)ST(4), (void *)dvh, 'd', 3);
    unpack1D( (SV*)ST(5), (void *)dph, 'd', 3);
-  OUTPUT:
-  dvb
-  dpb
-  dvh
-  dph
 
 ##### FLAG: Do slaFitxy some other time
 
@@ -1868,9 +1809,6 @@ slaImxv(rm, va, vb)
   slaImxv((void*)rm, va, vb);
 #endif
   unpack1D( (SV*)ST(2), (void *)vb, 'f', 3);
- OUTPUT: 
-  vb
-
 
 ##### does perl need slaIntin?
 
@@ -1907,7 +1845,6 @@ slaInvf(fwds, bkwds, j)
 #endif
   unpack1D( (SV*)ST(1), (void *)bkwds, 'd', 6);
  OUTPUT:
-  bkwds
   j
 
 
@@ -1973,8 +1910,6 @@ slaMappa(eq, date, amprms)
   slaMappa(eq, date, amprms);
 #endif
   unpack1D( (SV*)ST(2), (void *)amprms, 'd', 21); 
- OUTPUT:
-  amprms
 
 void
 slaMapqk(rm, dm, pr, pd, px, rv, amprms, ra, da)
@@ -2032,8 +1967,6 @@ slaMoon(iy, id, fd, pv)
    slaMoon(iy, id, fd, pv);
 #endif
    unpack1D( (SV*)ST(3), (void *)pv, 'f', 6);
- OUTPUT:
-  pv
 
 
 #### FLAG: Miss slaMxm use slaDmxm instead
@@ -2054,9 +1987,6 @@ slaNut(date, rmatn)
   slaNut(date, (void*)rmatn);
 #endif
   unpack1D( (SV*)ST(1), (void *)rmatn, 'd', 9);
- OUTPUT:
-  rmatn
-
 
 void
 slaNutc(date, dpsi, deps, eps0)
@@ -2335,7 +2265,6 @@ slaPertue(date,u,jstat)
 #endif
   unpack1D( (SV*)ST(1), (void *)u, 'd', 13);
  OUTPUT:
-  u
   jstat
 
 
@@ -2364,7 +2293,6 @@ slaPlanel(date, jform, epoch, orbinc, anode, perih, aorq, e, aorl, dm, pv, jstat
 #endif
   unpack1D( (SV*)ST(10), (void *)pv, 'd', 6);
  OUTPUT:
-  pv
   jstat
 
 void
@@ -2383,7 +2311,6 @@ slaPlanet(date, np, pv, jstat)
 #endif
    unpack1D( (SV*)ST(2), (void *)pv, 'd', 6);
  OUTPUT:
-  pv
   jstat
 
 void
@@ -2481,9 +2408,6 @@ slaPrebn(bep0, bep1, rmatp)
   slaPrebn(bep0, bep1, (void*)rmatp);
 #endif
   unpack1D( (SV*)ST(2), (void *)rmatp, 'd', 9);
- OUTPUT:
-  rmatp
-
 
 void
 slaPrec(ep0, ep1, rmatp)
@@ -2499,9 +2423,6 @@ slaPrec(ep0, ep1, rmatp)
   slaPrec(ep0, ep1, (void*)rmatp);
 #endif
   unpack1D( (SV*)ST(2), (void *)rmatp, 'd', 9);
- OUTPUT:
-  rmatp
-
 
 # Precession
  
@@ -2538,8 +2459,6 @@ slaPrecl(ep0, ep1, rmatp)
   slaPrecl(ep0, ep1, (void*)rmatp);
 #endif
   unpack1D( (SV*)ST(2), (void *)rmatp, 'd', 9);
- OUTPUT:
-  rmatp
 
 void
 slaPrenut(epoch, date, rmatpn)
@@ -2555,9 +2474,6 @@ slaPrenut(epoch, date, rmatpn)
   slaPrenut(epoch, date, (void*)rmatpn);
 #endif
   unpack1D( (SV*)ST(2), (void *)rmatpn, 'd', 9);
- OUTPUT:
-  rmatpn
-
 
 void
 slaPvobs(p, h, stl, pv)
@@ -2574,8 +2490,6 @@ slaPvobs(p, h, stl, pv)
    slaPvobs(p, h, stl, pv);
 #endif
    unpack1D( (SV*)ST(3), (void *)pv, 'd', 6);
- OUTPUT:
-  pv
 
 
 ###### Skip slaPxy - do later
@@ -2722,8 +2636,6 @@ slaRefv(vu, refa, refb, vr)
   slaRefv(vu, refa, refb, vr);
 #endif
   unpack1D( (SV*)ST(3), (void *)vr, 'd', 3);
- OUTPUT:
-  vr
 
 void
 slaRefz(zu, refa, refb, zr)
