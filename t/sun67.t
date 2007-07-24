@@ -41,12 +41,13 @@ print "# Section 4.1.1 - Formatting angles\n";
   my $string = join(" ",@ints);
   my $i = 1;
   for my $tst (@ints) {
+    my $startpos = $i;
     Astro::SLA::slaIntin($string,$i, $ix, my $j);
-    is($ix, $tst, "Compare input with parsed integer");
+    is($ix, $tst, "Extract integer from '".substr($string,$startpos-1)."'");
     if ($tst >= 0) {
-      is($j,0,"Status from integer parse");
+      is($j,0,"Status from positive integer parse");
     } else {
-      is($j, -1, "Status [negative] from integer parse");
+      is($j, -1, "Status from negative integer parse");
     }
   }
 

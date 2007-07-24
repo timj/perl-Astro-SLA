@@ -1819,9 +1819,16 @@ slaIntin(string, nstrt, ireslt, jflag)
   long ireslt
   int jflag = NO_INIT
  PROTOTYPE: $$$$
+ PREINIT:
+  int iresltf;
  CODE:
 #ifdef USE_FORTRAN
-  TRAIL(sla_intin)(string, &nstrt, &ireslt, &jflag, strlen(string));
+  /* Note that the fortran interface uses an int not a long */
+  iresltf = ireslt;
+  TRAIL(sla_intin)(string, &nstrt, &iresltf, &jflag, strlen(string));
+  if (jflag != 1) {
+    ireslt = iresltf;
+  }
 #else
   slaIntin(string, &nstrt, &ireslt, &jflag);
 #endif
