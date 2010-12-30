@@ -3,9 +3,6 @@ int *	T_INTP
 float	T_NV
 float *	T_FLOATP
 double * T_DOUBLEP
-Logical	T_IV
-item_descriptor *                  T_PTR
-file_descriptor *                  T_PTR
 
 INPUT 
 
