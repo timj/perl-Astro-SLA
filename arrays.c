@@ -241,12 +241,12 @@ void* pack2D ( SV* arg, char packtype ) {
    short sscalar;
    double dscalar;
    unsigned char uscalar;
-   AV* array;
-   AV* array2;
+   AV* array = NULL;
+   AV* array2 = NULL;
    I32 i,j,n,m;
-   SV* work;
-   SV** work2;
-   double nval;
+   SV* work = NULL;
+   SV** work2 = NULL;
+   double nval = 0.0;
    int isref;
    STRLEN len;
 
@@ -387,7 +387,7 @@ void* pack2D ( SV* arg, char packtype ) {
 
 void* packND ( SV* arg, char packtype ) {
 
-   SV* work;
+   SV* work = NULL;
    STRLEN len;
    void pack_element(SV* work, SV** arg, char packtype);   /* Called by packND */
    
@@ -418,7 +418,7 @@ void* packND ( SV* arg, char packtype ) {
 void pack_element(SV* work, SV** arg, char packtype) { 
 
    I32 i,n;
-   AV* array;
+   AV* array = NULL;
    int iscalar;
    float scalar;
    short sscalar;
@@ -484,8 +484,6 @@ void pack_element(SV* work, SV** arg, char packtype) {
       return;
    }
    
-   errexit:
-   
    croak("Routine can only handle scalars or refs to N-D arrays of scalars");
    
 }
@@ -509,14 +507,14 @@ void unpack1D ( SV* arg, void * var, char packtype, int n ) {
    /* n is the size of array var[] (n=1 for 1 element, etc.) If n=0 take
       var[] as having the same dimension as array referenced by arg */
    
-   int* ivar;
-   float* fvar;
-   double* dvar;
-   short* svar;
-   unsigned char* uvar;
+   int* ivar = NULL;
+   float* fvar = NULL;
+   double* dvar = NULL;
+   short* svar = NULL;
+   unsigned char* uvar = NULL;
    double foo;
-   SV* work;
-   AV* array;
+   SV* work = NULL;
+   AV* array = NULL;
    I32 i,m;
 
    /* Note in ref to scalar case data is already changed */
@@ -575,7 +573,7 @@ AV* coerce1D ( SV* arg, int n ) {
 
    /* n is the size of array var[] (n=1 for 1 element, etc.) */
    
-   AV* array;
+   AV* array = NULL;
    I32 i,m;
    
    /* In ref to scalar case we can do nothing - we can only hope the
@@ -619,7 +617,7 @@ void* get_mortalspace( int n, char packtype ) {
 
    /* n is the number of elements of space required, packtype is 'f' or 'i' */
    
-   SV* work;
+   SV* work = NULL;
    
    if (packtype!='f' && packtype!='i' && packtype!='d'
        && packtype!='u' && packtype!='s')

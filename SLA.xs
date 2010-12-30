@@ -72,18 +72,16 @@ void MAIN__ () {}
 
 #include "arrays.c"
 
-/* This function is used to raise an error if we have not
-   implemented the Fortran interface */
-void not_impl( char * s ) {
-  Perl_croak(aTHX_ "%s Fortran interface not yet implemented. Please inform the module author.",
-	s);
-}
-
+#ifdef USE_FORTRAN
 
 /* Internally convert an f77 string to C - must be at least 1 byte long */
 /* Could use cnf here */
- 
-void stringf77toC (char*c, int len) {
+
+static void stringf77toC( char *c, int len );
+static void myCnfExprt ( const char * source_c,
+                         char * dest_f, int dest_len);
+
+static void stringf77toC (char*c, int len) {
    int i;
 
    if (len==0) {return;} /* Do nothing */
@@ -113,8 +111,8 @@ void stringf77toC (char*c, int len) {
    This code is stolen from Starlink CNF routine cnfExprt
    [see SUN/209 - CNF]
 */
-void myCnfExprt ( const char * source_c,
-		    char * dest_f, int dest_len) {
+static void myCnfExprt ( const char * source_c,
+                         char * dest_f, int dest_len) {
    int i;                        /* Loop counter                            */
 
 /* Copy the characters of the input C string to the output FORTRAN string,  */
@@ -126,6 +124,7 @@ void myCnfExprt ( const char * source_c,
       dest_f[i] = ' ';
 }
 
+#endif
 
 MODULE = Astro::SLA   PACKAGE = Astro::SLA
 
@@ -2089,7 +2088,6 @@ _slaObs(n, inc, outc, name, w, p, h)
   double w = NO_INIT
   double p = NO_INIT
   double h = NO_INIT
-  char * rwc = NO_INIT
  PROTOTYPE: $$$$$$$
  PREINIT:
   int  name_len = 40;
