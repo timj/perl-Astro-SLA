@@ -27,9 +27,7 @@ The SLALIB constants (as provided in slamac.h) are available.
 
 In addition small utility subroutines are provided that
 do useful tasks (from the author's point of view) - specifically
-routines for calculating the Local Sidereal Time. It may be
-that this part of the module should be moved into an 
-accompanying module -- Astro::SLA::Extras.
+routines for calculating the Local Sidereal Time.
 
 =cut
 
@@ -159,9 +157,9 @@ double precision equivalents.
 
 For more information on the SLALIB routines consult the Starlink
 documentation (Starlink User Note 67 (SUN/67)). This document
-is available from the Starlink web site (http://star-www.rl.ac.uk/)
-[SUN67 avialable from: 
-http://star-www.rl.ac.uk/cgi-bin/htxserver/sun67.htx/sun67.html]]
+is available from the Starlink web site (http://www.starlink.ac.uk/)
+[SUN67 available from:
+http://www.starlink.ac.uk/cgi-bin/htxserver/sun67.htx/sun67.html ]
 
 
 =cut
@@ -468,24 +466,21 @@ Tim Jenness E<gt>tjenness@cpan.orgE<lt>
 =head1 REQUIREMENTS
 
 The Fortran version of SLALIB is available from Starlink under the
-Gnu GPL. You can download it from Starlink (http://www.starlink.rl.ac.uk)
-using the Starlink Software Store
-(http://www.starlink.rl.ac.uk/Software/software_store.htm) or
-developers CVS (http://dev.starlink.ac.uk).
-Specifically: http://www.starlink.rl.ac.uk/cgi-store/storeform1?SLA
+Gnu GPL. You can download it as part of the Starlink software
+collection (http://www.starlink.rl.ac.uk).
 
 The SLALIB library (C version) is proprietary.  Please contact Patrick
 Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
 
 =head1 COPYRIGHT
 
-This module is copyright (C) 1998-2005 Tim Jenness and PPARC.  All rights
-reserved.  This program is free software; you can redistribute it
-and/or modify it under the same terms as Perl itself.
+Copyright (C) 2007, 2010 Tim Jenness and the Science and Technology Facilities
+Council. Copyright (C) 1998-2005 Tim Jenness and the Particle Physics and
+Astronomy Research Council.  All rights reserved.
 
 This program is free software; you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later
+Foundation; either version 3 of the License, or (at your option) any later
 version.
 
 This program is distributed in the hope that it will be useful,but WITHOUT ANY

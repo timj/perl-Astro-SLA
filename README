@@ -48,15 +48,8 @@ A C compiler is required - this is an XS module. A Fortran compiler (such
 as g77) is required if you are building against the Fortran library [or
 at least the Fortran runtime libraries].
 
-Platforms:
-----------
-
-This module has been tested on the following platforms:
-
-   - Mac OS X, gcc4, perl 5.8.7
-   - White Box Linux 4, gcc3.4, perl 5.8.3
-
-but should be fairly portable.
+This module has been tested on linux and Mac OS X but should be fairly
+portable.
 
 
 Installation:
@@ -104,16 +97,29 @@ The module provides documentation on how to use the perl interface
 to SLALIB. It does not contain information on how to use
 SLALIB itself. For more information on SLALIB see:
 
-  http://star-www.rl.ac.uk/star/docs/sun67.htx/sun67.html
+  http://www.starlink.ac.uk/star/docs/sun67.htx/sun67.html
 
 
 Copyright
 ---------
 
-This module is copyright (C) 1998-2005 Tim Jenness and 
-the UK Particle Physics and Astronomy Research Council.  All rights
-reserved.  This program is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself. 
+Copyright (C) 2007, 2010 Tim Jenness and the Science and Technology Facilities
+Council. Copyright (C) 1998-2005 Tim Jenness and the Particle Physics and
+Astronomy Research Council.  All rights reserved.
+
+This program is free software; you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation; either version 3 of the License, or (at your option) any later
+version.
+
+This program is distributed in the hope that it will be useful,but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with
+this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+Place,Suite 330, Boston, MA  02111-1307, USA
+
 
 The SLALIB library (C version) is proprietary.  Please contact Patrick
 Wallace (ptw@tpsoft.demon.co.uk) if you would like to obtain a copy.
