@@ -1,3 +1,15 @@
+
+2007-07-24  Tim Jenness  <tjenness@cpan.org>
+
+	* SLA.xs: Fix slaIntin issues for Fortran vs C interface. Tidy up
+	slaIntin test.
+
+	* SLA.xs: Remove some unnecessary OUTPUT sections.
+
+2005-09-22  Tim Jenness  <tjenness@cpan.org>
+
+	---- V0.99 CPAN ---
+
 2005-09-02  Tim Jenness  <tjenness@cpan.org>
 
 	* t/mjd.t: Switch to Test::More
