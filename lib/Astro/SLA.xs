@@ -70,7 +70,7 @@ void MAIN__ () {}
 #include "slalib.h"
 # endif
 
-#include "arrays.c"
+#include "arrays.h"
 
 #ifdef USE_FORTRAN
 

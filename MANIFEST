@@ -2,10 +2,10 @@ README
 ChangeLog
 Makefile.PL
 MANIFEST
-SLA.pm
-SLA.xs
-arrays.c
-arrays.h
+lib/Astro/SLA.pm
+lib/Astro/SLA.xs
+src/arrays.c
+src/arrays.h
 typemap
 t/fk4to5.t
 t/slaObs.t

@@ -1,6 +1,9 @@
 Makefile
-SLA.o
 SLA.bs
-SLA.c
 blib
 pm_to_blib
+_build
+Build
+src/*.o
+lib/Astro/SLA.o
+lib/Astro/SLA.c
