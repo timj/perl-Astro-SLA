@@ -1,6 +1,6 @@
 README
 ChangeLog
-Makefile.PL
+Build.PL
 MANIFEST
 lib/Astro/SLA.pm
 lib/Astro/SLA.xs
