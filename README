@@ -17,10 +17,11 @@ Requirements:
 -------------
 
 This module requires either the C or Fortran version of the SLALIB
-library written by Pat Wallace. 
+library written by Pat Wallace.
 
 This module has been tested with the Starlink Fortran library v2.5
-(released 2005), and 2004 releases of the C library. It should work
+(released 2005), the current Starlink release (hawaiki),
+and 2008 releases of the C library. It should work
 fine with older versions (up to 2002).
 
 If you are working with orbital elements you need a version of the
@@ -55,20 +56,20 @@ portable.
 Installation:
 -------------
 
- - Edit the Makefile.PL so that the location of the SLA
+ - Edit the Build.PL so that the location of the SLA
    library and include files are correct. [see variables $sla_lib and
    $sla_inc]. By default the module attempts to find the Starlink
-   installation and then falls back to assuming the C version is 
+   installation and then falls back to assuming the C version is
    installed. Change the value of $use_fortran if you know you are
    using an explicit C or Fortran version.
- 
+
    It is assumed the C library is available from /usr/local/lib by default.
 
    The includes files, slalib.h, should be available
-   in the default path. If they are somewhere else the Makefile.PL 
+   in the default path. If they are somewhere else the Build.PL
    should be edited to reflect this location. For example,
    change the line
- 
+
      my $sla_inc => '',
 
    to
@@ -79,10 +80,10 @@ Installation:
 
 Then:
 
-  % perl Makefile.PL
-  % make
-  % make test
-  % make install
+  % perl Build.PL
+  % ./Build
+  % ./Build test
+  % ./Build install
 
 The tests only test part of the build. Some functions remain untested.
 In particular orbital element support will not be very good unless you
@@ -134,6 +135,15 @@ Changes
 -------
 
 See the ChangeLog file for a full list of changes.
+
+Changes for release 1.00:
+
+  - Use Module::Build
+
+  - Fix slaIntin when using the Fortran library
+
+  - Minor compiler warnings fixed and removedsome OUTPUT sections that
+    were not needed.
 
 Changes for release 0.99:
 
@@ -205,10 +215,10 @@ Changes for release 0.92:
 
 Changes for release 0.91:
 
-  - Add DR2S, DR2H and slaEcleq to the export list. 
+  - Add DR2S, DR2H and slaEcleq to the export list.
 
   - Fix argument order of slaEqgal and slaSupgal
         [patch supplied by Tim Kimball (kimball@stsci.edu)]
- 
-  - Allow use of single precision names as aliases to double precision 
+
+  - Allow use of single precision names as aliases to double precision
     commands.
