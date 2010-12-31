@@ -75,16 +75,16 @@
 
 	* SLA.pm: Announce Fortran version support in documentation
 
-2002-09-15  Tim Jenness  <t.jenness@jach.hawaii.edu>
+2002-09-15  Tim Jenness  <tjenness@cpan.org>
 
 	* SLA.xs: Add full support for Fortran version of SLALIB
 
-2002-08-15  Tim Jenness  <t.jenness@jach.hawaii.edu>
+2002-08-15  Tim Jenness  <tjenness@cpan.org>
 
 	* SLA.xs: Fix argument list for slaOap
 
 
-2002-08-11  Tim Jenness  <t.jenness@jach.hawaii.edu>
+2002-08-11  Tim Jenness  <tjenness@cpan.org>
 
 	* SLA.xs: Add slaPertel and slaPertue
 
