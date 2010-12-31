@@ -40,7 +40,7 @@ use vars qw($VERSION %EXPORT_TAGS);
 use Exporter 'import';
 use base qw/ DynaLoader /;
 
-$VERSION = '0.99';
+$VERSION = '1.00';
 
 %EXPORT_TAGS = (
                 'sla'=>[qw/

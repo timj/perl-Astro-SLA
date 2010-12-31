@@ -1,4 +1,8 @@
-2010-12-30  Tim Jenness  <timj@poma.jach.hawaii.edu>
+2010-12-30  Tim Jenness  <tjenness@cpan.org>
+
+	---- V1.00 CPAN ----
+
+	* lib/Astro/SLA.pm: Tweak DynaLoader/Exporter usage
 
 	* Build.PL: Use Module::Build
 
