@@ -33,18 +33,14 @@ routines for calculating the Local Sidereal Time.
 
 # '  -- close quote for my 'authors' apostrophe above.
 
-require Exporter;
-require DynaLoader;
-
 use strict;
 use Carp;
-use vars qw(@ISA $VERSION %EXPORT_TAGS);
+use vars qw($VERSION %EXPORT_TAGS);
+
+use Exporter 'import';
+use base qw/ DynaLoader /;
 
 $VERSION = '0.99';
-
-@ISA = qw(Exporter DynaLoader);
-
-
 
 %EXPORT_TAGS = (
                 'sla'=>[qw/
