@@ -1,5 +1,5 @@
 /*        -*- C -*-
-  
+
   perl-SLA glue - 99.9% complete
                                         t.jenness@jach.hawaii.edu
 
@@ -10,8 +10,8 @@
   Has been tested with the Sep 2005 release of SLALIB
   (C and Fortran)
  */
- 
- 
+
+
 #include "EXTERN.h"   /* std perl include */
 #include "perl.h"     /* std perl include */
 #include "XSUB.h"     /* XSUB include */
@@ -103,7 +103,7 @@ static void stringf77toC (char*c, int len) {
    if (i<0)       {i=0;}
    if (i==len) {i--;}
    /* And NULL it */;
-   *(c+i) = '\0';   
+   *(c+i) = '\0';
 }
 
 /* Copy a C string into a buffer and pad that buffer with spaces
@@ -199,7 +199,7 @@ slaAltaz(ha, dec, phi, az, azd, azdd, el, eld, eldd, pa, pad, padd)
  PROTOTYPE: $$$$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
-  TRAIL(sla_altaz)(&ha, &dec, &phi, &az, &azd, &azdd, &el, &eld, 
+  TRAIL(sla_altaz)(&ha, &dec, &phi, &az, &azd, &azdd, &el, &eld,
 		   &eldd, &pa, &pad, &padd);
 #else
   slaAltaz(ha, dec, phi, &az, &azd, &azdd, &el, &eld, &eldd, &pa, &pad, &padd);
@@ -490,20 +490,20 @@ slaClyd(iy, im, id, ny, nd, j)
 
 ### SKIP: slaCr2af - use DOUBLE instead - slaDr2af
 ### SKIP: slaCr2tf - use DOUBLE instead - slaDr2tf
-### SKIP: slaCs2c - use DOUBLE instead 
+### SKIP: slaCs2c - use DOUBLE instead
 ### SKIP: slaCs2c6 - use DOUBLE instead - slaDs2c6
 ### SKIP: slaCtf2d - use DOUBLE instead
 ### SKIP: slaCtf2r - use DOUBLE instead
 
 
 ## Up to slaDaf2r
-#   Converts DMS to radians 
+#   Converts DMS to radians
 
 void
 slaDaf2r(ideg, iamin, asec, rad, j)
   int ideg
   int iamin
-  double asec 
+  double asec
   double  rad = NO_INIT
   int  j = NO_INIT
  ALIAS:
@@ -667,7 +667,7 @@ slaDcmpf(coeffs, xy, yz, xs, ys, perp, orient)
   double perp = NO_INIT
   double orient = NO_INIT
  PROTOTYPE: \@$$$$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
   TRAIL(sla_dcmpf)(coeffs, &xy, &yz, &xs, &ys, &perp, &orient);
 #else
@@ -682,7 +682,7 @@ slaDcmpf(coeffs, xy, yz, xs, ys, perp, orient)
   orient
 
 void
-slaDcs2c(a, b, v) 
+slaDcs2c(a, b, v)
   double a
   double b
   double * v = NO_INIT
@@ -805,7 +805,7 @@ OUTPUT:
 void
 slaDimxv(dm, va, vb)
   double * dm
-  double * va 
+  double * va
   double * vb = NO_INIT
  PROTOTYPE: \@\@\@
  CODE:
@@ -833,7 +833,7 @@ slaDjcal(ndp, djm, iymdf, j)
 #endif
    unpack1D( (SV*)ST(2), (void *)iymdf, 'i', 4);
  OUTPUT:
-  j 
+  j
 
 # MJD to UT
 
@@ -996,7 +996,7 @@ slaDranrm(angle)
   RETVAL
 
 
-#   Converts radians to DMS 
+#   Converts radians to DMS
 
 void
 slaDr2af(ndp, angle, sign, idmsf)
@@ -1113,7 +1113,7 @@ slaDtf2d(ihour, imin, sec, days, j)
  j
 
 
-#  Converts HMS to radians 
+#  Converts HMS to radians
 
 void
 slaDtf2r(ihour, imin, sec, rad, j)
@@ -1330,7 +1330,7 @@ slaEarth(iy, id, fd, pv)
    slaEarth(iy, id, fd, pv);
 #endif
    unpack1D( (SV*)ST(3), (void *)pv, 'f', 6);
-  
+
 void
 slaEcleq(dl, db, date, dr, dd)
   double dl
@@ -1390,7 +1390,7 @@ slaEg50(dr, dd, dl, db)
   double dl = NO_INIT
   double db = NO_INIT
  PROTOTYPE: $$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
    TRAIL(sla_eg50)(&dr,&dd,&dl,&db);
 #else
@@ -1509,7 +1509,7 @@ slaEqgal(dr, dd, dl, db)
   double dl = NO_INIT
   double db = NO_INIT
  PROTOTYPE: $$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
    TRAIL(sla_eqgal)(&dr,&dd,&dl,&db);
 #else
@@ -1587,7 +1587,7 @@ slaFk425(r1950,d1950,dr1950,dd1950,p1950,v1950,r2000,d2000,dr2000,dd2000,p2000,v
 #endif
  OUTPUT:
   r2000
-  d2000 
+  d2000
   dr2000
   dd2000
   p2000
@@ -1642,7 +1642,7 @@ slaFk524(r2000,d2000,dr2000,dd2000,p2000,v2000,r1950,d1950,dr1950,dd1950,p1950,v
 #endif
  OUTPUT:
   r1950
-  d1950 
+  d1950
   dr1950
   dd1950
   p1950
@@ -1680,7 +1680,7 @@ slaGaleq(dl, db, dr, dd)
   double dr = NO_INIT
   double dd = NO_INIT
  PROTOTYPE: $$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
    TRAIL(sla_galeq)(&dl,&db,&dr,&dd);
 #else
@@ -1698,7 +1698,7 @@ slaGalsup(dl, db, dsl, dsb)
   double dsl = NO_INIT
   double dsb = NO_INIT
  PROTOTYPE: $$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
   TRAIL(sla_galsup)(&dl,&db,&dsl,&dsb);
 #else
@@ -1715,7 +1715,7 @@ slaGe50(dl, db, dr, dd)
   double dr = NO_INIT
   double dd = NO_INIT
  PROTOTYPE: $$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
    TRAIL(sla_ge50)(&dl,&db,&dr,&dd);
 #else
@@ -1733,7 +1733,7 @@ slaGeoc(p, h, r, z)
   double r = NO_INIT
   double z = NO_INIT
  PROTOTYPE: $$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
   TRAIL(sla_geoc)(&p,&h,&r,&z);
 #else
@@ -1797,7 +1797,7 @@ slaGresid(s)
 void
 slaImxv(rm, va, vb)
   float * rm
-  float * va 
+  float * va
   float * vb = NO_INIT
  PROTOTYPE: \@\@\@
  CODE:
@@ -1897,7 +1897,7 @@ slaMap(rm, dm, pr, pd, px, rv, eq, date, ra, da)
 #else
   slaMap(rm, dm, pr, pd, px, rv, eq, date, &ra, &da);
 #endif
- OUTPUT: 
+ OUTPUT:
   ra
   da
 
@@ -1915,7 +1915,7 @@ slaMappa(eq, date, amprms)
 #else
   slaMappa(eq, date, amprms);
 #endif
-  unpack1D( (SV*)ST(2), (void *)amprms, 'd', 21); 
+  unpack1D( (SV*)ST(2), (void *)amprms, 'd', 21);
 
 void
 slaMapqk(rm, dm, pr, pd, px, rv, amprms, ra, da)
@@ -1935,7 +1935,7 @@ slaMapqk(rm, dm, pr, pd, px, rv, amprms, ra, da)
 #else
   slaMapqk(rm, dm, pr, pd, px, rv, amprms, &ra, &da);
 #endif
- OUTPUT: 
+ OUTPUT:
   ra
   da
 
@@ -1956,7 +1956,7 @@ slaMapqkz(rm, dm, amprms, ra, da)
  OUTPUT:
   ra
   da
- 
+
 
 void
 slaMoon(iy, id, fd, pv)
@@ -2114,7 +2114,7 @@ _slaObs(n, inc, outc, name, w, p, h)
     c = outc;
   }
 #ifdef USE_FORTRAN
-  /* copy the input code [if any] to temp variable */ 
+  /* copy the input code [if any] to temp variable */
   myCnfExprt(c,tempc,code_len);
   TRAIL(sla_obs)(&n,tempc,name,&w,&p,&h,code_len,name_len);
   stringf77toC(name,name_len);
@@ -2430,7 +2430,7 @@ slaPrec(ep0, ep1, rmatp)
   unpack1D( (SV*)ST(2), (void *)rmatp, 'd', 9);
 
 # Precession
- 
+
 void
 slaPreces(system, ep0, ep1, ra, dc)
   char *system
@@ -2615,7 +2615,7 @@ slaRefro(zobs, hm, tdk, pmb, rh, wl, phi, tlr, eps, ref)
   double phi
   double tlr
   double eps
-  double ref = NO_INIT 
+  double ref = NO_INIT
  PROTOTYPE: $$$$$$$$$$
  CODE:
 #ifdef USE_FORTRAN
@@ -2658,7 +2658,7 @@ slaRefz(zu, refa, refb, zr)
  OUTPUT:
   zr
 
- 
+
 float
 slaRverot(phi, ra, da, st)
   float phi
@@ -2743,7 +2743,7 @@ slaS2tp(ra, dec, raz, decz, xi, eta, j)
   float eta = NO_INIT
   int   j = NO_INIT
  PROTOTYPE: $$$$$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
   TRAIL(sla_s2tp)(&ra, &dec, &raz, &decz, &xi, &eta, &j);
 #else
@@ -2766,13 +2766,13 @@ slaSubet(rc, dc, eq, rm, dm)
   double rm = NO_INIT
   double dm = NO_INIT
  PROTOTYPE: $$$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
   TRAIL(sla_subet)(&rc, &dc, &eq, &rm, &dm);
 #else
   slaSubet(rc, dc, eq, &rm, &dm);
 #endif
- OUTPUT: 
+ OUTPUT:
   rm
   dm
 
@@ -2783,7 +2783,7 @@ slaSupgal(dsl, dsb, dl, db)
   double dl = NO_INIT
   double db = NO_INIT
  PROTOTYPE: $$$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
    TRAIL(sla_supgal)(&dsl,&dsb,&dl,&db);
 #else
@@ -2839,7 +2839,7 @@ slaXy2xy(x1, y1, coeffs, x2, y2)
   double x2 = NO_INIT
   double y2 = NO_INIT
  PROTOTYPE: $$\@$$
- CODE: 
+ CODE:
 #ifdef USE_FORTRAN
   TRAIL(sla_xy2xy)(&x1, &y1, coeffs, &x2, &y2);
 #else

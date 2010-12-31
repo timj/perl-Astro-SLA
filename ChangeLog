@@ -72,7 +72,7 @@
 2002-09-15  Tim Jenness  <tjenness@cpan.org>
 
 	--- VERSION 0.96 on CPAN ---
-	
+
 	* SLA.pm: Announce Fortran version support in documentation
 
 2002-09-15  Tim Jenness  <t.jenness@jach.hawaii.edu>
@@ -82,7 +82,7 @@
 2002-08-15  Tim Jenness  <t.jenness@jach.hawaii.edu>
 
 	* SLA.xs: Fix argument list for slaOap
-	
+
 
 2002-08-11  Tim Jenness  <t.jenness@jach.hawaii.edu>
 
@@ -102,7 +102,7 @@
 
 	* MANIFEST: Add t/preces.t
 
-	* README: Tweak for 0.94 
+	* README: Tweak for 0.94
 
 	* SLA.pm: Version 0.94. Update copyright.
 
@@ -140,7 +140,7 @@
 	* stime: Add example program
 
         * SLA.pm (lstnow_tel): Trap for unknown telescopes.
-	
+
 2000-03-24  Tim Jenness  <tjenness@cpan.org>
 
 	* arrays.c: Use PL_na symbols rather than na
@@ -152,25 +152,25 @@
 1999-10-11  Tim Jenness  <tjenness@cpan.org>
 
 	* SLA.pm: Version number now 0.92
-	
+
 	* SLA.pm: Export single precisions commands. Export slaDvxv.
 	Update documentation to reflect the exportable commands rather
 	than the initial list.
-	
+
 	* SLA.xs: Fix compiler warnings by using void* (patch supplied by
 	Chris Phillips <phillips@jive.nfra.nl>)
 
 1999-08-03  Tim Jenness  <tjenness@cpan.org>
 
 	* SLA.pm: Version now 0.91
-	
+
 	* SLA.xs: Apply patch for slaEqgal and slaSupgal supplied by
 	Tim Kimball (kimball@stsci.edu)
-	Allow use of single precision names as aliases to double precision 
+	Allow use of single precision names as aliases to double precision
 	commands.
 	Remove use of static char.
 
-	* SLA.pm: Add DR2S and DR2H to the export list. 
+	* SLA.pm: Add DR2S and DR2H to the export list.
 
 1999-05-17  Tim Jenness  <tjenness@cpan.org>
 
@@ -187,7 +187,7 @@
 	* SLA.pm: Complete 99% + add lst routines
 
 	* SLA.xs: Complete 99%
-	
+
 
 1998-05-27  Tim Jenness  <tjenness@cpan.org>
 

@@ -20,7 +20,7 @@ Astro::SLA - Perl interface to SLAlib positional astronomy library
 This modules provides a Perl interface to either the C or Fortran
 versions of the SLALIB astrometry library written by Pat Wallace.
 
-In general the single precision routines have not been 
+In general the single precision routines have not been
 implemented since perl can work in double precision.
 
 The SLALIB constants (as provided in slamac.h) are available.
@@ -47,49 +47,49 @@ $VERSION = '0.99';
 
 
 %EXPORT_TAGS = (
-		'sla'=>[qw/
-			slaAddet slaAfin slaAirmas slaAmp slaAmpqk
-			slaAop slaAoppa slaAoppat slaAopqk slaAtmdsp
-			slaAv2m slaBear slaCaf2r slaCaldj slaCalyd
-			slaCc2s slaCc62s slaCd2tf slaCldj slaClyd
-			slaCr2af slaCr2tf slaCs2c6 slaDaf2r slaDafin
-			slaDat slaDav2m slaDbear slaDbjin slaDc62s
-			slaDcc2s slaDcmpf slaDcs2c slaDd2tf slaDe2h
-			slaDeuler slaDfltin slaDh2e slaDimxv slaDjcal
-			slaDjcl slaDm2av slaDmoon slaDmxm slaDmxv slaDpav
-			slaDr2af slaDr2tf slaDrange slaDranrm slaDs2c6
-			slaDs2tp slaDsep slaDtf2d slaDtf2r slaDtp2s
-			slaDtp2v slaDtps2c slaDtpv2c slaDtt slaDv2tp
-			slaDvdv slaDvn slaDvxv slaE2h slaEarth slaEcleq
-			slaEcmat slaEcor slaEg50 slaEpb slaEpb2d slaEpco
-			slaEpj slaEpj2d slaEqecl slaEqeqx slaEqgal
-			slaEtrms slaEuler slaEvp slaFk425 slaFk45z
-			slaFk54z slaFloatin slaGaleq slaGalsup slaGe50
-			slaGeoc slaGmst slaGmsta slaGresid slaH2e slaImxv
-			slaInvf slaKbj slaM2av slaMap slaMappa slaMapqk
-			slaMapqkz slaMoon slaMxm slaMxv slaNut slaNutc
-			slaOap slaOapqk slaObs slaPa slaPav slaPcd
-			slaPertue slaPertel
-			slaPda2h slaPdq2h slaPlanel slaPlanet slaPlante
-			slaPm slaPolmo slaPrebn slaPrec slaPreces
-			slaPrecl slaPrenut slaPvobs slaRandom slaRange
-			slaRanorm slaRcc slaRdplan slaRefco slaRefcoq
-			slaRefv slaRefz slaRverot slaRvgalc slaRvlg
-			slaRvlsrd slaRvlsrk slaS2tp slaSep slaSubet
-			slaSupgal slaTp2s slaTp2v slaTps2c slaTpv2c
-			slaUnpcd slaV2tp slaVdv slaVxv slaWait slaXy2xy
-			slaZd slaIntin
-			/],
+                'sla'=>[qw/
+                            slaAddet slaAfin slaAirmas slaAmp slaAmpqk
+                            slaAop slaAoppa slaAoppat slaAopqk slaAtmdsp
+                            slaAv2m slaBear slaCaf2r slaCaldj slaCalyd
+                            slaCc2s slaCc62s slaCd2tf slaCldj slaClyd
+                            slaCr2af slaCr2tf slaCs2c6 slaDaf2r slaDafin
+                            slaDat slaDav2m slaDbear slaDbjin slaDc62s
+                            slaDcc2s slaDcmpf slaDcs2c slaDd2tf slaDe2h
+                            slaDeuler slaDfltin slaDh2e slaDimxv slaDjcal
+                            slaDjcl slaDm2av slaDmoon slaDmxm slaDmxv slaDpav
+                            slaDr2af slaDr2tf slaDrange slaDranrm slaDs2c6
+                            slaDs2tp slaDsep slaDtf2d slaDtf2r slaDtp2s
+                            slaDtp2v slaDtps2c slaDtpv2c slaDtt slaDv2tp
+                            slaDvdv slaDvn slaDvxv slaE2h slaEarth slaEcleq
+                            slaEcmat slaEcor slaEg50 slaEpb slaEpb2d slaEpco
+                            slaEpj slaEpj2d slaEqecl slaEqeqx slaEqgal
+                            slaEtrms slaEuler slaEvp slaFk425 slaFk45z
+                            slaFk54z slaFloatin slaGaleq slaGalsup slaGe50
+                            slaGeoc slaGmst slaGmsta slaGresid slaH2e slaImxv
+                            slaInvf slaKbj slaM2av slaMap slaMappa slaMapqk
+                            slaMapqkz slaMoon slaMxm slaMxv slaNut slaNutc
+                            slaOap slaOapqk slaObs slaPa slaPav slaPcd
+                            slaPertue slaPertel
+                            slaPda2h slaPdq2h slaPlanel slaPlanet slaPlante
+                            slaPm slaPolmo slaPrebn slaPrec slaPreces
+                            slaPrecl slaPrenut slaPvobs slaRandom slaRange
+                            slaRanorm slaRcc slaRdplan slaRefco slaRefcoq
+                            slaRefv slaRefz slaRverot slaRvgalc slaRvlg
+                            slaRvlsrd slaRvlsrk slaS2tp slaSep slaSubet
+                            slaSupgal slaTp2s slaTp2v slaTps2c slaTpv2c
+                            slaUnpcd slaV2tp slaVdv slaVxv slaWait slaXy2xy
+                            slaZd slaIntin
+                          /],
 
-		'constants'=>[qw/
-			      DPI D2PI D1B2PI D4PI D1B4PI DPISQ DSQRPI DPIBY2
-			      DD2R DR2D DAS2R DR2AS DH2R DR2H DS2R DR2S D15B2P
-			      /],
+                'constants'=>[qw/
+                                  DPI D2PI D1B2PI D4PI D1B4PI DPISQ DSQRPI DPIBY2
+                                  DD2R DR2D DAS2R DR2AS DH2R DR2H DS2R DR2S D15B2P
+                                /],
 
-		'funcs'=>[qw/
-			  lstnow lstnow_tel ut2lst ut2lst_tel
-			  /]
-	       );
+                'funcs'=>[qw/
+                              lstnow lstnow_tel ut2lst ut2lst_tel
+                            /]
+               );
 
 
 Exporter::export_tags('sla','constants','funcs');
@@ -263,37 +263,37 @@ use constant D1B4PI => 0.079577471545947667884441881686257181017229822870228;
 # pi^2
 use constant DPISQ => 9.8696044010893586188344909998761511353136994072408;
 
-# sqrt(pi) 
+# sqrt(pi)
 use constant DSQRPI => 1.7724538509055160272981674833411451827975494561224;
 
-# pi/2:  90 degrees in radians 
+# pi/2:  90 degrees in radians
 use constant DPIBY2 => 1.5707963267948966192313216916397514420985846996876;
 
-# pi/180:  degrees to radians 
+# pi/180:  degrees to radians
 use constant DD2R => 0.017453292519943295769236907684886127134428718885417;
 
-# 180/pi:  radians to degrees 
+# 180/pi:  radians to degrees
 use constant DR2D => 57.295779513082320876798154814105170332405472466564;
 
-# pi/(180*3600):  arcseconds to radians 
+# pi/(180*3600):  arcseconds to radians
 use constant DAS2R => 4.8481368110953599358991410235794797595635330237270e-6;
 
-# 180*3600/pi :  radians to arcseconds 
+# 180*3600/pi :  radians to arcseconds
 use constant DR2AS => 2.0626480624709635515647335733077861319665970087963e5;
 
-# pi/12:  hours to radians 
+# pi/12:  hours to radians
 use constant DH2R => 0.26179938779914943653855361527329190701643078328126;
 
-# 12/pi:  radians to hours 
+# 12/pi:  radians to hours
 use constant DR2H => 3.8197186342054880584532103209403446888270314977709;
 
-# pi/(12*3600):  seconds of time to radians 
+# pi/(12*3600):  seconds of time to radians
 use constant DS2R => 7.2722052166430399038487115353692196393452995355905e-5;
 
-# 12*3600/pi:  radians to seconds of time 
+# 12*3600/pi:  radians to seconds of time
 use constant DR2S => 1.3750987083139757010431557155385240879777313391975e4;
 
-# 15/(2pi):  hours to degrees x radians to turns 
+# 15/(2pi):  hours to degrees x radians to turns
 use constant D15B2P => 2.3873241463784300365332564505877154305168946861068;
 
 
@@ -354,28 +354,28 @@ and in radians.
 
 sub lstnow {
 
-   croak 'Usage: lstnow($long)' unless scalar(@_) == 1;
+  croak 'Usage: lstnow($long)' unless scalar(@_) == 1;
 
-   my $long = shift;
+  my $long = shift;
 
-   my ($sign, @ihmsf);
+  my ($sign, @ihmsf);
 
-   # Get current UT time
-   my ($sec, $min, $hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime(time);
+  # Get current UT time
+  my ($sec, $min, $hour,$mday,$mon,$year,$wday,$yday,$isdst) = gmtime(time);
 
-   # Calculate LST
-   $year += 1900;
-   $mon++;
-   my ($lst, $mjd) = ut2lst($year, $mon, $mday, $hour, $min, $sec, $long);
+  # Calculate LST
+  $year += 1900;
+  $mon++;
+  my ($lst, $mjd) = ut2lst($year, $mon, $mday, $hour, $min, $sec, $long);
 
-   return ($lst, $mjd);
+  return ($lst, $mjd);
 
 }
 
 
 =item B<ut2lst>
 
-Given the UT time, calculate the Modified Julian date (UTC) and the 
+Given the UT time, calculate the Modified Julian date (UTC) and the
 local sidereal time (radians) for the specified longitude.
 
  ($lst, $mjd) = ut2lst(yy, mn, dd, hh, mm, ss, long)
@@ -423,7 +423,7 @@ sub ut2lst {
 
 =item B<ut2lst_tel>
 
-Given the UT time, calculate the Modified Julian date and the 
+Given the UT time, calculate the Modified Julian date and the
 local sidereal time (radians) for the specified telescope.
 
  ($lst, $mjd) = ut2lst_tel(yy, mn, dd, hh, mm, ss, tel)
