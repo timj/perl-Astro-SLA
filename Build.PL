@@ -1,5 +1,7 @@
+
 use strict;
 use warnings;
+use lib qw(inc);
 use File::Spec;
 use Module::Build;
 
@@ -108,6 +110,12 @@ if ($use_fortran) {
 
 } else {
   print "Attempting to build against a C SLALIB library: $sla_lib\n";
+
+  use Devel::CheckLib;
+  unless (check_lib(LIBS => $sla_lib,INC=>$sla_inc)) {
+    print "You need either Fortan or C version of slalib. See README\n";
+    exit 0;
+  }
 
   # no special defines for the C version
 
