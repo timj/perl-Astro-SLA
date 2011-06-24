@@ -151,7 +151,7 @@ my $build = Module::Build->new
                       "Test::More" => 0,
                       %build_prereqs,
                      },
-   c_source => [ "src" ],
+   c_source => "src",  # Only one option so use single string
    extra_compiler_flags => [$sla_inc, @defines],
    extra_linker_flags => $libs,
   );
