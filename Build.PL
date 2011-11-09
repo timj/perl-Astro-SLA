@@ -61,7 +61,12 @@ if ($use_fortran == -1) {
 
   if (-e $lib) {
     print "Located Starlink SLALIB library in $StarConfig{Star_Lib}\n";
-    $sla_lib = " -L$StarConfig{Star_Lib} -lsla ";
+
+    # Sometimes we have to use CNF
+    my $slalibs = qx/ sla_link /;
+    $slalibs = "-lsla" unless defined $slalibs;
+
+    $sla_lib = " -L$StarConfig{Star_Lib} $slalibs ";
 
     # See if we can find the version
     eval { require Starlink::Versions; };
