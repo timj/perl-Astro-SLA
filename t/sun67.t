@@ -115,7 +115,7 @@ print "# Section 4.11 - Mean Place transformations\n";
   my $ep0 = 1963.087;
   my $pr = -0.0312 * Astro::SLA::DS2R;
   my $pd =  0.103  * Astro::SLA::DAS2R;
-  my $px = 0.062 * Astro::SLA::DAS2R;
+  my $px = 0.062;
   my $rv = -34.22;
   my $ep1 = 1994.35;
 
@@ -162,7 +162,7 @@ print "# Section 4.11 - Mean Place transformations\n";
   my @v;
   Astro::SLA::slaDcs2c($r5, $d5, @v);
   for (0..2) {
-    $v[$_] -= $px * $eb[$_];
+    $v[$_] -= Astro::SLA::DAS2R * $px * $eb[$_];
   }
   Astro::SLA::slaDcc2s(@v, my $r6, my $d6);
 
