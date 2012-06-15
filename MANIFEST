@@ -13,4 +13,5 @@ t/mjd.t
 t/preces.t
 t/comet.t
 t/sun67.t
+inc/Devel/CheckLib.pm
 stime
