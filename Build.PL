@@ -164,6 +164,7 @@ my $build = Module::Build->new
                },
    build_requires => {
                       "Test::More" => 0,
+                      "Test::Number::Delta" => 1.0,
                       %build_prereqs,
                      },
    configure_requires => {

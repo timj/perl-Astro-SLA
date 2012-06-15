@@ -4,6 +4,7 @@
 
 use strict;
 use Test::More tests => 70;
+use Test::Number::Delta;
 
 use Astro::SLA;
 #require_ok("Astro::SLA");
@@ -60,7 +61,7 @@ print "# Section 4.1.1 - Formatting angles\n";
     # Double precision fortran-style exponent not recognized by perl
     $tst =~ s/D/E/g;
     $tst = $tst + 0; # Force numify of exponent form
-    is($tst,$dx, "Compare input with parsed float");
+    delta_ok($tst,$dx, "Compare input with parsed float");
     if ($tst >= 0) {
       is($j,0,"Status from float parse");
     } else {
