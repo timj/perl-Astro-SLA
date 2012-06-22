@@ -135,6 +135,12 @@ Changes
 
 See the ChangeLog file for a full list of changes.
 
+Changes for release 1.02
+
+  - Add ExtUtils::F77 as a configure dependency. This fixes a problem with
+    CPAN tools running Build.PL, finding ExtUtils::F77 is required, installing
+    it and not re-running Build.PL.
+
 Changes for release 1.01:
 
   - Understand that modern Fortran SLA requires CNF.

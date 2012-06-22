@@ -169,6 +169,7 @@ my $build = Module::Build->new
                      },
    configure_requires => {
                           "Module::Build" => 0.30,
+                          %build_prereqs,
                          },
    c_source => "src",  # Only one option so use single string
    extra_compiler_flags => [$sla_inc, @defines],
