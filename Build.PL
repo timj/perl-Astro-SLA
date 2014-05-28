@@ -65,6 +65,11 @@ if ($use_fortran == -1) {
   } else {
     print "Found Starlink configuration. Using $StarConfig{Star}\n";
   }
+}
+
+# Now that we have possibly found a Starlink tree we work out the libraries.
+# This check handles the case where we switched to C in the above branch.
+if ($use_fortran == -1) {
 
   # Work out the library full path
   my $lib = File::Spec->catfile($StarConfig{Star_Lib}, "libsla.a" );
