@@ -19,7 +19,7 @@ my $use_fortran = -1;
 # or use_fortran is set to 0 or 1
 
 # Can be set externally with the SLA_ROOT environment variable
-my $sla_root = "/usr/local/lib";
+my $sla_root = "/usr/local";
 
 if (exists $ENV{SLA_ROOT} && defined $ENV{SLA_ROOT} && -d $ENV{SLA_ROOT}) {
   $sla_root = $ENV{SLA_ROOT};
