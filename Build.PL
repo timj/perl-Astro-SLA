@@ -132,7 +132,7 @@ if ($use_fortran) {
 
   use Devel::CheckLib;
   unless (check_lib(LIBS => $sla_lib,INC=>$sla_inc)) {
-    print "You need either Fortan or C version of slalib. See README\n";
+    print "You need either Fortran or C version of slalib. See README\n";
     exit 0;
   }
 
